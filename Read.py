@@ -1,5 +1,5 @@
 nome = input("nome?")
-nome = input("name")
+print(nome + "Suca")
 i = 0
 for i in nome:
     print(i)
