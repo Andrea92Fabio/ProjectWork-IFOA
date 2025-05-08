@@ -1,5 +1,5 @@
 nome = input("nome?")
 print(nome)
-i = 0
+i = 1
+print("aaaaaaaaa")
 for i in nome:
-    print(i)
