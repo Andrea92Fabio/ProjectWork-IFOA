@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `customers` (
   `id` bigint(20) NOT NULL,
-  `mail` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `name` varchar(50) NOT NULL,
   `surname` varchar(50) NOT NULL,
   `birthdate` date NOT NULL,
@@ -44,7 +44,6 @@ CREATE TABLE `customers` (
   `shipZipCode` varchar(5) NOT NULL,
   `insertDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `confirmedDate` timestamp NULL DEFAULT NULL,
-  `is18` tinyint(1) NOT NULL DEFAULT 0,
   `privacy` tinyint(1) NOT NULL DEFAULT 0,
   `rules` tinyint(1) NOT NULL DEFAULT 0,
   `key` varchar(50) NOT NULL
@@ -61,7 +60,7 @@ ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `key` (`key`),
   ADD UNIQUE KEY `fiscalCode` (`fiscalCode`),
-  ADD KEY `Mail` (`mail`),
+  ADD KEY `Email` (`email`),
   ADD KEY `Confirmed_Date` (`confirmedDate`);
 
 --
