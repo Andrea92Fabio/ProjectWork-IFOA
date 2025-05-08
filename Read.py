@@ -1,5 +1,5 @@
 nome = input("nome?")
-print(nome)
-i = 1
-print("aaaaaaaaa")
+nome = input("name")
+i = 0
 for i in nome:
+    print(i)
