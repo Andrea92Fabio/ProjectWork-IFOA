@@ -44,7 +44,6 @@ CREATE TABLE `customers` (
   `shipZipCode` varchar(5) NOT NULL,
   `insertDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `confirmedDate` timestamp NULL DEFAULT NULL,
-  `is18` tinyint(1) NOT NULL DEFAULT 0,
   `privacy` tinyint(1) NOT NULL DEFAULT 0,
   `rules` tinyint(1) NOT NULL DEFAULT 0,
   `key` varchar(50) NOT NULL
