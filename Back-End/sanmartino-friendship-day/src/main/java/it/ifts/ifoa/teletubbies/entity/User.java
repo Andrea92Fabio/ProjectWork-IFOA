@@ -76,10 +76,45 @@ public class User
         }
 
         for (int i=0; i<fiscalCode.length(); i++) {
-            if (fiscalCode.length() != 16) {
-                throw new InvalidFiscalCodeException("0x05");
+            if(i<6){
+                if(!acceptedChar.contains(fiscalCode.charAt(i))){
+                    throw new InvalidFiscalCodeException("0x05");
+                }
             }
+            if(i<8 && i>6){
+                if(!acceptedNumber.contains(fiscalCode.charAt(i))){
+                    throw new InvalidFiscalCodeException("0x06");
+                }
+            }
+            if(i==8){
+                if(!acceptedChar.contains(fiscalCode.charAt(i))){
+                    throw new InvalidFiscalCodeException("0x07");
+                }
+            }
+            if(i>9&&i<11){
+                if(!acceptedNumber.contains(fiscalCode.charAt(i))){
+                    throw new InvalidFiscalCodeException("0x08");
+                }
+            }
+            if(i==11){
+                if(!acceptedChar.contains(fiscalCode.charAt(i))){
+                    throw new InvalidFiscalCodeException("0x09");
+                }
+            }
+            if (i>12&& i<15){
+                if(!acceptedNumber.contains(fiscalCode.charAt(i))){
+                    throw new InvalidFiscalCodeException("0x10");
+                }
+            }
+            if(i==15){
+                /*Inserire controllo ultima lettere di chatGPT*/
+            }
+        }
+        if (fiscalCode.length() != 16) {
+            throw new InvalidFiscalCodeException("0x0");
         }
         return fiscalCode;
     }
+
+
 }
