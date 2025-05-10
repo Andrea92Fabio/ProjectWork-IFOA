@@ -1,9 +1,6 @@
 package it.ifts.ifoa.teletubbies.repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 import it.ifts.ifoa.teletubbies.entity.User;
 import it.ifts.ifoa.teletubbies.exception.InsertFailedException;
@@ -34,7 +31,7 @@ public class UserRepository
             statement.setString(2, user.getName());
             statement.setString(3, user.getSurname());
 
-            statement.setDate(4, user.getBirthDate());
+            statement.setDate(4, Date.valueOf(user.getBirthDate()));
             statement.setString(5, user.getGender());
             statement.setString(6, user.getFiscalCode());
 
@@ -48,7 +45,7 @@ public class UserRepository
 
             statement.setString(13, user.getShipZipCode());
             statement.setBoolean(14, user.getPrivacy());
-            statement.setBoolean(15, user.getRules());
+            statement.setBoolean(15, user.setRules());
 
             if (statement.executeUpdate() < 1)
             {
