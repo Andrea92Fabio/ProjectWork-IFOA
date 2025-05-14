@@ -6,15 +6,16 @@ import java.util.regex.Pattern;
 
 public class User
 {
-    private String name,surname, gender,phoneNumber, fiscalCode,residencyCountry,residencyZipCode, residencyAddress, shipCountry, shipZipCode, shipAddress;
+    private String name,surname, gender,phoneNumber, email, fiscalCode,residencyCountry,residencyZipCode, residencyAddress, shipCountry, shipZipCode, shipAddress;
     private boolean privacy, rules;
     private LocalDate birthDate;
 
-    public User(String name, String surname, String gender, String fiscalCode, String residencyCountry, String residencyZipCode, String residencyAddress, String shipCountry, String shipZipCode, String shipAddress, boolean privacy, boolean rules, LocalDate birthDate) throws InvalidNameException, InvalidSurnameException, InvalidGenderException, InvalidPhoneNumberException, InvalidFiscalCodeException, InvalidResidenceCountryException, InvalidZipCodeException, InvalidAddressExceprion, InvalidShipCountryException, InvalidPrivacyException, InvalidRulesException, InvalidBirthDateException {
+    public User(String name, String surname, String email, String gender, String fiscalCode, String residencyCountry, String residencyZipCode, String residencyAddress, String shipCountry, String shipZipCode, String shipAddress, boolean privacy, boolean rules, LocalDate birthDate) throws InvalidNameException, InvalidSurnameException, InvalidGenderException, InvalidPhoneNumberException, InvalidFiscalCodeException, InvalidResidenceCountryException, InvalidZipCodeException, InvalidAddressExceprion, InvalidShipCountryException, InvalidPrivacyException, InvalidRulesException, InvalidBirthDateException {
 
         this.name = checkName(name);
         this.surname = checkSurname(surname);
         this.gender = checkGender(gender);
+        this.email = checkEmail(email);
         this.residencyCountry = checkResidencyCountry(residencyCountry);
         this.fiscalCode = checkFiscalCode(fiscalCode);
         this.residencyZipCode = checkResidencyZipCode(residencyZipCode);
@@ -26,6 +27,14 @@ public class User
         this.rules = checkRules(rules);
         this.birthDate = checkBirthDate(birthDate);
         this.phoneNumber = checkPhoneNumber(phoneNumber);
+    }
+
+    private String checkEmail(String email) throws  InvalidEmailException{
+        String regex = "^[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}&";
+        if (!Pattern.matches(regex, email)){
+            throw new InvalidEmailException("0x00");
+        }
+        return email;
     }
 
     private String checkName(String name) throws InvalidNameException{
