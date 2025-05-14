@@ -1,6 +1,7 @@
 package it.ifts.ifoa.teletubbies.repository;
 
 import java.sql.*;
+import java.time.Instant;
 
 import it.ifts.ifoa.teletubbies.entity.User;
 import it.ifts.ifoa.teletubbies.exception.InsertFailedException;
@@ -101,6 +102,51 @@ public class UserRepository
             throw new RuntimeException(e);
         }
         return retvalue;
+    }
+
+    public void doubleOptIn(String key)
+    {
+        String sql = "UPDATE customers SET confirmedDate = ? WHERE key = ?";
+        try
+        {
+            PreparedStatement statement = this.connection.prepareStatement(sql);
+            statement.setTimestamp(1, Timestamp.from(Instant.now()));
+            statement.setString(2, key);
+            statement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean isConfirmationTop499(String key)
+    {
+        String sqlWinners = "SELECT key FROM customers WHERE confirmedDate IS NOT NULL ORDER BY confirmedDate ASC LIMIT 499";
+        String sqlCandidate = "SELECT key FROM customers WHERE key = ?";
+        try
+        {
+            PreparedStatement candidateStatement = this.connection.prepareStatement(sqlCandidate);
+            ResultSet candidateResultSet = candidateStatement.executeQuery();
+            if (!candidateResultSet.next()){
+                return false;
+            }
+            String candidateKey = candidateResultSet.getString("key");
+
+            PreparedStatement winnerStatement = this.connection.prepareStatement(sqlWinners);
+            ResultSet winnersResultSet = winnerStatement.executeQuery();
+
+            while (winnersResultSet.next()){
+                if (winnersResultSet.getString("key").equals(candidateKey)){
+                    return true;
+                }
+            }
+            return false;
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 }
 
