@@ -199,4 +199,7 @@ public class User
         return birthDate;
     }
 
+    public String getEmail() {
+        return email;
+    }
 }
