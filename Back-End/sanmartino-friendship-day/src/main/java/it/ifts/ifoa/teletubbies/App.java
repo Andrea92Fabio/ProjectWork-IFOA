@@ -39,7 +39,7 @@ public class App
         }
         catch (SQLException e)
         {
-//            throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
         this.userRepository = new UserRepository(connection);
 
