@@ -1,6 +1,6 @@
 package it.ifts.ifoa.teletubbies.exception;
 
-public class InvalidEmailException extends RuntimeException
+public class InvalidEmailException extends CustomException
 {
     public InvalidEmailException(String message)
     {

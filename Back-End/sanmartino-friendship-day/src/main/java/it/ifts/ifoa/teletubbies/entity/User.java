@@ -10,7 +10,7 @@ public class User
     private boolean privacy, rules;
     private LocalDate birthDate;
 
-    public User(String name, String surname, String email, String gender, String fiscalCode, String residencyCountry, String residencyZipCode, String residencyAddress, String shipCountry, String shipZipCode, String shipAddress, boolean privacy, boolean rules, LocalDate birthDate) throws InvalidNameException, InvalidSurnameException, InvalidGenderException, InvalidPhoneNumberException, InvalidFiscalCodeException, InvalidResidenceCountryException, InvalidZipCodeException, InvalidAddressExceprion, InvalidShipCountryException, InvalidPrivacyException, InvalidRulesException, InvalidBirthDateException {
+    public User(String name, String surname, String email, String gender, String fiscalCode, String residencyCountry, String residencyZipCode, String residencyAddress, String shipCountry, String shipZipCode, String shipAddress, boolean privacy, boolean rules, LocalDate birthDate) throws InvalidNameException, InvalidSurnameException, InvalidGenderException, InvalidPhoneNumberException, InvalidFiscalCodeException, InvalidResidenceCountryException, InvalidZipCodeException, InvalidAddressException, InvalidShipCountryException, InvalidPrivacyException, InvalidRulesException, InvalidBirthDateException {
 
         this.name = checkName(name);
         this.surname = checkSurname(surname);
@@ -96,9 +96,10 @@ public class User
         return residencyZipCode;
     }
 
-    private String checkResidencyAddress(String residencyAddress) throws InvalidAddressExceprion {
+    private String checkResidencyAddress(String residencyAddress) throws InvalidAddressException
+    {
         if (residencyAddress == null && residencyAddress.length()<=2) {
-            throw new InvalidAddressExceprion("0x09");
+            throw new InvalidAddressException("0x09");
         }
         return residencyAddress;
     }
@@ -120,9 +121,10 @@ public class User
         return shipZipCode;
     }
 
-    private String checkShipAddress(String shipAddress) throws InvalidAddressExceprion {
+    private String checkShipAddress(String shipAddress) throws InvalidAddressException
+    {
         if (shipAddress == null && shipAddress.length()<=2) {
-            throw new InvalidAddressExceprion("0x12");
+            throw new InvalidAddressException("0x12");
         }
         return shipAddress;
     }
@@ -191,7 +193,7 @@ public class User
     public boolean getPrivacy() {
         return privacy;
     }
-
+    public String getEmail() { return email; }
     public boolean getRules() {
         return rules;
     }

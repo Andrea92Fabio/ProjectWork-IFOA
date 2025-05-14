@@ -45,7 +45,7 @@ public class UserRepository
 
             statement.setString(13, user.getShipZipCode());
             statement.setBoolean(14, user.getPrivacy());
-            statement.setBoolean(15, user.setRules());
+            statement.setBoolean(15, user.getRules());
 
             if (statement.executeUpdate() < 1)
             {
