@@ -1,16 +1,14 @@
-package it.ifts.ifoa.teletubbies.entity;
-import it.ifts.ifoa.teletubbies.exception.*;
-
 import java.time.LocalDate;
 import java.util.regex.Pattern;
+import java.util.Random;
 
 public class User
 {
-    private String name,surname, gender,phoneNumber, email, fiscalCode,residencyCountry,residencyZipCode, residencyAddress, shipCountry, shipZipCode, shipAddress;
+    private String name,surname, gender,phoneNumber, key, email, fiscalCode,residencyCountry,residencyZipCode, residencyAddress, shipCountry, shipZipCode, shipAddress;
     private boolean privacy, rules;
     private LocalDate birthDate;
 
-    public User(String name, String surname, String email, String gender, String fiscalCode, String residencyCountry, String residencyZipCode, String residencyAddress, String shipCountry, String shipZipCode, String shipAddress, boolean privacy, boolean rules, LocalDate birthDate) throws InvalidNameException, InvalidSurnameException, InvalidGenderException, InvalidPhoneNumberException, InvalidFiscalCodeException, InvalidResidenceCountryException, InvalidZipCodeException, InvalidAddressException, InvalidShipCountryException, InvalidPrivacyException, InvalidRulesException, InvalidBirthDateException {
+    public User(String name, String surname,String key, String email, String gender, String fiscalCode, String residencyCountry, String residencyZipCode, String residencyAddress, String shipCountry, String shipZipCode, String shipAddress, boolean privacy, boolean rules, LocalDate birthDate) throws InvalidNameException, InvalidSurnameException, InvalidGenderException, InvalidPhoneNumberException, InvalidFiscalCodeException, InvalidResidenceCountryException, InvalidZipCodeException, InvalidAddressException, InvalidShipCountryException, InvalidPrivacyException, InvalidRulesException, InvalidBirthDateException {
 
         this.name = checkName(name);
         this.surname = checkSurname(surname);
@@ -27,8 +25,23 @@ public class User
         this.rules = checkRules(rules);
         this.birthDate = checkBirthDate(birthDate);
         this.phoneNumber = checkPhoneNumber(phoneNumber);
+        this.key = assignKey();
     }
 
+    private String assignKey(){
+        String safeCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.~";
+        String retvalue = "";
+        Random rand = new Random();
+        int totalCharacter = rand.nextInt(10)+40;
+
+        for (int i =0;i<totalCharacter;i++){
+            int num = rand.nextInt(safeCharacters.length());
+            String temvalue = String.valueOf(safeCharacters.charAt(num));
+            retvalue = retvalue + temvalue;
+        }
+
+        return retvalue;
+    }
     private String checkEmail(String email) throws  InvalidEmailException{
         String regex = "^[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}&";
         if (!Pattern.matches(regex, email)){
