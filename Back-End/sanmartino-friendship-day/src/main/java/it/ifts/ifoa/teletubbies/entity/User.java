@@ -1,3 +1,6 @@
+package it.ifts.ifoa.teletubbies.entity;
+import it.ifts.ifoa.teletubbies.exception.*;
+
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 import java.util.Random;
@@ -42,6 +45,7 @@ public class User
 
         return retvalue;
     }
+
     private String checkEmail(String email) throws  InvalidEmailException{
         String regex = "^[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}&";
         if (!Pattern.matches(regex, email)){
