@@ -1,0 +1,74 @@
+.hero{
+    background-image: url('./../img/visore.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main{
+    width: min(90%, 1200px);
+    margin: 0 auto;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.title-600{
+    font-size: 3rem;
+}
+.title-900{
+    font-size: 5rem;
+}
+.title-900 span{
+    font-size: 0.7em;
+}
+
+img{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.grid-2-col{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+}
+
+.rules-1{
+    margin-block-start: 5rem;
+}
+
+.rules-2{
+    margin-block-start: 5rem;
+}
+
+.divider{
+    margin: 4rem auto;
+    height: .5rem;
+    width: 40%;
+    background-color: red;
+    
+}
+
+.button{
+    background-color: red;
+    color: white;
+        border-radius: 1rem;
+    padding: 1rem 2rem;
+    transition: border-radius 0.3s ease-in-out;
+}
+.button:hover{
+    border-radius: 3rem 1rem;
+}
+
+
+@media screen and (width < 1000px) {
+.rules-1{
+    grid-template-columns: 1fr;
+}    
+}
