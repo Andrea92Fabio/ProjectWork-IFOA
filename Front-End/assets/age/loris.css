@@ -1,0 +1,35 @@
+*, *::after, *::before{
+box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    background-image: url('../img/bottiglie.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+form{
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+form::before{
+    
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+        z-index: -1;
+}
