@@ -1,117 +1,139 @@
 .hero {
-    background-image: url('./../img/visore.png');
-    background-size: cover;
-    background-position: center;
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  background-image: url("./../img/visore.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .cta {
-    background-color: red;
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 1rem;
+  background-color: red;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
 }
 
 .cta:hover {
 }
 
 .main {
-    width: min(90%, 1200px);
-    margin: 0 auto;
+  width: min(90%, 1200px);
+  margin: 0 auto;
 }
 
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 .title-600 {
-    font-size: 3rem;
+  font-size: 3rem;
 }
 .title-900 {
-    font-size: 5rem;
+  font-size: 5rem;
 }
 .title-900 span {
-    font-size: 0.7em;
+  font-size: 0.7em;
 }
 
 img {
-    display: block;
-    width: 100%;
-    height: auto;
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .grid-2-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
 }
 
 .rules-1 {
-    margin-block-start: 5rem;
+  margin-block-start: 5rem;
 }
 
 .rules-2 {
-    margin-block-start: 5rem;
+  margin-block-start: 5rem;
 }
 
 .divider {
-    margin: 4rem auto;
-    height: 0.5rem;
-    width: 40%;
-    background-color: red;
+  margin: 4rem auto;
+  height: 0.5rem;
+  width: 40%;
+  background-color: red;
 }
 
 .button {
-    background-color: red;
-    color: white;
-    border-radius: 1rem;
-    padding: 1rem 2rem;
-    transition: border-radius 0.3s ease-in-out;
+  background-color: red;
+  color: white;
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  transition: border-radius 0.3s ease-in-out;
 }
 .button:hover {
-    border-radius: 3rem 1rem;
+  border-radius: 3rem 1rem;
 }
 
 .card-wrapper {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
 }
 
 .card {
-    padding: 2rem;
-    background-color: red;
-    border-radius: 1rem;
-    display: flex;
-    flex-direction: column;
-    transition: transform 300ms ease-in-out;
+  --stagger: 0ms;
+  padding: 2rem;
+  background-color: red;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  translate: -50px 0px;
+  opacity: 0;
+  transition: transform 300ms ease-in-out,
+    translate 300ms ease-in-out var(--stagger),
+    opacity 300ms ease-in-out var(--stagger);
+}
+
+.card:nth-of-type(2) {
+  --stagger: 100ms;
+}
+.card:nth-of-type(3) {
+  --stagger: 200ms;
+}
+
+.show {
+  translate: 0px 0px;
+  opacity: 1;
 }
 
 .card:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .card img {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 /* remove this */
 .card p {
-    text-align: center;
-    font-size: 2.5rem;
+  text-align: center;
+  font-size: 2.5rem;
 }
 
 @media screen and (width < 1000px) {
-    .rules-1 {
-        grid-template-columns: 1fr;
-    }
+  .rules-1 {
+    grid-template-columns: 1fr;
+  }
 
-    .grid-2-col,
-    .card-wrapper {
-        grid-template-columns: 1fr;
-    }
+  .grid-2-col,
+  .card-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .card:nth-of-type(2),
+  .card:nth-of-type(3) {
+    --stagger: 0ms;
+  }
 }
