@@ -1,29 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>Document</title>
-    <script src="loris.js" defer></script>
-    <link rel="stylesheet" href="loris.css">
-</head>
+    <script
+      src="/assets/js/age-check.js"
+      defer
+    ></script>
+    <link
+      rel="stylesheet"
+      href="/assets/css/age-check.css"
+    />
+  </head>
 
-<body>
-
-    <form id="wall-birthdate" class="form">
-        <div class="form-content">
-            <div class="date-wrapper">
-                <input type="date" name=""
-                    style="padding: 3rem; font-size: 2rem; outline: none; background-color: antiquewhite; border: none; box-shadow: none;"
-                    id="">
-                <input class="__input" id="day" size="2" placeholder="DD" style="display: none;" />
-                <input class="__input" id="month" size="2" placeholder="MM" style="display: none;" />
-                <input class="__input" id="year" size="4" placeholder="YYYY" />
-            </div>
-            <input type="submit" value="Entra">
+  <body>
+    <form
+      id="age-check-form"
+      class="form"
+    >
+      <div class="form-content">
+        <div class="date-wrapper">
+          <input
+            type="date"
+            name=""
+            id="age-check-birthdate"
+          />
         </div>
+        <input
+          type="submit"
+          value="Entra"
+          class="button"
+        />
+      </div>
     </form>
-</body>
-
+  </body>
 </html>

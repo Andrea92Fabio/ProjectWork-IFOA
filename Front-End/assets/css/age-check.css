@@ -1,0 +1,50 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+.form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.date-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.input-date {
+  padding: 0.5em 1em;
+  background: green;
+  font-size: 3rem;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--clr-main-200);
+  border-radius: 4rem;
+  min-height: 60vh;
+  min-width: 70vw;
+  z-index: 1;
+}
+
+.form::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(30px);
+  z-index: -1;
+}

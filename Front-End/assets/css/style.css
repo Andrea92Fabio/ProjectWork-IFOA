@@ -1,314 +1,132 @@
-.col-xxl-12 {
-    width: 100%;
+:root {
+  --clr-main-100: #ffd9ce;
+  --clr-main-200: #ffbfad;
+  --clr-main-300: #ff9b7a;
+  --clr-main-400: #ff5024;
+  --clr-main-500: #cc3f1d;
+  --clr-main-600: #992f16;
+  --clr-main-700: #6b200f;
+  --clr-main-800: #361008;
+
+  --clr-success-200: #00ff00;
+  --clr-success-400: #00ff00;
+  --clr-success-600: #00ff00;
+
+  --clr-error-200: #ff0000;
+  --clr-error-400: #ff0000;
+  --clr-error-600: #ff0000;
+
+  /* lenght variables to use in helper classes like gap-md */
+  --len-xl: clamp(3.5rem, 2.9286rem + 2.2857vw, 4.5rem);
+  --len-lg: clamp(2rem, 1.4286rem + 2.2857vw, 3rem);
+  --len-md: clamp(1.625rem, 1.4107rem + 0.8571vw, 2rem);
+  --len-sm: clamp(1.125rem, 1.0536rem + 0.2857vw, 1.25rem);
+
+  --font-family: "Montserrat", sans-serif;
 }
 
-.full-w {
-    width: 100%;
+.text {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: normal;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.input {
+  font-weight: 500;
+}
+
+.lab-button {
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.1ch;
+}
+
+/* website used to calculate: https://clamp.font-size.app/ */
+/* 400px to 1100px */
+
+.title-900 {
+  font-size: clamp(2.75rem, 2.0357rem + 2.8571vw, 4rem);
+  letter-spacing: -0.02ch;
+  line-height: 0.8;
+}
+
+.title-700 {
+  font-size: clamp(2rem, 1.4286rem + 2.2857vw, 3rem);
+  letter-spacing: -0.02ch;
+  line-height: 0.9;
+}
+
+.title-500 {
+  font-size: clamp(1.75rem, 1.6071rem + 0.5714vw, 2rem);
+  letter-spacing: -0.01ch;
+  line-height: 1;
+}
+.title-300 {
+  font-size: clamp(1.25rem, 1.1071rem + 0.5714vw, 1.5rem);
+  line-height: 1.2;
+}
+.title-100 {
+  font-size: clamp(1.125rem, 1.0536rem + 0.2857vw, 1.25rem);
+  line-height: 1.2;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* We should mainly use margin top to add spacing. 
+We can use gap most of the times if using grid or flex in a layout*/
+.mt-xl {
+  margin-block-start: var(--len-xl);
+}
+
+.mt-lg {
+  margin-block-start: var(--len-lg);
+}
+
+.mt-md {
+  margin-block-start: var(--len-md);
 }
 
 .mt-sm {
-    margin-block-start: 1rem;
-}
-.mt-md {
-    margin-block-start: 2rem;
-}
-.mt-lg {
-    margin-block-start: 4rem;
+  margin-block-start: var(--len-sm);
 }
 
-.col-xxl-11 {
-    width: 91.666%;
+.gap-xl {
+  gap: var(--len-xl);
 }
 
-.col-xxl-10 {
-    width: 83.333%;
+.gap-lg {
+  gap: var(--len-lg);
 }
 
-.col-xxl-9 {
-    width: 75%;
+.gap-md {
+  gap: var(--len-md);
 }
 
-.col-xxl-8 {
-    width: 66.666%;
+.gap-sm {
+  gap: var(--len-sm);
 }
 
-.col-xxl-7 {
-    width: 58.333%;
+.grid {
+  display: grid;
 }
 
-.col-xxl-6 {
-    width: 50%;
+.grid-two-cols {
+  grid-template-columns: repeat(2, 1fr);
 }
 
-.col-xxl-5 {
-    width: 41.666%;
-}
-
-.col-xxl-4 {
-    width: 33.333%;
-}
-
-.col-xxl-3 {
-    width: 25%;
-}
-
-.col-xxl-2 {
-    width: 16.666%;
-}
-
-.col-xxl-1 {
-    width: 8.333%;
-}
-
-@media screen and (max-width: 1399px) {
-    .col-xl-12 {
-        width: 100%;
-    }
-
-    .col-xl-11 {
-        width: 91.666%;
-    }
-
-    .col-xl-10 {
-        width: 83.333%;
-    }
-
-    .col-xl-9 {
-        width: 75%;
-    }
-
-    .col-xl-8 {
-        width: 66.666%;
-    }
-
-    .col-xl-7 {
-        width: 58.333%;
-    }
-
-    .col-xl-6 {
-        width: 50%;
-    }
-
-    .col-xl-5 {
-        width: 41.666%;
-    }
-
-    .col-xl-4 {
-        width: 33.333%;
-    }
-
-    .col-xl-3 {
-        width: 25%;
-    }
-
-    .col-xl-2 {
-        width: 16.666%;
-    }
-
-    .col-xl-1 {
-        width: 8.333%;
-    }
-}
-
-@media screen and (max-width: 1199px) {
-    .col-lg-12 {
-        width: 100%;
-    }
-
-    .col-lg-11 {
-        width: 91.666%;
-    }
-
-    .col-lg-10 {
-        width: 83.333%;
-    }
-
-    .col-lg-9 {
-        width: 75%;
-    }
-
-    .col-lg-8 {
-        width: 66.666%;
-    }
-
-    .col-lg-7 {
-        width: 58.333%;
-    }
-
-    .col-lg-6 {
-        width: 50%;
-    }
-
-    .col-lg-5 {
-        width: 41.666%;
-    }
-
-    .col-lg-4 {
-        width: 33.333%;
-    }
-
-    .col-lg-3 {
-        width: 25%;
-    }
-
-    .col-lg-2 {
-        width: 16.666%;
-    }
-
-    .col-lg-1 {
-        width: 8.333%;
-    }
-}
-
-@media screen and (max-width: 991px) {
-    .col-md-12 {
-        width: 100%;
-    }
-
-    .col-md-11 {
-        width: 91.666%;
-    }
-
-    .col-md-10 {
-        width: 83.333%;
-    }
-
-    .col-md-9 {
-        width: 75%;
-    }
-
-    .col-md-8 {
-        width: 66.666%;
-    }
-
-    .col-md-7 {
-        width: 58.333%;
-    }
-
-    .col-md-6 {
-        width: 50%;
-    }
-
-    .col-md-5 {
-        width: 41.666%;
-    }
-
-    .col-md-4 {
-        width: 33.333%;
-    }
-
-    .col-md-3 {
-        width: 25%;
-    }
-
-    .col-md-2 {
-        width: 16.666%;
-    }
-
-    .col-md-1 {
-        width: 8.333%;
-    }
-}
-
-@media screen and (max-width: 767px) {
-    .col-sm-12 {
-        width: 100%;
-    }
-
-    .col-sm-11 {
-        width: 91.666%;
-    }
-
-    .col-sm-10 {
-        width: 83.333%;
-    }
-
-    .col-sm-9 {
-        width: 75%;
-    }
-
-    .col-sm-8 {
-        width: 66.666%;
-    }
-
-    .col-sm-7 {
-        width: 58.333%;
-    }
-
-    .col-sm-6 {
-        width: 50%;
-    }
-
-    .col-sm-5 {
-        width: 41.666%;
-    }
-
-    .col-sm-4 {
-        width: 33.333%;
-    }
-
-    .col-sm-3 {
-        width: 25%;
-    }
-
-    .col-sm-2 {
-        width: 16.666%;
-    }
-
-    .col-sm-1 {
-        width: 8.333%;
-    }
-}
-
-@media screen and (max-width: 575px) {
-    .mobile-row-reverse {
-        flex-direction: column-reverse;
-    }
-    .col-12 {
-        width: 100%;
-    }
-
-    .col-11 {
-        width: 91.666%;
-    }
-
-    .col-10 {
-        width: 83.333%;
-    }
-
-    .col-9 {
-        width: 75%;
-    }
-
-    .col-8 {
-        width: 66.666%;
-    }
-
-    .col-7 {
-        width: 58.333%;
-    }
-
-    .col-6 {
-        width: 50%;
-    }
-
-    .col-5 {
-        width: 41.666%;
-    }
-
-    .col-4 {
-        width: 33.333%;
-    }
-
-    .col-3 {
-        width: 25%;
-    }
-
-    .col-2 {
-        width: 16.666%;
-    }
-
-    .col-1 {
-        width: 8.333%;
-    }
+@media screen and (width < 1000px) {
+  .grid-two-cols {
+    grid-template-columns: 1fr;
+  }
 }
