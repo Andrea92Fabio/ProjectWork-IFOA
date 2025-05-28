@@ -8,6 +8,25 @@
     />
     <title>San martino friendship day</title>
     <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="./assets/css/reset.css"
+    />
+
+    <link
       rel="stylesheet"
       href="./assets/css/style.css"
     />
@@ -40,50 +59,61 @@
             />
           </div>
           <input
-            class="button"
+            class="button lab-button"
             type="submit"
             value="Entra"
           />
         </div>
       </form>
     </div>
-    <div id="view-home">
+    <div
+      id="view-home"
+      aria-hidden="true"
+      inert="true"
+    >
       <div class="hero">
         <h1 class="title-900 text-center">
           <span class="title-700"> San martino </span><br />friendship day
         </h1>
-        <button class="cta mt-md">Partecipa ora</button>
+        <button class="cta lab-button mt-md">Partecipa ora</button>
       </div>
       <div class="main">
         <div class="rules-1 grid-2-col">
           <div>
-            <h2 class="title-600">Brinda all'amicizia</h2>
-            <p>
+            <h2 class="title-700">Brinda all'amicizia</h2>
+            <p class="text mt-sm">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi
               laborum accusantium quae numquam repudiandae! Vero, explicabo
               debitis esse nihil doloribus non nesciunt beatae mollitia vel
-              quasi harum quisquam velit aperiam!
+              quasi harum quisquam velit aperiam! Lorem, ipsum dolor sit amet
+              consectetur adipisicing elit. Quasi laborum accusantium quae
+              numquam repudiandae! Vero, explicabo debitis esse nihil doloribus
+              non nesciunt beatae mollitia vel quasi harum quisquam velit
+              aperiam!
             </p>
-            <button class="cta">Partecipa ora</button>
+            <button class="cta mt-sm lab-button">Partecipa ora</button>
           </div>
           <img
+            class="fade-in-left"
             src="./assets/img/bottiglie.png"
             alt=""
             srcset=""
           />
         </div>
 
-        <div class="win-section">
-          <h2>Vinci un premio partecipando al concorso</h2>
+        <div class="win-section mt-xl">
+          <h2 class="title-500 text-center">
+            Vinci un premio partecipando al concorso
+          </h2>
           <div class="what-win">
-            <h3 class="mt-sm">Cosa vinci</h3>
+            <h3 class="title-300 text-center mt-sm">Cosa vinci</h3>
             <div class="card-wrapper mt-md">
               <div class="card">
                 <img
                   src="https://placehold.co/300x300/png"
                   alt="bottiglie"
                 />
-                <p class="mt-md">4 Bottiglie</p>
+                <p class="mt-md title-300">4 Bottiglie</p>
               </div>
 
               <div class="card">
@@ -91,14 +121,14 @@
                   src="https://placehold.co/300x300/png"
                   alt="stampo"
                 />
-                <p class="mt-md">1 stampo</p>
+                <p class="mt-md title-300">1 stampo</p>
               </div>
               <div class="card">
                 <img
                   src="https://placehold.co/300x300/png"
                   alt="Bag"
                 />
-                <p class="mt-md">Bag</p>
+                <p class="mt-md title-300">Bag</p>
               </div>
             </div>
           </div>
@@ -109,17 +139,20 @@
               alt=""
             />
             <div>
-              <h2>Come vincere</h2>
+              <h2 class="title-700">Come vincere</h2>
               <ul>
-                <li>clicca su partecipa</li>
-                <li>compila il form</li>
-                <li>conferma la tua mail</li>
+                <li class="mt-md">✅ clicca su partecipa</li>
+                <li class="mt-sm">✅ compila il form</li>
+                <li class="mt-sm">✅ conferma la tua mail</li>
               </ul>
-              <p>
+              <p class="text mt-md">
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                 Distinctio ducimus doloremque porro at quasi dignissimos,
                 perspiciatis, dolor fugiat nisi autem voluptatem accusamus
                 eveniet soluta qui hic, mollitia dolorum maiores error!
+                <br />
+
+                <button class="cta lab-button mt-sm">Partecipa ora</button>
               </p>
             </div>
           </div>

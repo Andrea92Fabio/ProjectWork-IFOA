@@ -16,23 +16,9 @@
   border-radius: 1rem;
 }
 
-.cta:hover {
-}
-
 .main {
   width: min(90%, 1200px);
   margin: 0 auto;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.title-600 {
-  font-size: 3rem;
-}
-.title-900 {
-  font-size: 5rem;
 }
 
 img {
@@ -77,6 +63,13 @@ img {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
+}
+
+.fade-in-left {
+  translate: -50px 0px;
+  opacity: 0;
+  transition: transform 300ms ease-in-out, translate 300ms ease-in-out,
+    opacity 300ms ease-in-out;
 }
 
 .card {

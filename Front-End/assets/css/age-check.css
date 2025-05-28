@@ -4,6 +4,19 @@
   box-sizing: border-box;
 }
 
+body:has(#view-age-check.active) {
+  height: 100vh;
+  overflow: hidden;
+}
+
+#view-age-check {
+  display: none;
+}
+
+#view-age-check.active {
+  display: block;
+}
+
 .form {
   position: fixed;
   top: 50%;

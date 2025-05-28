@@ -22,7 +22,7 @@
   --len-md: clamp(1.625rem, 1.4107rem + 0.8571vw, 2rem);
   --len-sm: clamp(1.125rem, 1.0536rem + 0.2857vw, 1.25rem);
 
-  --font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .text {
@@ -47,7 +47,7 @@
   font-size: 1rem;
   text-transform: uppercase;
   font-weight: 500;
-  letter-spacing: 0.1ch;
+  letter-spacing: 0.2ch;
 }
 
 /* website used to calculate: https://clamp.font-size.app/ */
@@ -55,27 +55,32 @@
 
 .title-900 {
   font-size: clamp(2.75rem, 2.0357rem + 2.8571vw, 4rem);
+  font-weight: 900;
   letter-spacing: -0.02ch;
   line-height: 0.8;
 }
 
 .title-700 {
   font-size: clamp(2rem, 1.4286rem + 2.2857vw, 3rem);
+  font-weight: 800;
   letter-spacing: -0.02ch;
   line-height: 0.9;
 }
 
 .title-500 {
   font-size: clamp(1.75rem, 1.6071rem + 0.5714vw, 2rem);
+  font-weight: 700;
   letter-spacing: -0.01ch;
   line-height: 1;
 }
 .title-300 {
   font-size: clamp(1.25rem, 1.1071rem + 0.5714vw, 1.5rem);
+  font-weight: 600;
   line-height: 1.2;
 }
 .title-100 {
   font-size: clamp(1.125rem, 1.0536rem + 0.2857vw, 1.25rem);
+  font-weight: 600;
   line-height: 1.2;
 }
 

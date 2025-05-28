@@ -1,19 +1,24 @@
 import home from "./home.js";
 
 export default function ageCheck() {
-  const form = document.querySelector("#age-check-form");
-  const ageInput = document.querySelector("#age-check-birthdate");
-
   const view = document.querySelector("#view-age-check");
-
+  let birthdate = sessionStorage.getItem("birthdate");
+  if (birthdate != null && isDrinkingAge(new Date(birthdate))) {
+    home();
+    return;
+  }
+  view.classList.add("active");
+  const form = document.querySelector("#age-check-form");
+  const birthdateInput = document.querySelector("#age-check-birthdate");
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const date = new Date(ageInput.value);
-    console.log(isDrinkingAge(date));
-
-    if (isDrinkingAge(date)) {
-      view.remove();
+    const birthdateObj = new Date(birthdateInput.value);
+    sessionStorage.setItem("birthdate", birthdateObj.toISOString());
+    if (isDrinkingAge(birthdateObj)) {
+      view.classList.remove("active");
       home();
+    } else {
+      window.location.replace("https://google.com");
     }
   });
 }
