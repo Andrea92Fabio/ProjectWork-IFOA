@@ -1,0 +1,23 @@
+
+.backimg {
+    background-image:url("https://placehold.co/1600x600") ;
+    background-size: cover;      
+    background-position: center; 
+    background-repeat: no-repeat;
+    height: 600px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.leftside,
+
+.left-side {
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    background:white; /* sfondo leggermente scuro per leggere meglio il testo */
+    border: 1px;
+    border-style: solid;
+    border-color: black;
+}

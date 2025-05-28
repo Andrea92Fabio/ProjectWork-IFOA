@@ -7,8 +7,16 @@
     flex-wrap: wrap;
 }
 
-#form-view {
+#ty-view {
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#form-view {
+    display: none;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
