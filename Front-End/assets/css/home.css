@@ -72,6 +72,27 @@ img {
     opacity 300ms ease-in-out;
 }
 
+.fade-in-top {
+  translate: 0px -50px;
+  opacity: 0;
+  transition: transform 300ms ease-in-out, translate 300ms ease-in-out,
+    opacity 300ms ease-in-out;
+}
+
+.fade-in-bottom {
+  translate: 0px 50px;
+  opacity: 0;
+  transition: transform 300ms ease-in-out, translate 300ms ease-in-out,
+    opacity 300ms ease-in-out;
+}
+
+.fade-in-right {
+  translate: 50px 0px;
+  opacity: 0;
+  transition: transform 300ms ease-in-out, translate 300ms ease-in-out,
+    opacity 300ms ease-in-out;
+}
+
 .card {
   --stagger: 0ms;
   padding: 2rem;
