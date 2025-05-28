@@ -1,7 +1,12 @@
-import home from "./home.js";
+import home, { observer } from "./home.js";
 
 export default function ageCheck() {
   const view = document.querySelector("#view-age-check");
+
+  const animatableOnEntranceObjs = view.querySelectorAll(".fade-in-top");
+
+  animatableOnEntranceObjs.forEach((el) => observer.observe(el));
+
   let birthdate = sessionStorage.getItem("birthdate");
   if (birthdate != null && isDrinkingAge(new Date(birthdate))) {
     home();
@@ -26,9 +31,15 @@ export default function ageCheck() {
 function isDrinkingAge(birthdate) {
   const today = new Date();
 
-  if (today.getFullYear() - birthdate.getFullYear() > 18) {
+  if (
+    today.getFullYear() - birthdate.getFullYear() > 18 &&
+    today.getFullYear() - birthdate.getFullYear() < 100
+  ) {
     return true;
-  } else if (today.getFullYear() - birthdate.getFullYear() < 18) {
+  } else if (
+    today.getFullYear() - birthdate.getFullYear() < 18 ||
+    today.getFullYear() - birthdate.getFullYear() >= 100
+  ) {
     return false;
   } else if (today.getMonth() < birthdate.getMonth()) {
     return false;

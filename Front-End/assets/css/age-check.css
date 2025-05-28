@@ -10,7 +10,9 @@ body:has(#view-age-check.active) {
 }
 
 #view-age-check {
+  position: relative;
   display: none;
+  z-index: 9999;
 }
 
 #view-age-check.active {

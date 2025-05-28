@@ -130,6 +130,13 @@ We can use gap most of the times if using grid or flex in a layout*/
   grid-template-columns: repeat(2, 1fr);
 }
 
+.view {
+  display: none;
+}
+.view.active {
+  display: block;
+}
+
 @media screen and (width < 1000px) {
   .grid-two-cols {
     grid-template-columns: 1fr;

@@ -44,12 +44,15 @@
     ></script>
   </head>
   <body>
-    <div id="view-age-check">
+    <div
+      class="view"
+      id="view-age-check"
+    >
       <form
         id="age-check-form"
         class="form"
       >
-        <div class="form-content">
+        <div class="form-content fade-in-top">
           <div class="date-wrapper">
             <input
               type="date"
@@ -68,6 +71,7 @@
     </div>
     <div
       id="view-home"
+      class="active view"
       aria-hidden="true"
       inert="true"
     >
@@ -75,7 +79,11 @@
         <h1 class="title-900 text-center fade-in-top">
           <span class="title-700"> San martino </span><br />friendship day
         </h1>
-        <button class="cta lab-button mt-md">Partecipa ora</button>
+        <a
+          href="#view-form"
+          class="cta lab-button mt-md"
+          >Partecipa ora</a
+        >
       </div>
       <div class="main">
         <div class="rules-1 grid-2-col">
@@ -91,7 +99,11 @@
               non nesciunt beatae mollitia vel quasi harum quisquam velit
               aperiam!
             </p>
-            <button class="cta mt-sm lab-button">Partecipa ora</button>
+            <a
+              href="#view-form"
+              class="cta mt-sm lab-button"
+              >Partecipa ora</a
+            >
           </div>
           <img
             class="fade-in-right"
@@ -152,7 +164,11 @@
                 eveniet soluta qui hic, mollitia dolorum maiores error!
                 <br />
 
-                <button class="cta lab-button mt-sm">Partecipa ora</button>
+                <a
+                  href="#view-form"
+                  class="cta lab-button mt-sm"
+                  >Partecipa ora</a
+                >
               </p>
             </div>
           </div>
@@ -168,6 +184,20 @@
           </p>
         </footer>
       </div>
+    </div>
+    <div
+      id="view-form"
+      class="view"
+      inert="true"
+      aria-hidden="true"
+    >
+      <div class="title-900 fade-in-top">Hi my dude</div>
+      <input
+        type="date"
+        name=""
+        id=""
+        class="input-field"
+      />
     </div>
   </body>
 </html>
