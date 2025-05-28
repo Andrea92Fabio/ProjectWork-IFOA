@@ -63,7 +63,7 @@ public class UserRepository
     //if user is italian, verify that fiscal code isn't already taken
     public boolean isFiscalCodeAlreadyTaken(User user)
     {
-        String sql = "SELECT * FROM customers WHERE fiscalCode = ?";
+        String sql = "SELECT id FROM customers WHERE fiscalCode = ?";
         boolean retvalue = false;
         try
         {
@@ -85,7 +85,7 @@ public class UserRepository
     //verify that email isn't already taken
     public boolean isEmailAlreadyTaken(User user)
     {
-        String sql = "SELECT * FROM customers WHERE email = ?";
+        String sql = "SELECT id FROM customers WHERE email = ?";
         boolean retvalue = false;
         try
         {
@@ -122,26 +122,17 @@ public class UserRepository
 
     public boolean isConfirmationTop499(String key)
     {
-        String sqlWinners = "SELECT key FROM customers WHERE confirmedDate IS NOT NULL ORDER BY confirmedDate ASC LIMIT 499";
-        String sqlCandidate = "SELECT key FROM customers WHERE key = ?";
+        String sql = "SELECT COUNT(*) FROM (" +
+                "SELECT key FROM customers WHERE confirmedDate IS NOT NULL ORDER BY confirmedDate ASC LIMIT 499)" +
+                "WHERE key = ?";
         try
         {
-            PreparedStatement candidateStatement = this.connection.prepareStatement(sqlCandidate);
-            ResultSet candidateResultSet = candidateStatement.executeQuery();
-            if (!candidateResultSet.next()){
-                return false;
-            }
-            String candidateKey = candidateResultSet.getString("key");
-
-            PreparedStatement winnerStatement = this.connection.prepareStatement(sqlWinners);
-            ResultSet winnersResultSet = winnerStatement.executeQuery();
-
-            while (winnersResultSet.next()){
-                if (winnersResultSet.getString("key").equals(candidateKey)){
-                    return true;
-                }
-            }
-            return false;
+            PreparedStatement candidateStatement = this.connection.prepareStatement(sql);
+            candidateStatement.setString(1, key);
+            ResultSet resultSet = candidateStatement.executeQuery();
+            if( resultSet.next()){
+                return resultSet.getInt(1) > 0;
+            } return false;
         }
         catch (SQLException e)
         {
