@@ -45,7 +45,7 @@ h1 {
   color: var(--clr-main-100);
 }
 
-.main {
+.container {
   width: min(90%, 1200px);
   margin: 0 auto;
 }
@@ -60,32 +60,6 @@ img {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
-}
-
-.rules-1 {
-  margin-block-start: 5rem;
-}
-
-.rules-2 {
-  margin-block-start: 5rem;
-}
-
-.divider {
-  margin: 4rem auto;
-  height: 0.5rem;
-  width: 40%;
-  background-color: red;
-}
-
-.button {
-  background-color: red;
-  color: white;
-  border-radius: 1rem;
-  padding: 1rem 2rem;
-  transition: border-radius 0.3s ease-in-out;
-}
-.button:hover {
-  border-radius: 3rem 1rem;
 }
 
 .card-wrapper {
@@ -125,7 +99,7 @@ img {
 .card {
   --stagger: 0ms;
   padding: 2rem;
-  background-color: red;
+  background-color: var(--clr-main-400);
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
