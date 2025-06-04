@@ -1,5 +1,5 @@
 .hero {
-  background-image: url("./../img/visore.png");
+  background-image: url("./../img/teletubbies.jpeg");
   background-size: cover;
   background-position: center;
   min-height: 80vh;
@@ -19,8 +19,8 @@ h1 {
 
 .hero::before {
   content: "";
-  background: black;
-  opacity: 0.5;
+  background: var(--clr-main-800);
+  opacity: 0.4;
   position: absolute;
   inset: 0;
 }
@@ -71,29 +71,25 @@ img {
 .fade-in-left {
   translate: -50px 0px;
   opacity: 0;
-  transition: transform 300ms ease-in-out, translate 300ms ease-in-out,
-    opacity 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
 }
 
 .fade-in-top {
   translate: 0px -50px;
   opacity: 0;
-  transition: transform 300ms ease-in-out, translate 300ms ease-in-out,
-    opacity 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
 }
 
 .fade-in-bottom {
   translate: 0px 50px;
   opacity: 0;
-  transition: transform 300ms ease-in-out, translate 300ms ease-in-out,
-    opacity 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
 }
 
 .fade-in-right {
   translate: 50px 0px;
   opacity: 0;
-  transition: transform 300ms ease-in-out, translate 300ms ease-in-out,
-    opacity 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
 }
 
 .card {
