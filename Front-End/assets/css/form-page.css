@@ -1,0 +1,11 @@
+.main-form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--len-md);
+}
+
+.form-input-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--len-xs);
+}

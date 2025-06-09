@@ -1,219 +1,214 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <title>San martino friendship day</title>
-    <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
-    />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>San martino friendship day</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
 
-    <link
-      rel="stylesheet"
-      href="./assets/css/reset.css"
-    />
+        <link rel="stylesheet" href="./assets/css/reset.css" />
 
-    <link
-      rel="stylesheet"
-      href="./assets/css/style.css"
-    />
-    <link
-      rel="stylesheet"
-      href="assets/css/home.css"
-    />
-    <link
-      rel="stylesheet"
-      href="assets/css/age-check.css"
-    />
+        <link rel="stylesheet" href="./assets/css/style.css" />
+        <link rel="stylesheet" href="./assets/css/home.css" />
+        <link rel="stylesheet" href="./assets/css/age-check.css" />
+        <link rel="stylesheet" href="./assets/css/form-page.css" />
 
-<link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon">
+        <link
+            rel="shortcut icon"
+            href="./assets/img/favicon.ico"
+            type="image/x-icon"
+        />
 
-    <script
-      type="module"
-      src="./assets/js/app.js"
-    ></script>
-  </head>
-  <body>
-    <div
-      class="view"
-      id="view-age-check"
-    >
-      <form
-        id="age-check-form"
-        class="form"
-      >
-        <div class="form-content fade-in-top">
-          <div class="date-wrapper">
-            <label
-              for="age-check-birthdate"
-              class="lab-button"
-              >Data di nascita</label
-            >
-            <input
-              type="date"
-              name=""
-              required
-              class="input input-date"
-              id="age-check-birthdate"
-            />
-          </div>
-          <input
-            class="cta lab-button mt-md"
-            type="submit"
-            value="Entra"
-          />
+        <script type="module" src="./assets/js/app.js"></script>
+    </head>
+    <body>
+        <div class="view" id="view-age-check">
+            <form id="age-check-form" class="form">
+                <div class="form-content fade-in-top">
+                    <div class="date-wrapper">
+                        <label for="age-check-birthdate" class="lab-button"
+                            >Data di nascita</label
+                        >
+                        <input
+                            type="date"
+                            name=""
+                            required
+                            class="input input-date"
+                            id="age-check-birthdate"
+                        />
+                    </div>
+                    <input
+                        class="cta lab-button mt-md"
+                        type="submit"
+                        value="Entra"
+                    />
+                </div>
+            </form>
         </div>
-      </form>
-    </div>
-    <div
-      id="view-home"
-      class="active view"
-      aria-hidden="true"
-      inert="true"
-    >
-      <div class="hero">
-        <h1 class="title-900 text-center">
-          <span class="title-700"> San martino </span><br />friendship day
-        </h1>
-        <a
-          href="#view-form"
-          class="cta lab-button mt-md fade-in-bottom"
-          >Partecipa ora</a
-        >
-      </div>
-      <div class="bg-color-100 text-clr-700">
-        <div class="container py-lg">
-          <div class="grid-2-col">
-            <div class="flex-col">
-              <h2 class="title-700 fade-in-top">Brinda all'amicizia</h2>
-              <p class="text mt-sm">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi
-                laborum accusantium quae numquam repudiandae! Vero, explicabo
-                debitis esse nihil doloribus non nesciunt beatae mollitia vel
-                quasi harum quisquam velit aperiam! Lorem, ipsum dolor sit amet
-                consectetur adipisicing elit. Quasi laborum accusantium quae
-                numquam repudiandae! Vero, explicabo debitis esse nihil
-                doloribus non nesciunt beatae mollitia vel quasi harum quisquam
-                velit aperiam!
-              </p>
-              <a
-                href="#view-form"
-                class="cta mt-sm lab-button justify-self-start fade-in-bottom"
-                >Partecipa ora</a
-              >
-            </div>
-            <img
-              class="fade-in-right"
-              src="./assets/img/bottiglie.png"
-              alt=""
-              srcset=""
-            />
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-color-200 text-clr-800 py-lg">
-        <div class="container">
-          <div class="win-section">
-            <h2 class="title-500 text-center">
-              Vinci un premio partecipando al concorso
-            </h2>
-            <div class="what-win">
-              <h3 class="title-300 text-center mt-sm fade-in-top">
-                Cosa vinci
-              </h3>
-              <div class="card-wrapper mt-md">
-                <div class="card">
-                  <img
-                    src="https://placehold.co/300x300/png"
-                    alt="bottiglie"
-                  />
-                  <p class="mt-md title-300">4 Bottiglie</p>
-                </div>
-
-                <div class="card">
-                  <img
-                    src="https://placehold.co/300x300/png"
-                    alt="stampo"
-                  />
-                  <p class="mt-md title-300">1 stampo</p>
-                </div>
-                <div class="card">
-                  <img
-                    src="https://placehold.co/300x300/png"
-                    alt="Bag"
-                  />
-                  <p class="mt-md title-300">Bag</p>
-                </div>
-                </div>
-              </div>
-            </div>
-        </div>
-          </div>
-          <div class="bg-color-100 text-clr-700 py-lg">
-            <div class="container">
-              <div class="grid-2-col">
-                <img
-                class="fade-in-left"
-                  src="https://placehold.co/300x300/png"
-                  alt=""
-                />
-                <div class="flex-col">
-                  <h2 class="title-700 fade-in-top">Come vincere</h2>
-                  <ul>
-                    <li class="mt-md">✅ clicca su partecipa</li>
-                    <li class="mt-sm">✅ compila il form</li>
-                    <li class="mt-sm">✅ conferma la tua mail</li>
-                  </ul>
-                  <p class="text mt-md">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Distinctio ducimus doloremque porro at quasi dignissimos,
-                    perspiciatis, dolor fugiat nisi autem voluptatem accusamus
-                    eveniet soluta qui hic, mollitia dolorum maiores error!
-                    <br />
-                  </p>
-                  <a
-                    href="#view-form"
-                    class="cta lab-button mt-sm fade-in-bottom"
+        <div id="view-home" class="active view" aria-hidden="true" inert="true">
+            <div class="hero">
+                <h1 class="title-900 text-center">
+                    <span class="title-700"> San martino </span><br />friendship
+                    day
+                </h1>
+                <a href="#view-form" class="cta lab-button mt-md fade-in-bottom"
                     >Partecipa ora</a
-                  >
-                </div>
-              </div>
+                >
             </div>
-          </div>
+            <div class="bg-color-100 text-clr-700">
+                <div class="container py-lg">
+                    <div class="grid-2-col">
+                        <div class="flex-col">
+                            <h2 class="title-700 fade-in-top">
+                                Brinda all'amicizia
+                            </h2>
+                            <p class="text mt-sm">
+                                Lorem, ipsum dolor sit amet consectetur
+                                adipisicing elit. Quasi laborum accusantium quae
+                                numquam repudiandae! Vero, explicabo debitis
+                                esse nihil doloribus non nesciunt beatae
+                                mollitia vel quasi harum quisquam velit aperiam!
+                                Lorem, ipsum dolor sit amet consectetur
+                                adipisicing elit. Quasi laborum accusantium quae
+                                numquam repudiandae! Vero, explicabo debitis
+                                esse nihil doloribus non nesciunt beatae
+                                mollitia vel quasi harum quisquam velit aperiam!
+                            </p>
+                            <a
+                                href="#view-form"
+                                class="cta mt-sm lab-button justify-self-start fade-in-bottom"
+                                >Partecipa ora</a
+                            >
+                        </div>
+                        <img
+                            class="fade-in-right"
+                            src="./assets/img/bottiglie.png"
+                            alt=""
+                            srcset=""
+                        />
+                    </div>
+                </div>
+            </div>
 
+            <div class="bg-color-200 text-clr-800 py-lg">
+                <div class="container">
+                    <div class="win-section">
+                        <h2 class="title-500 text-center">
+                            Vinci un premio partecipando al concorso
+                        </h2>
+                        <div class="what-win">
+                            <h3 class="title-300 text-center mt-sm fade-in-top">
+                                Cosa vinci
+                            </h3>
+                            <div class="card-wrapper mt-md">
+                                <div class="card">
+                                    <img
+                                        src="https://placehold.co/300x300/png"
+                                        alt="bottiglie"
+                                    />
+                                    <p class="mt-md title-300">4 Bottiglie</p>
+                                </div>
+
+                                <div class="card">
+                                    <img
+                                        src="https://placehold.co/300x300/png"
+                                        alt="stampo"
+                                    />
+                                    <p class="mt-md title-300">1 stampo</p>
+                                </div>
+                                <div class="card">
+                                    <img
+                                        src="https://placehold.co/300x300/png"
+                                        alt="Bag"
+                                    />
+                                    <p class="mt-md title-300">Bag</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-color-100 text-clr-700 py-lg">
+                <div class="container">
+                    <div class="grid-2-col">
+                        <img
+                            class="fade-in-left"
+                            src="https://placehold.co/300x300/png"
+                            alt=""
+                        />
+                        <div class="flex-col">
+                            <h2 class="title-700 fade-in-top">Come vincere</h2>
+                            <ul>
+                                <li class="mt-md">✅ clicca su partecipa</li>
+                                <li class="mt-sm">✅ compila il form</li>
+                                <li class="mt-sm">✅ conferma la tua mail</li>
+                            </ul>
+                            <p class="text mt-md">
+                                Lorem ipsum dolor, sit amet consectetur
+                                adipisicing elit. Distinctio ducimus doloremque
+                                porro at quasi dignissimos, perspiciatis, dolor
+                                fugiat nisi autem voluptatem accusamus eveniet
+                                soluta qui hic, mollitia dolorum maiores error!
+                                <br />
+                            </p>
+                            <a
+                                href="#view-form"
+                                class="cta lab-button mt-sm fade-in-bottom"
+                                >Partecipa ora</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div
-      id="view-form"
-      class="view"
-      inert="true"
-      aria-hidden="true"
-    >
-    
-    
-      <h2 class="title-900 fade-in-top">Hi my dude</h2>
-      <form>
-      <input
-        type="date"
-        name="birthdate"
-        id=""
-        class="input-field"
-      /></form>
-    </div>
-  </body>
+        <div
+            id="view-form"
+            class="view bg-color-100"
+            inert="true"
+            aria-hidden="true"
+        >
+            <div class="container">
+                <h2 class="title-900 fade-in-top">Hi my dude</h2>
+                <form class="main-form" id="main-form">
+                    <div class="form-input-wrapper" id="form-name-wrapper">
+                        <label for="name" class="lab-button label">Nome</label>
+                        <input
+                            type="text"
+                            name="name"
+                            required
+                            class="input input-date"
+                            id="form-name"
+                        />
+                        <div id="form-name-errors" class="errors-target"></div>
+                    </div>
+
+                    <div class="form-input-wrapper" id="form-birthdate-wrapper">
+                        <label for="form-birthdate" class="lab-button label"
+                            >Data di nascita</label
+                        >
+                        <input
+                            type="date"
+                            name=""
+                            required
+                            class="input input-date"
+                            id="form-birthdate"
+                        />
+                        <div
+                            id="form-birthdate-errors"
+                            class="errors-target"
+                        ></div>
+                    </div>
+                    <div></div>
+
+                    <input type="submit" class="cta" />
+                    <div></div>
+                </form>
+            </div>
+        </div>
+    </body>
 </html>
