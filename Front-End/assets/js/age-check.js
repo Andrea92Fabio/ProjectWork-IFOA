@@ -23,7 +23,7 @@ export default function ageCheck() {
       view.classList.remove("active");
       home();
     } else {
-      window.location.replace("https://google.com");
+      window.location.replace("https://www.beviresponsabile.it/");
     }
   });
 }

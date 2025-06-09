@@ -30,6 +30,7 @@ h1 {
 }
 
 .cta {
+  cursor: pointer;
   background-color: var(--clr-main-400);
   color: var(--clr-main-800);
   transition: all 300ms;
