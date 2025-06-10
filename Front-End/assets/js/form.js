@@ -85,6 +85,12 @@ export default function form() {
                 'form-shipping-address',
                 `L'indirizzo di spedizione inserito non è valido`
             );
+        //Temporaneo
+        if(!validateFiscalCode(fiscalCode.value))
+            errors.set(
+                'form-fiscal-code',
+                `Hai inserito un codice fiscale sbagliato`
+            );
         //cap 5 figures
         //
 
@@ -145,4 +151,11 @@ function validateZipCode(s) {
         return false;
     }
     parseInt(s);
+}
+
+function validateFiscalCode(s){
+    const reg = /^[a-zA-Z]{6}[\d]{2}[a-zA-Z]{1}[\d]{2}[a-zA-Z]{1}[\d]{3}[a-zA-Z]{1}/;
+    if(reg.test(s)){
+        return true;
+    } return false
 }

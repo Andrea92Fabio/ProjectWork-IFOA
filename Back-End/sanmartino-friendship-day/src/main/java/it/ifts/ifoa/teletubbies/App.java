@@ -13,6 +13,9 @@ import java.sql.SQLException;
 
 import static spark.Spark.*;
 
+//Aggiungere Corpo della mail in MailService e oggetto della mail
+//Scegliere se fare un corpo in html o semplice txt
+
 public class App
 {
     Connection connection;
