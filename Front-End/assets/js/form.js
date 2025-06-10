@@ -55,6 +55,8 @@ export default function form() {
         errors.set('form-shipping-address', null);
         errors.set('form-shipping-zip-code', null);
 
+        const checkerMap = new Map(errors);
+
         const birthdateObject = new Date(
             formElement.querySelector('#form-birthdate').value
         );
@@ -65,8 +67,9 @@ export default function form() {
                 'Devi essere maggiorenne per partecipare'
             );
         }
-        if (!validateStringNotEmptyOrWhitespaceOnly(name.value))
+        if (!validateStringNotEmptyOrWhitespaceOnly(name.value)) {
             errors.set('form-name', 'Il nome inserito non è valido');
+        }
 
         if (!validateStringNotEmptyOrWhitespaceOnly(surname.value))
             errors.set('form-surname', 'Il cognome inserito non è valido');
@@ -106,8 +109,17 @@ export default function form() {
         });
 
         console.log(errors);
+        console.log(checkerMap);
 
-        return errors.size == 0;
+        let isValidForm = true;
+
+        checkerMap.forEach((el, key) => {
+            if (checkerMap.get(key) != errors.get(key)) {
+                isValidForm = false;
+            }
+        });
+
+        return isValidForm;
     }
     //todo: todo: send data as json
 
