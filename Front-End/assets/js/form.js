@@ -1,15 +1,22 @@
 import { observer } from './home.js';
 import { isDrinkingAge } from './age-check.js';
 
+const view = document.querySelector('#view-form');
+const formElement = view.querySelector('#main-form');
+
+const name = formElement.querySelector('#form-name');
+const surname = formElement.querySelector('#form-surname');
+const email = formElement.querySelector('#form-email');
+const birthdate = formElement.querySelector('#form-birthdate');
+const gender = formElement.querySelector('#form-gender');
+const residencyCountry = formElement.querySelector('#form-residency-country');
+
 export default function form() {
-    const view = document.querySelector('#view-form');
     view.classList.add('active');
     view.removeAttribute('aria-hidden');
     view.removeAttribute('inert');
 
-    const form = view.querySelector('#main-form');
-
-    const inputFields = form.querySelectorAll('.input-field');
+    const inputFields = formElement.querySelectorAll('.input-field');
 
     view.querySelector('#form-birthdate').value = sessionStorage
         .getItem('birthdate')
@@ -20,10 +27,8 @@ export default function form() {
     });
     //todo: implement an extra check on submit
 
-    form.addEventListener('submit', (e) => {
+    formElement.addEventListener('submit', (e) => {
         e.preventDefault();
-
-        const bdayObj = new Date(form.querySelector('#form-birthdate'));
 
         console.log(validateForm());
     });
@@ -33,42 +38,43 @@ export default function form() {
 
         errors.set('form-birthdate', null);
         errors.set('form-name', null);
+        errors.set('form-surname', null);
 
-        const bdayObj = new Date(form.querySelector('#form-birthdate').value);
+        const birthdateObject = new Date(
+            formElement.querySelector('#form-birthdate').value
+        );
 
-        const name = form.querySelector('#form-name').value;
-        const surname = form.querySelector('#form-surname').value;
-        const email = form.querySelector('#form-email').value;
-        const gender = form.querySelector('#form-gender').value;
-        const residencyCountry = form.querySelector(
-            '#form-residency-country'
-        ).value;
-
-        if (!isDrinkingAge(bdayObj)) {
+        if (!isDrinkingAge(birthdateObject)) {
             errors.set(
                 'form-birthdate',
                 'Devi essere maggiorenne per partecipare'
             );
         }
-        if (!validateString(name))
+        if (!validateString(name.value))
             errors.set('form-name', 'Il nome inserito non è valido');
 
-        if (!validateString(surname))
+        if (!validateString(surname.value))
             errors.set('form-surname', 'Il cognome inserito non è valido');
         //cap 5 figures
         //
 
         errors.forEach((el, key) => {
             if (el) {
-                form.querySelector(`#${key}-errors`).textContent = el;
-                form.querySelector(`#${key}-wrapper`).classList.remove(
-                    'success'
-                );
-                form.querySelector(`#${key}-wrapper`).classList.add('error');
+                formElement.querySelector(`#${key}-errors`).textContent = el;
+                formElement
+                    .querySelector(`#${key}-wrapper`)
+                    .classList.remove('success');
+                formElement
+                    .querySelector(`#${key}-wrapper`)
+                    .classList.add('error');
             } else {
-                form.querySelector(`#${key}-errors`).textContent = '';
-                form.querySelector(`#${key}-wrapper`).classList.remove('error');
-                form.querySelector(`#${key}-wrapper`).classList.add('success');
+                formElement.querySelector(`#${key}-errors`).textContent = '';
+                formElement
+                    .querySelector(`#${key}-wrapper`)
+                    .classList.remove('error');
+                formElement
+                    .querySelector(`#${key}-wrapper`)
+                    .classList.add('success');
             }
         });
 
