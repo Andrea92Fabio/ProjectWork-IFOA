@@ -148,16 +148,18 @@ img {
     .card:nth-of-type(3) {
         --stagger: 0ms;
     }
-    .fade-in-left,
-    .fade-in-top,
-    .fade-in-right,
+
+    /* this fixes the mobile issue */
     .fade-in-bottom {
-        translate: -50px 0px;
+        translate: 0px -50px;
         opacity: 0;
     }
 
     .show {
         translate: 0px 0px;
         opacity: 1;
+    }
+    .hero {
+        min-height: 20rem;
     }
 }
