@@ -5,7 +5,6 @@
 }
 
 .form-input-wrapper {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--len-xs);
+    display: flex;
+    flex-direction: column;
 }
