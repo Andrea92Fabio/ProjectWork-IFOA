@@ -142,7 +142,7 @@
                             src="./assets/img/come_vincere.webp"
                             alt=""
                         />
-                        <div class="flex-col">
+                        <div class="flex-col pb-lg">
                             <h2 class="title-700 fade-in-top">Come vincere</h2>
                             <ul>
                                 <li class="mt-md">✅ clicca su partecipa</li>
@@ -181,11 +181,39 @@
                         <input
                             type="text"
                             name="name"
-                            required
-                            class="input input-date"
+                            class="input input-date mt-xs"
                             id="form-name"
                         />
                         <div id="form-name-errors" class="errors-target"></div>
+                    </div>
+
+                    <div class="form-input-wrapper" id="form-surname-wrapper">
+                        <label for="surname" class="lab-button label"
+                            >Cognome</label
+                        >
+                        <input
+                            type="text"
+                            name="surname"
+                            class="input input-date mt-xs"
+                            id="form-surname"
+                        />
+                        <div
+                            id="form-surname-errors"
+                            class="errors-target"
+                        ></div>
+                    </div>
+
+                    <div class="form-input-wrapper" id="form-email-wrapper">
+                        <label for="email" class="lab-button label"
+                            >Email</label
+                        >
+                        <input
+                            type="email"
+                            name="email"
+                            class="input input-date mt-xs"
+                            id="form-email"
+                        />
+                        <div id="form-email-errors" class="errors-target"></div>
                     </div>
 
                     <div class="form-input-wrapper" id="form-birthdate-wrapper">
@@ -194,9 +222,9 @@
                         >
                         <input
                             type="date"
-                            name=""
+                            name="birthdate"
                             required
-                            class="input input-date"
+                            class="input input-date mt-xs"
                             id="form-birthdate"
                         />
                         <div
@@ -206,7 +234,7 @@
                     </div>
                     <div></div>
 
-                    <input type="submit" class="cta" />
+                    <input type="submit" class="cta lab-button" value="invia" />
                     <div></div>
                 </form>
             </div>

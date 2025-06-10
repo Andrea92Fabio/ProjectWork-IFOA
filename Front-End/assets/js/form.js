@@ -36,13 +36,25 @@ export default function form() {
 
         const bdayObj = new Date(form.querySelector('#form-birthdate').value);
 
+        const name = form.querySelector('#form-name').value;
+        const surname = form.querySelector('#form-surname').value;
+        const email = form.querySelector('#form-email').value;
+        const gender = form.querySelector('#form-gender').value;
+        const residencyCountry = form.querySelector(
+            '#form-residency-country'
+        ).value;
+
         if (!isDrinkingAge(bdayObj)) {
             errors.set(
                 'form-birthdate',
                 'Devi essere maggiorenne per partecipare'
             );
         }
+        if (!validateString(name))
+            errors.set('form-name', 'Il nome inserito non è valido');
 
+        if (!validateString(surname))
+            errors.set('form-surname', 'Il cognome inserito non è valido');
         //cap 5 figures
         //
 
@@ -64,7 +76,6 @@ export default function form() {
 
         return errors.size == 0;
     }
-
     //todo: todo: send data as json
 
     const animatableOnEntranceObjs = [
@@ -75,4 +86,11 @@ export default function form() {
     ];
 
     animatableOnEntranceObjs.forEach((el) => observer.observe(el));
+}
+
+function validateString(s) {
+    if (s === null || s.replace(' ', '') === '') {
+        return false;
+    }
+    return true;
 }

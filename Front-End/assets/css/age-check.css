@@ -1,16 +1,3 @@
-*,
-*::after,
-*::before {
-    box-sizing: border-box;
-}
-
-html,
-body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
-
 body:has(#view-age-check.active) {
     height: 100svh;
     width: 100svw;
