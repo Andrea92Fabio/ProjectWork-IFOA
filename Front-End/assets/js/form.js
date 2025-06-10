@@ -10,6 +10,12 @@ const email = formElement.querySelector('#form-email');
 const birthdate = formElement.querySelector('#form-birthdate');
 const gender = formElement.querySelector('#form-gender');
 const residencyCountry = formElement.querySelector('#form-residency-country');
+const residencyAddress = formElement.querySelector('#form-residency-address');
+const residencyZipCode = formElement.querySelector('#form-residency-zip-code');
+const shippingCountry = formElement.querySelector('#form-shipping-country');
+const shippingAddress = formElement.querySelector('#form-shipping-address');
+const shippingZipCode = formElement.querySelector('#form-shipping-zip-code');
+const fiscalCode = formElement.querySelector('#form-fiscal-code');
 
 export default function form() {
     view.classList.add('active');
@@ -36,9 +42,18 @@ export default function form() {
     function validateForm() {
         const errors = new Map();
 
-        errors.set('form-birthdate', null);
         errors.set('form-name', null);
         errors.set('form-surname', null);
+        errors.set('form-email', null);
+        errors.set('form-birthdate', null);
+        errors.set('form-gender', null);
+        errors.set('form-residency-country', null);
+        errors.set('form-residency-address', null);
+        errors.set('form-residency-zip-code', null);
+        errors.set('form-fiscal-code', null);
+        errors.set('form-shipping-country', null);
+        errors.set('form-shipping-address', null);
+        errors.set('form-shipping-zip-code', null);
 
         const birthdateObject = new Date(
             formElement.querySelector('#form-birthdate').value
@@ -50,11 +65,23 @@ export default function form() {
                 'Devi essere maggiorenne per partecipare'
             );
         }
-        if (!validateString(name.value))
+        if (!validateStringNotEmptyOrWhitespaceOnly(name.value))
             errors.set('form-name', 'Il nome inserito non è valido');
 
-        if (!validateString(surname.value))
+        if (!validateStringNotEmptyOrWhitespaceOnly(surname.value))
             errors.set('form-surname', 'Il cognome inserito non è valido');
+
+        if (!validateStringNotEmptyOrWhitespaceOnly(residencyAddress.value))
+            errors.set(
+                'form-residency-address',
+                `L'indirizzo di residenza inserito non è valido`
+            );
+
+        if (!validateStringNotEmptyOrWhitespaceOnly(shippingAddress.value))
+            errors.set(
+                'form-shipping-address',
+                `L'indirizzo di spedizione inserito non è valido`
+            );
         //cap 5 figures
         //
 
@@ -94,9 +121,16 @@ export default function form() {
     animatableOnEntranceObjs.forEach((el) => observer.observe(el));
 }
 
-function validateString(s) {
+function validateStringNotEmptyOrWhitespaceOnly(s) {
     if (s === null || s.replace(' ', '') === '') {
         return false;
     }
     return true;
+}
+
+function validateZipCode(s) {
+    if (s.length !== 5) {
+        return false;
+    }
+    parseInt(s);
 }

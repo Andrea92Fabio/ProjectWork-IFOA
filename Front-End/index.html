@@ -223,12 +223,176 @@
                         <input
                             type="date"
                             name="birthdate"
-                            required
                             class="input input-date mt-xs"
                             id="form-birthdate"
                         />
                         <div
                             id="form-birthdate-errors"
+                            class="errors-target"
+                        ></div>
+                    </div>
+
+                    <div class="form-input-wrapper" id="form-gender-wrapper">
+                        <label for="form-gender" class="lab-button label"
+                            >Genere</label
+                        >
+                        <select
+                            name="gender"
+                            id="form-gender"
+                            class="input mt-xs"
+                        >
+                            <option value="man">Uomo</option>
+                            <option value="woman">Donna</option>
+                            <option value="other">Altro</option>
+                            <option value="not specified">
+                                Preferisco non specificarlo
+                            </option>
+                        </select>
+                        <div
+                            id="form-gender-errors"
+                            class="errors-target"
+                        ></div>
+                    </div>
+
+                    <div
+                        class="form-input-wrapper"
+                        id="form-residency-country-wrapper"
+                    >
+                        <label
+                            for="form-residency-country"
+                            class="lab-button label"
+                            >Paese di residenza</label
+                        >
+                        <select
+                            name="residency-country"
+                            id="form-residency-country"
+                            class="input mt-xs"
+                        >
+                            <option value="italy">Italia</option>
+                            <option value="san marino">San Marino</option>
+                            <option value="other">Altro</option>
+                        </select>
+                        <div
+                            id="form-residency-country-errors"
+                            class="errors-target"
+                        ></div>
+                    </div>
+
+                    <div
+                        class="form-input-wrapper"
+                        id="form-residency-address-wrapper"
+                    >
+                        <label for="residency-address" class="lab-button label"
+                            >Indirizzo di residenza</label
+                        >
+                        <input
+                            type="text"
+                            name="residency-address"
+                            class="input input-date mt-xs"
+                            id="form-residency-address"
+                        />
+                        <div
+                            id="form-residency-address-errors"
+                            class="errors-target"
+                        ></div>
+                    </div>
+
+                    <div
+                        class="form-input-wrapper"
+                        id="form-residency-zip-code-wrapper"
+                    >
+                        <label for="residency-zip-code" class="lab-button label"
+                            >CAP di residenza</label
+                        >
+                        <input
+                            type="text"
+                            name="residency-zip-code"
+                            class="input input-date mt-xs"
+                            id="form-residency-zip-code"
+                        />
+                        <div
+                            id="form-residency-zip-code-errors"
+                            class="errors-target"
+                        ></div>
+                    </div>
+
+                    <div
+                        class="form-input-wrapper"
+                        id="form-fiscal-code-wrapper"
+                    >
+                        <label for="form-fiscal-code" class="lab-button label"
+                            >Codice fiscale</label
+                        >
+                        <input
+                            type="text"
+                            name="fiscal code"
+                            class="input input-date mt-xs"
+                            id="form-fiscal-code"
+                        />
+                        <div
+                            id="form-fiscal-code-errors"
+                            class="errors-target"
+                        ></div>
+                    </div>
+
+                    <div
+                        class="form-input-wrapper"
+                        id="form-shipping-country-wrapper"
+                    >
+                        <label
+                            for="form-shipping-country"
+                            class="lab-button label"
+                            >Paese di spedizione</label
+                        >
+                        <select
+                            name="shipping-country"
+                            id="form-shipping-country"
+                            class="input mt-xs"
+                        >
+                            <option value="italy">Italia</option>
+                            <option value="san marino">San Marino</option>
+                            <option value="other">Altro</option>
+                        </select>
+                        <div
+                            id="form-shipping-country-errors"
+                            class="errors-target"
+                        ></div>
+                    </div>
+
+                    <div
+                        class="form-input-wrapper"
+                        id="form-shipping-address-wrapper"
+                    >
+                        <label for="shipping-address" class="lab-button label"
+                            >Indirizzo di spedizione</label
+                        >
+                        <input
+                            type="text"
+                            name="shipping-address"
+                            class="input input-date mt-xs"
+                            id="form-shipping-address"
+                        />
+                        <div
+                            id="form-shipping-address-errors"
+                            class="errors-target"
+                        ></div>
+                    </div>
+
+                    <div
+                        class="form-input-wrapper"
+                        id="form-shipping-zip-code-wrapper"
+                    >
+                        <label for="shipping-zip-code" class="lab-button label"
+                            >CAP di spedizione</label
+                        >
+                        <input
+                            type="text"
+                            name="shipping-zip-code"
+                            class="input input-date mt-xs"
+                            id="form-shipping-zip-code"
+                        />
+                        <div
+                            id="form-shipping-zip-code-errors"
                             class="errors-target"
                         ></div>
                     </div>
