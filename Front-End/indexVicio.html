@@ -1,249 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
 
-    <title>Document</title>
-</head>
-
-<body>
-    <div id="form-view" class="view">
-        <img src="https://placehold.co/1200x600" class="full-w" alt="">
-        <div class="container-boxed">
-            <form method="post" name="play" id="play" onabort="">
-                <div id="column">
-                    <br><br>
-                    <h2>Compila il form con i tuoi dati e prova a vincere sta funcia di minchia</h2>
-                    <br>
-                    <p>pochi semplici passi e potrai vincerla facilmente</p>
-                    <br><br>
+    <body>
+        <div id="ty-view" class="view">
+            <img src="https://placehold.co/1600x600" alt="" />
+            <h2 class="title-900 text-center mt-lg">
+                Grazie per aver partecipato
+            </h2>
+            <p class="mt-sm">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam,
+                sint! Autem esse, vel minima doloribus aliquam a
+            </p>
+            <div class="backimg grid-2-col mt-lg">
+                <div class="left-side">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Possimus blanditiis impedit aliquid sapiente
+                        explicabo numquam pariatur! Totam cum odit earum iusto
+                        odio illo sed possimus. Doloremque labore id magni
+                        nesciunt.
+                    </p>
                 </div>
-        </div>
-        <img src="https://placehold.co/1000x50/png" class="full-w" alt="">
-        <div class="container-boxed">
-            <div><br><br></div>
-            <div id="row">
-                <div class="col-12 col-md-6 col-xxl-4">
-                    <div class="input-wrapper">
-                        <input type="text" name="firstname" id="firstname" size="20" maxlength="20" placeholder="Nome"
-                            required>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-4">
-                    <div class="input-wrapper">
-                        <input type="text" name="lastname" id="lastname" size="20" maxlength="20" placeholder="Cognome"
-                            required>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-4">
-                    <div class="input-wrapper">
-                        <input type="email" name="mail" id="mail" size="20" maxlength="20" placeholder="Email" required>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-4">
-                    <div class="input-wrapper">
-                        <input type="date" name="birthdate" id="birthdate" size="20" maxlength="8"
-                            placeholder="Data di nascita" required>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-4">
-                    <div class="input-wrapper">
-                        <select name="gender" id="gender" required>
-                            <option value="male">Uomo</option>
-                            <option value="female">Donna</option>
-                            <option value="other">Altro</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-4">
-                    <div class="input-wrapper">
-                        <input type="text" name="fiscalCode" id="fiscalCode" size="20" maxlength="17"
-                            placeholder="Codice Fiscale" required>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-4">
-                    <div class="input-wrapper">
-                        <select name="recidencyCountry" id="recidencyCountry" required>
-                            <option value="albania">Albania</option>
-                            <option value="andorra">Andorra</option>
-                            <option value="armenia">Armenia</option>
-                            <option value="austria">Austria</option>
-                            <option value="azerbaijan">Azerbaigian</option>
-                            <option value="belarus">Bielorussia</option>
-                            <option value="belgium">Belgio</option>
-                            <option value="bosnia-herzegovina">Bosnia ed Erzegovina</option>
-                            <option value="bulgaria">Bulgaria</option>
-                            <option value="croatia">Croazia</option>
-                            <option value="cyprus">Cipro</option>
-                            <option value="czech-republic">Repubblica Ceca</option>
-                            <option value="denmark">Danimarca</option>
-                            <option value="estonia">Estonia</option>
-                            <option value="finland">Finlandia</option>
-                            <option value="france">Francia</option>
-                            <option value="georgia">Georgia</option>
-                            <option value="germany">Germania</option>
-                            <option value="greece">Grecia</option>
-                            <option value="hungary">Ungheria</option>
-                            <option value="iceland">Islanda</option>
-                            <option value="ireland">Irlanda</option>
-                            <option value="italy">Italia</option>
-                            <option value="kazakhstan">Kazakistan (parte europea)</option>
-                            <option value="kosovo">Kosovo</option>
-                            <option value="latvia">Lettonia</option>
-                            <option value="liechtenstein">Liechtenstein</option>
-                            <option value="lithuania">Lituania</option>
-                            <option value="luxembourg">Lussemburgo</option>
-                            <option value="malta">Malta</option>
-                            <option value="moldova">Moldavia</option>
-                            <option value="monaco">Monaco</option>
-                            <option value="montenegro">Montenegro</option>
-                            <option value="netherlands">Paesi Bassi</option>
-                            <option value="north-macedonia">Macedonia del Nord</option>
-                            <option value="norway">Norvegia</option>
-                            <option value="poland">Polonia</option>
-                            <option value="portugal">Portogallo</option>
-                            <option value="romania">Romania</option>
-                            <option value="russia">Russia (parte europea)</option>
-                            <option value="san-marino">San Marino</option>
-                            <option value="serbia">Serbia</option>
-                            <option value="slovakia">Slovacchia</option>
-                            <option value="slovenia">Slovenia</option>
-                            <option value="spain">Spagna</option>
-                            <option value="sweden">Svezia</option>
-                            <option value="switzerland">Svizzera</option>
-                            <option value="turkey">Turchia (parte europea)</option>
-                            <option value="ukraine">Ucraina</option>
-                            <option value="united-kingdom">Regno Unito</option>
-                            <option value="vatican-city">Città del Vaticano</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-4">
-                    <div class="input-wrapper">
-                        <input type="text" name="recidencyAddress" id="recidencyAddress" size="20" maxlength="100"
-                            placeholder="Indirizzo di residenza" required>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-4">
-                    <div class="input-wrapper">
-                        <input type="number" name="recidencyZipCode" id="recidencyZipCode" size="20" maxlength="5"
-                            placeholder="CAP di residenza" required>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-4">
-                    <div class="input-wrapper">
-                        <select name="shipCountry" id="shipCountry" required>
-                            <option value="albania">Albania</option>
-                            <option value="andorra">Andorra</option>
-                            <option value="armenia">Armenia</option>
-                            <option value="austria">Austria</option>
-                            <option value="azerbaijan">Azerbaigian</option>
-                            <option value="belarus">Bielorussia</option>
-                            <option value="belgium">Belgio</option>
-                            <option value="bosnia-herzegovina">Bosnia ed Erzegovina</option>
-                            <option value="bulgaria">Bulgaria</option>
-                            <option value="croatia">Croazia</option>
-                            <option value="cyprus">Cipro</option>
-                            <option value="czech-republic">Repubblica Ceca</option>
-                            <option value="denmark">Danimarca</option>
-                            <option value="estonia">Estonia</option>
-                            <option value="finland">Finlandia</option>
-                            <option value="france">Francia</option>
-                            <option value="georgia">Georgia</option>
-                            <option value="germany">Germania</option>
-                            <option value="greece">Grecia</option>
-                            <option value="hungary">Ungheria</option>
-                            <option value="iceland">Islanda</option>
-                            <option value="ireland">Irlanda</option>
-                            <option value="italy">Italia</option>
-                            <option value="kazakhstan">Kazakistan (parte europea)</option>
-                            <option value="kosovo">Kosovo</option>
-                            <option value="latvia">Lettonia</option>
-                            <option value="liechtenstein">Liechtenstein</option>
-                            <option value="lithuania">Lituania</option>
-                            <option value="luxembourg">Lussemburgo</option>
-                            <option value="malta">Malta</option>
-                            <option value="moldova">Moldavia</option>
-                            <option value="monaco">Monaco</option>
-                            <option value="montenegro">Montenegro</option>
-                            <option value="netherlands">Paesi Bassi</option>
-                            <option value="north-macedonia">Macedonia del Nord</option>
-                            <option value="norway">Norvegia</option>
-                            <option value="poland">Polonia</option>
-                            <option value="portugal">Portogallo</option>
-                            <option value="romania">Romania</option>
-                            <option value="russia">Russia (parte europea)</option>
-                            <option value="san-marino">San Marino</option>
-                            <option value="serbia">Serbia</option>
-                            <option value="slovakia">Slovacchia</option>
-                            <option value="slovenia">Slovenia</option>
-                            <option value="spain">Spagna</option>
-                            <option value="sweden">Svezia</option>
-                            <option value="switzerland">Svizzera</option>
-                            <option value="turkey">Turchia (parte europea)</option>
-                            <option value="ukraine">Ucraina</option>
-                            <option value="united-kingdom">Regno Unito</option>
-                            <option value="vatican-city">Città del Vaticano</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-4">
-                    <div class="input-wrapper">
-                        <input type="text" name="shipAddress" id="shipAddress" size="20" maxlength="100"
-                            placeholder="Indirizzo di spedizione" required>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-4">
-                    <div class="input-wrapper">
-                        <input type="number" name="shipZipCode" id="shipZipCode" size="20" maxlength="5"
-                            placeholder="CAP di spedizione" required>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-4">
-                    <div class="input-wrapper">
-                        <input type="checkbox" name="rules" id="rules" required>
-                        <label for="rules">Regolamento</label>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-4">
-                    <div class="input-wrapper">
-                        <input type="checkbox" name="privacy" id="privacy" required>
-                        <label for="privacy">Privacy</label>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-4">
-                    <div class="input-wrapper">
-                        <input type="checkbox" name="is18" id="is18" required>
-                        <label for="is18">Ho 18 anni</label>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xxl-4">
-                    <div class="bottom-container">
-                        <input type="submit">
-                    </div>
-                </div>
+                <div></div>
+            </div>
+            <div class="mt-lg">
+                <p>info sulla fine del concorso brutti pezzi di merda</p>
             </div>
         </div>
-    </div>
-    </form>
-    </div>
-    <div id="ty-view" class="view">
-        <img src="https://placehold.co/1600x600" alt="">
-        <h2 class="title-900 text-center mt-lg">Grazie per aver partecipato</h2>
-        <p class="mt-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, sint! Autem esse, vel minima doloribus aliquam a</p>
-        <div class="backimg grid-2-col mt-lg">
-            <div class="left-side" >
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                    Possimus blanditiis impedit aliquid sapiente explicabo numquam pariatur! Totam cum odit earum iusto odio illo sed possimus. Doloremque labore id magni nesciunt.</p>
-            </div>
-            <div></div>
-        </div>
-        <div class="mt-lg"> <p>info sulla fine del concorso brutti pezzi di merda</p></div>
-
-    </div>
-
-</body>
-
+    </body>
 </html>

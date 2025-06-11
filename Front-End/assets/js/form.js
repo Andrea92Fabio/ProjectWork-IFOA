@@ -1,5 +1,6 @@
 import { observer } from './home.js';
 import { isDrinkingAge } from './age-check.js';
+import thankYou from './thank-you.js';
 
 const view = document.querySelector('#view-form');
 const formElement = view.querySelector('#main-form');
@@ -36,7 +37,10 @@ export default function form() {
     formElement.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        console.log(validateForm());
+        if (validateForm()) {
+            view.classList.remove('active');
+            thankYou();
+        }
     });
 
     function validateForm() {
@@ -73,7 +77,7 @@ export default function form() {
 
         if (!validateStringNotEmptyOrWhitespaceOnly(surname.value))
             errors.set('form-surname', 'Il cognome inserito non è valido');
-        
+
         //Inserire email
 
         //inserire data di nascita
@@ -92,7 +96,7 @@ export default function form() {
                 `L'indirizzo di spedizione inserito non è valido`
             );
         //Temporaneo
-        if(!validateFiscalCode(fiscalCode.value,residencyCountry.value ))
+        if (!validateFiscalCode(fiscalCode.value, residencyCountry.value))
             errors.set(
                 'form-fiscal-code',
                 `Hai inserito un codice fiscale sbagliato`
@@ -159,12 +163,14 @@ function validateZipCode(s) {
     parseInt(s);
 }
 
-function validateFiscalCode(s, t){
-    if(t === "san marino"){
-        return true
-    }
-    const reg = /^[a-zA-Z]{6}[\d]{2}[a-zA-Z]{1}[\d]{2}[a-zA-Z]{1}[\d]{3}[a-zA-Z]{1}/;
-    if(reg.test(s)){
+function validateFiscalCode(s, t) {
+    if (t === 'san marino') {
         return true;
-    } return false
+    }
+    const reg =
+        /^[a-zA-Z]{6}[\d]{2}[a-zA-Z]{1}[\d]{2}[a-zA-Z]{1}[\d]{3}[a-zA-Z]{1}/;
+    if (reg.test(s)) {
+        return true;
+    }
+    return false;
 }
