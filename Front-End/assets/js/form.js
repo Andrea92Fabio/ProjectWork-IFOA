@@ -73,6 +73,12 @@ export default function form() {
 
         if (!validateStringNotEmptyOrWhitespaceOnly(surname.value))
             errors.set('form-surname', 'Il cognome inserito non è valido');
+        
+        //Inserire email
+
+        //inserire data di nascita
+
+        //inserire paese residenza
 
         if (!validateStringNotEmptyOrWhitespaceOnly(residencyAddress.value))
             errors.set(
@@ -86,7 +92,7 @@ export default function form() {
                 `L'indirizzo di spedizione inserito non è valido`
             );
         //Temporaneo
-        if(!validateFiscalCode(fiscalCode.value))
+        if(!validateFiscalCode(fiscalCode.value,residencyCountry.value ))
             errors.set(
                 'form-fiscal-code',
                 `Hai inserito un codice fiscale sbagliato`
@@ -153,7 +159,10 @@ function validateZipCode(s) {
     parseInt(s);
 }
 
-function validateFiscalCode(s){
+function validateFiscalCode(s, t){
+    if(t === "san marino"){
+        return true
+    }
     const reg = /^[a-zA-Z]{6}[\d]{2}[a-zA-Z]{1}[\d]{2}[a-zA-Z]{1}[\d]{3}[a-zA-Z]{1}/;
     if(reg.test(s)){
         return true;
