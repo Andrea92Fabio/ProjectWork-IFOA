@@ -38,7 +38,7 @@ public class App
         //todo: setup connection string
         try
         {
-            this.connection = DriverManager.getConnection("");
+            this.connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/san_martino_friendship_day?user=root");
         }
         catch (SQLException e)
         {
