@@ -42,7 +42,7 @@ CREATE TABLE `customers` (
   `shipCountry` varchar(50) NOT NULL,
   `shipAddress` varchar(200) NOT NULL,
   `shipZipCode` varchar(5) NOT NULL,
-  `insertDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `insertDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `confirmedDate` timestamp NULL DEFAULT NULL,
   `privacy` tinyint(1) NOT NULL DEFAULT 0,
   `rules` tinyint(1) NOT NULL DEFAULT 0,

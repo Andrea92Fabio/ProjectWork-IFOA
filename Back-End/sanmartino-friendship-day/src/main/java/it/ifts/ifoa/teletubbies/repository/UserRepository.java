@@ -130,7 +130,7 @@ public class UserRepository
             PreparedStatement candidateStatement = this.connection.prepareStatement(sql);
             candidateStatement.setString(1, tokenId);
             ResultSet resultSet = candidateStatement.executeQuery();
-            if( resultSet.next()){
+            if(resultSet.next()){
                 return resultSet.getInt(1) > 0;
             } return false;
         }
