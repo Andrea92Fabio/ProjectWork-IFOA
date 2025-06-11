@@ -5,9 +5,9 @@ import thankYou from './thank-you.js';
 const view = document.querySelector('#view-form');
 const formElement = view.querySelector('#main-form');
 
-const name = formElement.querySelector('#form-name');
+export const name = formElement.querySelector('#form-name');
 const surname = formElement.querySelector('#form-surname');
-const email = formElement.querySelector('#form-email');
+export const email = formElement.querySelector('#form-email');
 const birthdate = formElement.querySelector('#form-birthdate');
 const gender = formElement.querySelector('#form-gender');
 const residencyCountry = formElement.querySelector('#form-residency-country');
