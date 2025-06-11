@@ -33,7 +33,7 @@ public class App
 
     public App()
     {
-        port(8080);
+        port(80);
 
         //todo: setup connection string
         try
