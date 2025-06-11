@@ -49,6 +49,13 @@ a {
 .text-clr-700 {
     color: var(--clr-main-700);
 }
+.text-clr-200 {
+    color: var(--clr-main-200);
+}
+.text-clr-100 {
+    color: var(--clr-main-100);
+}
+
 .bg-color-100 {
     background: var(--clr-main-100);
 }
@@ -75,6 +82,7 @@ a {
 }
 
 .input {
+    width: 100%;
     font-weight: 500;
     padding: 0.75em 1em;
     background-color: var(--clr-main-200);
@@ -116,7 +124,7 @@ a {
     font-size: clamp(2.75rem, 2.0357rem + 2.8571vw, 4rem);
     font-weight: 900;
     letter-spacing: -0.02ch;
-    line-height: 0.8;
+    line-height: 0.85;
 }
 
 .title-700 {
