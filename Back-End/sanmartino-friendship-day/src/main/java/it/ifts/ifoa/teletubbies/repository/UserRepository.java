@@ -123,7 +123,7 @@ public class UserRepository
     public boolean isConfirmationTop499(String tokenId)
     {
         String sql = "SELECT COUNT(*) FROM (" +
-                "SELECT tokenId FROM customers WHERE confirmedDate IS NOT NULL ORDER BY confirmedDate ASC LIMIT 499) " +
+                "SELECT tokenId FROM customers WHERE confirmedDate IS NOT NULL ORDER BY confirmedDate ASC LIMIT 499) AS top " +
                 "WHERE tokenId = ?";
         try
         {
