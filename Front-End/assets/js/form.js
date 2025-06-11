@@ -79,10 +79,13 @@ export default function form() {
             errors.set('form-surname', 'Il cognome inserito non è valido');
 
         //Inserire email
-
-        //inserire data di nascita
-
+        if (!validateEmail(email.value)) {
+            errors.set('form-email', `L'email inserita non è valida`);
+        }
         //inserire paese residenza
+        if (!validateCountry(residencyCountry.value)) {
+            errors.set('form-residency-country', `Il paese di residenza inserito non è valido`);
+        }
 
         if (!validateStringNotEmptyOrWhitespaceOnly(residencyAddress.value))
             errors.set(
@@ -95,14 +98,29 @@ export default function form() {
                 'form-shipping-address',
                 `L'indirizzo di spedizione inserito non è valido`
             );
-        //Temporaneo
+        //cap 5 figures
+        if (!validateZipCode(residencyZipCode.value)) {
+            errors.set(
+                'form-residency-zip-code',
+                `Il CAP che hai inserito non è valido`
+            )
+        }
+        //Codice fiscale
         if (!validateFiscalCode(fiscalCode.value, residencyCountry.value))
             errors.set(
                 'form-fiscal-code',
                 `Hai inserito un codice fiscale sbagliato`
             );
-        //cap 5 figures
-        //
+        // 
+                if (!validateZipCode(shippingZipCode.value)) {
+            errors.set(
+                'form-shipping-zip-code',
+                `Il CAP che hai inserito non è valido`
+            );
+        }
+                if (!validateCountry(shippingCountry.value)) {
+                    errors.set('form-shipping-country', `Il paese di spedizione che hai inserito non è valido`);
+                }
 
         errors.forEach((el, key) => {
             if (el) {
@@ -157,19 +175,33 @@ function validateStringNotEmptyOrWhitespaceOnly(s) {
 }
 
 function validateZipCode(s) {
-    if (s.length !== 5) {
-        return false;
-    }
-    parseInt(s);
+    const reg  = /^[\d]{5}/
+    if (reg.test(s)) {
+        return true;
+    } return false
 }
 
 function validateFiscalCode(s, t) {
     if (t === 'san marino') {
         return true;
     }
-    const reg =
-        /^[a-zA-Z]{6}[\d]{2}[a-zA-Z]{1}[\d]{2}[a-zA-Z]{1}[\d]{3}[a-zA-Z]{1}/;
+
+    if (s.length === 16 || s.length === 17 ) {
+        return true;
+    }
+    return false;
+}
+
+function validateEmail(s){
+    const reg = /^[a-zA-Z0-9]{1}[a-zA-Z0-9.]+@[a-zA-Z0-9.]+[.]{1}[a-zA-Z]{2,}$/     //tiberiu.melinescu  @gmail .com
     if (reg.test(s)) {
+        return true;
+    }
+    return false;
+}
+
+function validateCountry(s) {
+    if (s === "italy" || s === "san marino") {
         return true;
     }
     return false;
