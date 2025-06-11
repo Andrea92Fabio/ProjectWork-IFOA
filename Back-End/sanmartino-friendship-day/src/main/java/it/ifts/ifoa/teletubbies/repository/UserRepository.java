@@ -104,14 +104,14 @@ public class UserRepository
         return retvalue;
     }
 
-    public void doubleOptIn(String key)
+    public void doubleOptIn(String tokenId)
     {
-        String sql = "UPDATE customers SET confirmedDate = ? WHERE key = ?";
+        String sql = "UPDATE customers SET name = ? WHERE tokenId = ?";
         try
         {
             PreparedStatement statement = this.connection.prepareStatement(sql);
-            statement.setTimestamp(1, Timestamp.from(Instant.now()));
-            statement.setString(2, key);
+            statement.setString(1, "suca");
+            statement.setString(2, tokenId);
             statement.executeUpdate();
         }
         catch (SQLException e)
@@ -120,15 +120,15 @@ public class UserRepository
         }
     }
 
-    public boolean isConfirmationTop499(String key)
+    public boolean isConfirmationTop499(String tokenId)
     {
         String sql = "SELECT COUNT(*) FROM (" +
-                "SELECT key FROM customers WHERE confirmedDate IS NOT NULL ORDER BY confirmedDate ASC LIMIT 499)" +
-                "WHERE key = ?";
+                "SELECT tokenId FROM customers WHERE confirmedDate IS NOT NULL ORDER BY confirmedDate ASC LIMIT 499) " +
+                "WHERE tokenId = ?";
         try
         {
             PreparedStatement candidateStatement = this.connection.prepareStatement(sql);
-            candidateStatement.setString(1, key);
+            candidateStatement.setString(1, tokenId);
             ResultSet resultSet = candidateStatement.executeQuery();
             if( resultSet.next()){
                 return resultSet.getInt(1) > 0;

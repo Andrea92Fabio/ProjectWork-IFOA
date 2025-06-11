@@ -2,9 +2,12 @@ package it.ifts.ifoa.teletubbies;
 
 
 import com.google.gson.Gson;
+import it.ifts.ifoa.teletubbies.controller.ConfirmationController;
 import it.ifts.ifoa.teletubbies.controller.SubmissionsController;
+import it.ifts.ifoa.teletubbies.middleware.Middleware;
 import it.ifts.ifoa.teletubbies.repository.UserRepository;
 import it.ifts.ifoa.teletubbies.service.MailService;
+import it.ifts.ifoa.teletubbies.service.UserConfirmationService;
 import it.ifts.ifoa.teletubbies.service.UserSubmissionService;
 
 import java.sql.Connection;
@@ -22,7 +25,9 @@ public class App
     UserRepository userRepository;
     MailService mailService;
     SubmissionsController submissionsController;
+    ConfirmationController confirmationController;
     UserSubmissionService userSubmissionService;
+    UserConfirmationService userConfirmationService;
 
 
     public static void main(String[] args)
@@ -34,6 +39,8 @@ public class App
     public App()
     {
         port(80);
+
+        Middleware.enableCORS();
 
         //todo: setup connection string
         try
@@ -48,14 +55,19 @@ public class App
 
         this.mailService = new MailService();
         this.userSubmissionService = new UserSubmissionService(userRepository);
+        this.userConfirmationService = new UserConfirmationService(userRepository);
 
 
         Gson gson = new Gson();
         this.submissionsController = new SubmissionsController(gson, userSubmissionService);
+        this.confirmationController = new ConfirmationController(userConfirmationService);
+
     }
 
     private void run()
     {
         submissionsController.initSubmissionEndpoint();
+
+        confirmationController.initConfirmationEndpoint();
     }
 }

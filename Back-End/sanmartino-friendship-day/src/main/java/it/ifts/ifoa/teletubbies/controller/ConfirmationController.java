@@ -16,10 +16,11 @@ public class ConfirmationController
 
     public void initConfirmationEndpoint()
     {
-        get("/api/confirmation/:key", (req, res) ->
+        get("/api/confirmation/:tokenId", (req, res) ->
         {
-            String key = req.params("key");
-            if (this.userConfirmationService.confirmKeyAndCheckWin(key))
+            String tokenId = req.params("tokenId");
+            System.out.println(tokenId);
+            if (this.userConfirmationService.confirmTokenIdAndCheckWin(tokenId))
             {
                 return "You win";
                 }

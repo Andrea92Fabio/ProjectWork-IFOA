@@ -7,11 +7,11 @@ import java.util.Random;
 
 public class User
 {
-    private String name,surname, gender,phoneNumber, key, email, fiscalCode,residencyCountry,residencyZipCode, residencyAddress, shipCountry, shipZipCode, shipAddress;
+    private String name,surname, gender,phoneNumber, tokenId, email, fiscalCode,residencyCountry,residencyZipCode, residencyAddress, shipCountry, shipZipCode, shipAddress;
     private boolean privacy, rules;
     private LocalDate birthDate;
 
-    public User(String name, String surname,String key, String email, String gender, String fiscalCode, String residencyCountry, String residencyZipCode, String residencyAddress, String shipCountry, String shipZipCode, String shipAddress, boolean privacy, boolean rules, LocalDate birthDate) throws InvalidNameException, InvalidSurnameException, InvalidGenderException, InvalidPhoneNumberException, InvalidFiscalCodeException, InvalidResidenceCountryException, InvalidZipCodeException, InvalidAddressException, InvalidShipCountryException, InvalidPrivacyException, InvalidRulesException, InvalidBirthDateException {
+    public User(String name, String surname,String tokenId, String email, String gender, String fiscalCode, String residencyCountry, String residencyZipCode, String residencyAddress, String shipCountry, String shipZipCode, String shipAddress, boolean privacy, boolean rules, LocalDate birthDate) throws InvalidNameException, InvalidSurnameException, InvalidGenderException, InvalidPhoneNumberException, InvalidFiscalCodeException, InvalidResidenceCountryException, InvalidZipCodeException, InvalidAddressException, InvalidShipCountryException, InvalidPrivacyException, InvalidRulesException, InvalidBirthDateException {
 
         this.name = checkName(name);
         this.surname = checkSurname(surname);
@@ -28,10 +28,10 @@ public class User
         this.rules = checkRules(rules);
         this.birthDate = checkBirthDate(birthDate);
         this.phoneNumber = checkPhoneNumber(phoneNumber);
-        this.key = assignKey();
+        this.tokenId = assignTokenId();
     }
 
-    private String assignKey(){
+    private String assignTokenId(){
         String safeCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.~";
         String retvalue = "";
         Random rand = new Random();

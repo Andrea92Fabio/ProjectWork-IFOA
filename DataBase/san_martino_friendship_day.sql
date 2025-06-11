@@ -46,7 +46,7 @@ CREATE TABLE `customers` (
   `confirmedDate` timestamp NULL DEFAULT NULL,
   `privacy` tinyint(1) NOT NULL DEFAULT 0,
   `rules` tinyint(1) NOT NULL DEFAULT 0,
-  `key` varchar(50) NOT NULL
+  `tokenId` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -58,7 +58,7 @@ CREATE TABLE `customers` (
 --
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `key` (`key`),
+  ADD UNIQUE KEY `tokenId` (`tokenId`),
   ADD UNIQUE KEY `fiscalCode` (`fiscalCode`),
   ADD KEY `Email` (`email`),
   ADD KEY `Confirmed_Date` (`confirmedDate`);

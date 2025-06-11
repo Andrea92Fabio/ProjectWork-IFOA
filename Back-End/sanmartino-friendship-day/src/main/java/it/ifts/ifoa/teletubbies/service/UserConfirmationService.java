@@ -12,9 +12,9 @@ public class UserConfirmationService
     }
 
 
-    public boolean confirmKeyAndCheckWin(String key)
+    public boolean confirmTokenIdAndCheckWin(String tokenId)
     {
-        this.userRepository.doubleOptIn(key);
-        return this.userRepository.isConfirmationTop499(key);
+        this.userRepository.doubleOptIn(tokenId);
+        return this.userRepository.isConfirmationTop499(tokenId);
     }
 }
