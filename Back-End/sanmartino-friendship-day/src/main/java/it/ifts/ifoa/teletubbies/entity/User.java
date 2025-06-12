@@ -8,6 +8,10 @@ import java.util.Random;
 
 public class User
 {
+
+    public User() {
+    }
+
     private String name,surname, gender,phoneNumber, tokenId, email, fiscalCode,residencyCountry,residencyZipCode, residencyAddress, shipCountry, shipZipCode, shipAddress;
     private boolean privacy, rules;
     private LocalDate birthDate;
@@ -29,22 +33,22 @@ public class User
         this.rules = checkRules(rules);
         this.birthDate = checkBirthDate(birthDate);
         this.phoneNumber = checkPhoneNumber(phoneNumber);
-        this.tokenId = assignTokenId();
+//        this.tokenId = assignTokenId();
     }
 
-    private String assignTokenId(){
+    public void assignTokenId(){
         String safeCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.~";
-        String retvalue = "";
+        StringBuilder retvalue = new StringBuilder();
         Random rand = new Random();
         int totalCharacter = rand.nextInt(10)+40;
 
         for (int i =0;i<totalCharacter;i++){
             int num = rand.nextInt(safeCharacters.length());
             String temvalue = String.valueOf(safeCharacters.charAt(num));
-            retvalue = retvalue + temvalue;
+            retvalue.append(temvalue);
         }
 
-        return retvalue;
+        this.tokenId = retvalue.toString();
     }
 
     private String checkEmail(String email) throws  InvalidEmailException{
@@ -219,4 +223,37 @@ public class User
         return birthDate;
     }
 
+    public String getTokenId() {
+        return tokenId;
+    }
+
+    public boolean isPrivacy() {
+        return privacy;
+    }
+
+    public boolean isRules() {
+        return rules;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", gender='" + gender + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", tokenId='" + tokenId + '\'' +
+                ", email='" + email + '\'' +
+                ", fiscalCode='" + fiscalCode + '\'' +
+                ", residencyCountry='" + residencyCountry + '\'' +
+                ", residencyZipCode='" + residencyZipCode + '\'' +
+                ", residencyAddress='" + residencyAddress + '\'' +
+                ", shipCountry='" + shipCountry + '\'' +
+                ", shipZipCode='" + shipZipCode + '\'' +
+                ", shipAddress='" + shipAddress + '\'' +
+                ", privacy=" + privacy +
+                ", rules=" + rules +
+                ", birthDate=" + birthDate +
+                '}';
+    }
 }

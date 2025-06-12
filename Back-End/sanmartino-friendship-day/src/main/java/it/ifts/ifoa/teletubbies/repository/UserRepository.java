@@ -23,8 +23,8 @@ public class UserRepository
                  birthdate, gender, fiscalCode,\
                  phoneNumber, residencyCountry, residencyAddress,\
                  residencyZipCode, shipCountry, shipAddress,\
-                 shipZipCode, privacy, rules) \
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
+                 shipZipCode, privacy, rules, tokenId) \
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
         try
         {
             PreparedStatement statement = this.connection.prepareStatement(sql);
@@ -47,6 +47,7 @@ public class UserRepository
             statement.setString(13, user.getShipZipCode());
             statement.setBoolean(14, user.getPrivacy());
             statement.setBoolean(15, user.getRules());
+            statement.setString(16, user.getTokenId());
 
             if (statement.executeUpdate() < 1)
             {

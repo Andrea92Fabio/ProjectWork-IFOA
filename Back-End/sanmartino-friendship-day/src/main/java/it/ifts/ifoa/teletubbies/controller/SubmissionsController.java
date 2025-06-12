@@ -41,6 +41,9 @@ public class SubmissionsController
             try
             {
                 User candidate = gson.fromJson(req.body(), User.class);
+                System.out.println(candidate);
+                candidate.assignTokenId();
+                System.out.println(candidate);
                 if (this.userSubmissionService.isEmailAlreadyTaken(candidate))
                 {
                     throw new InvalidEmailException("1x01");

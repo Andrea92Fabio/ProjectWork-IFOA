@@ -37,7 +37,7 @@ CREATE TABLE `customers` (
   `fiscalCode` varchar(17) DEFAULT '''-''',
   `phoneNumber` varchar(13) NOT NULL,
   `residencyCountry` varchar(20) NOT NULL,
-  `residencyAddres` varchar(200) NOT NULL,
+  `residencyAddress` varchar(200) NOT NULL,
   `residencyZipCode` varchar(5) NOT NULL,
   `shipCountry` varchar(50) NOT NULL,
   `shipAddress` varchar(200) NOT NULL,

@@ -1,7 +1,7 @@
 package it.ifts.ifoa.teletubbies;
 
 
-import com.google.gson.Gson;
+import com.google.gson.*;
 import it.ifts.ifoa.teletubbies.controller.ConfirmationController;
 import it.ifts.ifoa.teletubbies.controller.SubmissionsController;
 import it.ifts.ifoa.teletubbies.middleware.Middleware;
@@ -10,9 +10,11 @@ import it.ifts.ifoa.teletubbies.service.MailService;
 import it.ifts.ifoa.teletubbies.service.UserConfirmationService;
 import it.ifts.ifoa.teletubbies.service.UserSubmissionService;
 
+import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import static spark.Spark.*;
 
@@ -58,7 +60,15 @@ public class App
         this.userConfirmationService = new UserConfirmationService(userRepository);
 
 
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
+                    @Override
+                    public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+                            throws JsonParseException {
+                        return LocalDate.parse(json.getAsString());
+                    }
+                })
+                .create();
         this.submissionsController = new SubmissionsController(gson, userSubmissionService);
         this.confirmationController = new ConfirmationController(gson, userConfirmationService);
 
