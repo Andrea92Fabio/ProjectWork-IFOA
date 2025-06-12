@@ -33,7 +33,7 @@ const user = {
     shipAddress: null,
     privacy: true,
     rules: true,
-    //birthDate: null,
+    birthDate: null,
     phoneNumber: 3923936702,
 };
 
@@ -67,7 +67,7 @@ export default function form() {
             user.shipCountry = shippingCountry.value;
             user.shipZipCode = shippingZipCode.value;
             user.shipAddress = shippingAddress.value;
-            //user.birthDate = birthdate.value;
+            user.birthDate = birthdate.value;
 
             const jsonUser = JSON.stringify(user);
             console.log(jsonUser);

@@ -2,6 +2,7 @@ package it.ifts.ifoa.teletubbies.entity;
 import it.ifts.ifoa.teletubbies.exception.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.regex.Pattern;
 import java.util.Random;
 
@@ -11,7 +12,7 @@ public class User
     private boolean privacy, rules;
     private LocalDate birthDate;
 
-    public User(String name, String surname,String tokenId, String email, String gender, String fiscalCode, String residencyCountry, String residencyZipCode, String residencyAddress, String shipCountry, String shipZipCode, String shipAddress, boolean privacy, boolean rules, LocalDate birthDate) throws InvalidNameException, InvalidSurnameException, InvalidGenderException, InvalidPhoneNumberException, InvalidFiscalCodeException, InvalidResidenceCountryException, InvalidZipCodeException, InvalidAddressException, InvalidShipCountryException, InvalidPrivacyException, InvalidRulesException, InvalidBirthDateException {
+    public User(String name, String surname, String email, String gender, String fiscalCode, String residencyCountry, String residencyZipCode, String residencyAddress, String shipCountry, String shipZipCode, String shipAddress, boolean privacy, boolean rules, String birthDate) throws InvalidNameException, InvalidSurnameException, InvalidGenderException, InvalidPhoneNumberException, InvalidFiscalCodeException, InvalidResidenceCountryException, InvalidZipCodeException, InvalidAddressException, InvalidShipCountryException, InvalidPrivacyException, InvalidRulesException, InvalidBirthDateException {
 
         this.name = checkName(name);
         this.surname = checkSurname(surname);
@@ -160,18 +161,18 @@ public class User
         return rules;
     }
 
-    private LocalDate checkBirthDate(LocalDate birthDate) throws InvalidBirthDateException {
+    private LocalDate checkBirthDate(String birthDate) throws InvalidBirthDateException {
         if (birthDate == null) {
             throw new InvalidBirthDateException("0x15");
         }
-
+        LocalDate retvalue = LocalDate.parse(birthDate);
         LocalDate now = LocalDate.now();
         LocalDate minimumAge = now.minusYears(18);
 
-        if (birthDate.isAfter(minimumAge)) {
+        if (retvalue.isAfter(minimumAge)) {
             throw new InvalidBirthDateException("0x16");
         }
-        return birthDate;
+        return retvalue;
     }
 
     public String getName() {
