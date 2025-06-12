@@ -1,4 +1,5 @@
-.main-thank-you {
+.main-thank-you,
+.main-form-error {
     background-image: url('../img/form_and_thank_you.webp');
     display: flex;
     background-size: cover;
@@ -11,26 +12,17 @@
     position: relative;
 }
 
-.main-thank-you > .container {
+.main-thank-you > .container,
+.main-form-error > .container {
     z-index: 1;
     text-align: center;
     text-wrap: pretty;
 }
 
-.thank-you-overlay {
+.thank-you-overlay,
+.form-error-overlay {
     position: absolute;
     inset: 0;
     background: var(--clr-main-800);
     opacity: 0.5;
-}
-
-.leftside,
-.left-side {
-    flex-direction: column;
-    justify-content: center;
-    padding: 20px;
-    background: white; /* sfondo leggermente scuro per leggere meglio il testo */
-    border: 1px;
-    border-style: solid;
-    border-color: black;
 }

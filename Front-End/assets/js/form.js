@@ -1,6 +1,7 @@
 import { observer } from './home.js';
 import { isDrinkingAge } from './age-check.js';
 import thankYou from './thank-you.js';
+import errorView from './error-view.js';
 
 const view = document.querySelector('#view-form');
 const formElement = view.querySelector('#main-form');
@@ -77,7 +78,13 @@ export default function form() {
                     method: 'POST',
                     body: jsonUser,
                 });
-            } catch {}
+            } catch (error) {
+                view.classList.remove('active');
+
+                errorView();
+
+                return;
+            }
 
             view.classList.remove('active');
             thankYou();
