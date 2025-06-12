@@ -18,6 +18,25 @@ const shippingAddress = formElement.querySelector('#form-shipping-address');
 const shippingZipCode = formElement.querySelector('#form-shipping-zip-code');
 const fiscalCode = formElement.querySelector('#form-fiscal-code');
 
+//todo:add provincia for shipping and residency and add phonenumber
+const user = {
+    name: null,
+    surname: null,
+    gender: null,
+    email: null,
+    residencyCountry: null,
+    fiscalCode: null,
+    residencyZipCode: null,
+    residencyAddress: null,
+    shipCountry: null,
+    shipZipCode: null,
+    shipAddress: null,
+    privacy: true,
+    rules: true,
+    //birthDate: null,
+    phoneNumber: 3923936702,
+};
+
 export default function form() {
     view.classList.add('active');
     view.removeAttribute('aria-hidden');
@@ -33,16 +52,38 @@ export default function form() {
         errors[el.id] = '';
     });
     //todo: implement an extra check on submit
-
-    formElement.addEventListener('submit', (e) => {
+    formElement.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         if (validateForm()) {
+            user.name = name.value;
+            user.surname = surname.value;
+            user.gender = gender.value;
+            user.email = email.value;
+            user.residencyCountry = residencyCountry.value;
+            user.fiscalCode = fiscalCode.value;
+            user.residencyZipCode = residencyZipCode.value;
+            user.residencyAddress = residencyAddress.value;
+            user.shipCountry = shippingCountry.value;
+            user.shipZipCode = shippingZipCode.value;
+            user.shipAddress = shippingAddress.value;
+            //user.birthDate = birthdate.value;
+
+            const jsonUser = JSON.stringify(user);
+            console.log(jsonUser);
+
+            try {
+                const res = await fetch('http://192.168.100.8/api/submission', {
+                    method: 'POST',
+                    body: jsonUser,
+                });
+            } catch {}
+
             view.classList.remove('active');
             thankYou();
         }
     });
-
+    //todo: add rules and privacy checker and add it on front end
     function validateForm() {
         const errors = new Map();
 
@@ -84,7 +125,10 @@ export default function form() {
         }
         //inserire paese residenza
         if (!validateCountry(residencyCountry.value)) {
-            errors.set('form-residency-country', `Il paese di residenza inserito non è valido`);
+            errors.set(
+                'form-residency-country',
+                `Il paese di residenza inserito non è valido`
+            );
         }
 
         if (!validateStringNotEmptyOrWhitespaceOnly(residencyAddress.value))
@@ -103,7 +147,7 @@ export default function form() {
             errors.set(
                 'form-residency-zip-code',
                 `Il CAP che hai inserito non è valido`
-            )
+            );
         }
         //Codice fiscale
         if (!validateFiscalCode(fiscalCode.value, residencyCountry.value))
@@ -111,16 +155,19 @@ export default function form() {
                 'form-fiscal-code',
                 `Hai inserito un codice fiscale sbagliato`
             );
-        // 
-                if (!validateZipCode(shippingZipCode.value)) {
+        //
+        if (!validateZipCode(shippingZipCode.value)) {
             errors.set(
                 'form-shipping-zip-code',
                 `Il CAP che hai inserito non è valido`
             );
         }
-                if (!validateCountry(shippingCountry.value)) {
-                    errors.set('form-shipping-country', `Il paese di spedizione che hai inserito non è valido`);
-                }
+        if (!validateCountry(shippingCountry.value)) {
+            errors.set(
+                'form-shipping-country',
+                `Il paese di spedizione che hai inserito non è valido`
+            );
+        }
 
         errors.forEach((el, key) => {
             if (el) {
@@ -147,6 +194,7 @@ export default function form() {
 
         let isValidForm = true;
 
+        //todo: delete checker map and set is valid form inside the if statements
         checkerMap.forEach((el, key) => {
             if (checkerMap.get(key) != errors.get(key)) {
                 isValidForm = false;
@@ -175,10 +223,11 @@ function validateStringNotEmptyOrWhitespaceOnly(s) {
 }
 
 function validateZipCode(s) {
-    const reg  = /^[\d]{5}/
+    const reg = /^[\d]{5}/;
     if (reg.test(s)) {
         return true;
-    } return false
+    }
+    return false;
 }
 
 function validateFiscalCode(s, t) {
@@ -186,14 +235,14 @@ function validateFiscalCode(s, t) {
         return true;
     }
 
-    if (s.length === 16 || s.length === 17 ) {
+    if (s.length === 16 || s.length === 17) {
         return true;
     }
     return false;
 }
 
-function validateEmail(s){
-    const reg = /^[a-zA-Z0-9]{1}[a-zA-Z0-9.]+@[a-zA-Z0-9.]+[.]{1}[a-zA-Z]{2,}$/     //tiberiu.melinescu  @gmail .com
+function validateEmail(s) {
+    const reg = /^[a-zA-Z0-9]{1}[a-zA-Z0-9.]+@[a-zA-Z0-9.]+[.]{1}[a-zA-Z]{2,}$/; //tiberiu.melinescu  @gmail .com
     if (reg.test(s)) {
         return true;
     }
@@ -201,7 +250,7 @@ function validateEmail(s){
 }
 
 function validateCountry(s) {
-    if (s === "italy" || s === "san marino") {
+    if (s === 'italy' || s === 'san marino') {
         return true;
     }
     return false;
