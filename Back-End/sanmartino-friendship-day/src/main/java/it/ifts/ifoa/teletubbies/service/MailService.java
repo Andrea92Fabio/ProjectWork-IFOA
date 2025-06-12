@@ -9,8 +9,8 @@ import java.util.Properties;
 public class MailService {
 
     public static void sendEmail(String receiver) {
-        final String senderEmail = "vincenzovitale.ariosto@gmail.com";
-        final String password = "hfyh gabq bcnp tkov";
+        final String senderEmail = "teletubbies.pw@gmail.com";
+        final String password = "rzmw gkis qngy magn";
 
         String host = "smtp.gmail.com";
         int port = 587;
