@@ -4,8 +4,11 @@ getResultFromServer(tokenId);
 
 async function getResultFromServer(tokenId) {
     const response = await fetch(
-        `http://localhost:80/api/confirmation/${tokenId}`
+        `http://192.168.100.8:80/api/confirmation/${tokenId}`
     );
 
+    const json = await response.json();
+
+    alert(json.message);
     console.log(response);
 }

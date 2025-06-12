@@ -60,7 +60,7 @@ public class App
 
         Gson gson = new Gson();
         this.submissionsController = new SubmissionsController(gson, userSubmissionService);
-        this.confirmationController = new ConfirmationController(userConfirmationService);
+        this.confirmationController = new ConfirmationController(gson, userConfirmationService);
 
     }
 

@@ -106,11 +106,11 @@ public class UserRepository
 
     public void doubleOptIn(String tokenId)
     {
-        String sql = "UPDATE customers SET name = ? WHERE tokenId = ?";
+        String sql = "UPDATE customers SET confirmedDate = ? WHERE tokenId = ?";
         try
         {
             PreparedStatement statement = this.connection.prepareStatement(sql);
-            statement.setString(1, "suca");
+            statement.setTimestamp(1, Timestamp.from(Instant.now()) );
             statement.setString(2, tokenId);
             statement.executeUpdate();
         }
