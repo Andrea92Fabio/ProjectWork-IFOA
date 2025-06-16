@@ -88,7 +88,7 @@ public class User
         if (phoneNumber == null || phoneNumber.trim().isEmpty()) {
             return "0x04";
         }
-        String regex =  "^\\+[0-9]{6,15}$";
+        String regex =  "^\\+*[0-9]{6,15}$";
         if(!Pattern.matches(regex,phoneNumber)){
             return "0x04";
         }
@@ -132,7 +132,7 @@ public class User
         if(this.residencyCountry.equals("San Marino")){
             return null;
         }
-        if(residencyProvincia == null && residencyProvincia.length()!=2){
+        if(residencyProvincia == null || residencyProvincia.length()!=2){
             return "0x09";
         }
         return null;
@@ -165,7 +165,7 @@ public class User
         if(this.residencyCountry.equals("San Marino")){
             return null;
         }
-        if(residencyProvincia == null && residencyProvincia.length()!=2){
+        if(residencyProvincia == null || residencyProvincia.length()!=2){
             return "0x13";
         }
         return null;
