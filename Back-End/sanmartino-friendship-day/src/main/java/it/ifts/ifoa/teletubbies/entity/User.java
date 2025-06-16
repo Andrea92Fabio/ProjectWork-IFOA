@@ -72,7 +72,7 @@ public class User
     }
 
     private void checkGender(String gender) throws InvalidGenderException {
-        if(!gender.equals("Uomo") && !gender.equals("Donna") && !gender.equals("ALtro")){
+        if(!gender.equals("man") && !gender.equals("woman") && !gender.equals("other") && !gender.equals("not specified")){
             throw new InvalidGenderException("0x03");
         }
     }
