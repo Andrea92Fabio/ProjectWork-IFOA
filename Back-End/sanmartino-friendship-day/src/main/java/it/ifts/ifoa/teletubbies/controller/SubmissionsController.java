@@ -55,7 +55,9 @@ public class SubmissionsController
                         throw new InvalidFiscalCodeException("1x02");
                     }
                 }
-                this.userSubmissionService.saveUser(candidate);
+                if (messages.isEmpty()){
+                    this.userSubmissionService.saveUser(candidate);
+                }
             }
             catch (JsonSyntaxException e)
             {
@@ -70,9 +72,11 @@ public class SubmissionsController
 
             if (messages.isEmpty()) //if there are no errors
             {
+                res.status(HttpStatus.CREATED_201);
                 messages.add("submission successful");
                 responseBody.put("message", messages);
             } else {
+                res.status(HttpStatus.BAD_REQUEST_400);
                 responseBody.put("error", messages);
             }
 

@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class User
 {
 
-    private String name,surname, gender,phoneNumber, tokenId, email, fiscalCode,residencyCountry,residencyZipCode, residencyAddress, shipCountry, shipZipCode, shipAddress, residencyProvincia, shipProvincia;
+    private String name,surname, gender,phoneNumber, tokenId, email, fiscalCode,residencyCountry,residencyZipCode, residencyAddress, shipCountry, shipZipCode, shipAddress, residencyProvince, shipProvince;
     private boolean privacy, rules;
     private LocalDate birthDate;
 
@@ -34,8 +34,8 @@ public class User
         errors.add(checkPrivacy(this.privacy));
         errors.add(checkRules(this.rules));
         errors.add(checkBirthDate(this.birthDate));
-        errors.add(checkResidencyProvincia(this.residencyProvincia));
-        errors.add(checkShipProvincia(this.shipProvincia));
+        errors.add(checkResidencyProvince(this.residencyProvince));
+        errors.add(checkShipProvince(this.shipProvince));
         ArrayList<String> retvalue = errors.stream().filter(Objects::nonNull).collect(Collectors.toCollection(ArrayList::new));
         return retvalue;
     }
@@ -128,11 +128,11 @@ public class User
         return null;
     }
 
-    private String checkResidencyProvincia(String residencyProvincia){
+    private String checkResidencyProvince(String residencyProvince){
         if(this.residencyCountry.equals("san marino")){
             return null;
         }
-        if(residencyProvincia == null || residencyProvincia.length()!=2){
+        if(residencyProvince == null || residencyProvince.length()!=2){
             return "0x09";
         }
         return null;
@@ -161,11 +161,11 @@ public class User
         return null;
     }
 
-    private String checkShipProvincia(String residencyProvincia){
+    private String checkShipProvince(String residencyProvince){
         if(this.shipCountry.equals("san marino")){
             return null;
         }
-        if(residencyProvincia == null || residencyProvincia.length()!=2){
+        if(residencyProvince == null || residencyProvince.length()!=2){
             return "0x13";
         }
         return null;
