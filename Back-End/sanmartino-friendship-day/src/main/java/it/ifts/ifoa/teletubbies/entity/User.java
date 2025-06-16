@@ -9,7 +9,7 @@ import java.util.Random;
 public class User
 {
 
-    private String name,surname, gender,phoneNumber, tokenId, email, fiscalCode,residencyCountry,residencyZipCode, residencyAddress, shipCountry, shipZipCode, shipAddress;
+    private String name,surname, gender,phoneNumber, tokenId, email, fiscalCode,residencyCountry,residencyZipCode, residencyAddress, shipCountry, shipZipCode, shipAddress, residencyProvincia, shipProvincia;
     private boolean privacy, rules;
     private LocalDate birthDate;
 
@@ -33,7 +33,8 @@ public class User
         checkPrivacy(this.privacy);
         checkRules(this.rules);
         checkBirthDate(this.birthDate);
-
+        checkResidencyProvincia(this.residencyProvincia);
+        checkShipProvincia(this.shipProvincia);
     }
 
     public void assignTokenId(){
@@ -52,7 +53,7 @@ public class User
     }
 
     private void checkEmail(String email) throws  InvalidEmailException{
-        String regex = "^[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}&";
+        String regex = "^[a-zA-Z0-9]{1,}[a-zA-Z0-9.]+@[a-zA-Z0-9.]+\\.[a-zA-Z]{2,}$";
         if (!Pattern.matches(regex, email)){
             throw new InvalidEmailException("0x00");
         }
@@ -103,17 +104,25 @@ public class User
     }
 
     private void checkResidencyZipCode(String residencyZipCode) throws InvalidZipCodeException {
-        String regex = "^[0-9]{5}";
+        String regex = "^[0-9]{5}$";
         if (!Pattern.matches(regex, residencyZipCode) ) {
             throw new InvalidZipCodeException("0x08");
         }
 
     }
 
-    private void checkResidencyAddress(String residencyAddress) throws InvalidAddressException
-    {
+    private void checkResidencyAddress(String residencyAddress) throws InvalidAddressException {
         if (residencyAddress == null && residencyAddress.length()<=2) {
             throw new InvalidAddressException("0x09");
+        }
+    }
+
+    private void checkResidencyProvincia(String residencyProvincia) throws InvalidResidencyProvinciaException{
+        if(this.residencyCountry.equals("San Marino")){
+            return;
+        }
+        if(residencyProvincia == null && residencyProvincia.length()!=2){
+            throw new InvalidResidencyProvinciaException("0x17");
         }
     }
 
@@ -125,7 +134,7 @@ public class User
     }
 
     private void checkShipZipCode(String shipZipCode) throws InvalidZipCodeException {
-        String regex = "^[0-9]{5}";
+        String regex = "^[0-9]{5}$";
         if (!Pattern.matches(regex, shipZipCode) ) {
             throw new InvalidZipCodeException("0x11");
         }
@@ -135,6 +144,15 @@ public class User
     {
         if (shipAddress == null && shipAddress.length()<=2) {
             throw new InvalidAddressException("0x12");
+        }
+    }
+
+    private void checkShipProvincia(String residencyProvincia) throws InvalidShipProvinciaException{
+        if(this.residencyCountry.equals("San Marino")){
+            return;
+        }
+        if(residencyProvincia == null && residencyProvincia.length()!=2){
+            throw new InvalidShipProvinciaException("0x18");
         }
     }
 
