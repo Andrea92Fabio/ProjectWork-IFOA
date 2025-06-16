@@ -105,9 +105,10 @@ public class UserRepository
         return retvalue;
     }
 
+
     public void doubleOptIn(String tokenId)
     {
-        String sql = "UPDATE customers SET confirmedDate = ? WHERE tokenId = ?";
+        String sql = "UPDATE customers SET confirmedDate = ? WHERE tokenId = ? AND confirmedDate IS NULL";
         try
         {
             PreparedStatement statement = this.connection.prepareStatement(sql);
