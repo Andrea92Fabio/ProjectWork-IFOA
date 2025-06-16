@@ -7,6 +7,7 @@ public class Middleware {
         before((request, response) -> {
             response.header("Access-Control-Allow-Origin", "*"); // use "*" only for dev
             response.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+            response.header("Content-type", "application/json");
             System.out.println("cors");
         });
 

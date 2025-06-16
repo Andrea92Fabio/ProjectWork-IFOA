@@ -79,10 +79,21 @@ export default function form() {
                     {
                         method: 'POST',
                         body: jsonUser,
+                        headers: {
+                            'Content-type': 'application/json',
+                        },
                     }
                 );
+
+                if (res.status > 201) {
+                    const error = await res.json();
+                    const code = error.error;
+                    throw new Error(code);
+                }
             } catch (error) {
                 view.classList.remove('active');
+
+                console.error('Error message', error.message);
 
                 errorView();
 
