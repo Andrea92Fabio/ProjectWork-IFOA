@@ -162,7 +162,7 @@ public class User
     }
 
     private String checkShipProvincia(String residencyProvincia){
-        if(this.residencyCountry.equals("san marino")){
+        if(this.shipCountry.equals("san marino")){
             return null;
         }
         if(residencyProvincia == null || residencyProvincia.length()!=2){
