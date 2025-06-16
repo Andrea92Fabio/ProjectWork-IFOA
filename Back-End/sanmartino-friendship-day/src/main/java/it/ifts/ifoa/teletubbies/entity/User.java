@@ -96,7 +96,7 @@ public class User
     }
 
     private String checkFiscalCode(String fiscalCode){
-        if(this.residencyCountry.equals("San Marino")){
+        if(this.residencyCountry.equals("san marino")){
             return null;
         }
         String regex = "^[a-zA-Z]{6}[a-zA-Z0-9]{2}[a-zA-Z][a-zA-Z0-9]{2}[a-zA-Z][a-zA-Z0-9]{3}[a-zA-Z]+$";
@@ -107,7 +107,7 @@ public class User
     }
 
     private String checkResidencyCountry(String residencyCountry){
-        if (residencyCountry == null || (!residencyCountry.equals("Italia") && !residencyCountry.equals("San Marino"))) {
+        if (residencyCountry == null || (!residencyCountry.equals("italy") && !residencyCountry.equals("san marino"))) {
             return "0x06";
         }
         return null;
@@ -129,7 +129,7 @@ public class User
     }
 
     private String checkResidencyProvincia(String residencyProvincia){
-        if(this.residencyCountry.equals("San Marino")){
+        if(this.residencyCountry.equals("san marino")){
             return null;
         }
         if(residencyProvincia == null || residencyProvincia.length()!=2){
@@ -140,7 +140,7 @@ public class User
 
 
     private String checkShipCountry(String shipCountry){
-        if (shipCountry == null || (!shipCountry.equals("Italia") && !shipCountry.equals("San Marino"))) {
+        if (shipCountry == null || (!shipCountry.equals("italy") && !shipCountry.equals("san marino"))) {
             return "0x10";
         }
         return null;
@@ -162,7 +162,7 @@ public class User
     }
 
     private String checkShipProvincia(String residencyProvincia){
-        if(this.residencyCountry.equals("San Marino")){
+        if(this.residencyCountry.equals("san marino")){
             return null;
         }
         if(residencyProvincia == null || residencyProvincia.length()!=2){
