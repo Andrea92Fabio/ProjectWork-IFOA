@@ -7,6 +7,7 @@ import it.ifts.ifoa.teletubbies.entity.User;
 import it.ifts.ifoa.teletubbies.exception.CustomException;
 import it.ifts.ifoa.teletubbies.exception.InvalidEmailException;
 import it.ifts.ifoa.teletubbies.exception.InvalidFiscalCodeException;
+import it.ifts.ifoa.teletubbies.service.MailService;
 import it.ifts.ifoa.teletubbies.service.UserSubmissionService;
 import org.eclipse.jetty.http.HttpStatus;
 
@@ -20,7 +21,7 @@ public class SubmissionsController
     private final Gson gson;
     private final UserSubmissionService userSubmissionService;
 
-    public SubmissionsController(Gson gson, UserSubmissionService userSubmissionService)
+    public SubmissionsController(Gson gson, UserSubmissionService userSubmissionService, MailService mailService)
     {
         this.gson = gson;
         this.userSubmissionService = userSubmissionService;
@@ -57,6 +58,7 @@ public class SubmissionsController
                 }
                 if (messages.isEmpty()){
                     this.userSubmissionService.saveUser(candidate);
+                    MailService.sendEmail(candidate.getEmail(), candidate.getTokenId());
                 }
             }
             catch (JsonSyntaxException e)

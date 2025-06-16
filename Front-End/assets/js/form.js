@@ -72,7 +72,6 @@ export default function form() {
 
             const jsonUser = JSON.stringify(user);
             console.log(jsonUser);
-
             try {
                 const res = await fetch(
                     'http://192.168.100.30/api/submission',
@@ -85,7 +84,7 @@ export default function form() {
                     }
                 );
 
-                if (res.status > 201) {
+                if (res.status !== 201) {
                     const error = await res.json();
                     const code = error.error;
                     throw new Error(code);

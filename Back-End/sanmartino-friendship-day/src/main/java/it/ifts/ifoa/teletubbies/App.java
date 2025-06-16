@@ -69,7 +69,7 @@ public class App
                     }
                 })
                 .create();
-        this.submissionsController = new SubmissionsController(gson, userSubmissionService);
+        this.submissionsController = new SubmissionsController(gson, userSubmissionService, mailService);
         this.confirmationController = new ConfirmationController(gson, userConfirmationService);
 
     }
