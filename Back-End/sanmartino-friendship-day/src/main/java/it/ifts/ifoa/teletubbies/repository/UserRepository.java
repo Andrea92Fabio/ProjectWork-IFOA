@@ -70,6 +70,7 @@ public class UserRepository
         {
             PreparedStatement statement = this.connection.prepareStatement(sql);
             statement.setString(1, user.getFiscalCode());
+            System.out.println(user.getFiscalCode());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next())
             {

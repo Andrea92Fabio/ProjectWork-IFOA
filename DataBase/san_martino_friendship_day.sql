@@ -59,7 +59,6 @@ CREATE TABLE `customers` (
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `tokenId` (`tokenId`),
-  ADD UNIQUE KEY `fiscalCode` (`fiscalCode`),
   ADD KEY `Email` (`email`),
   ADD KEY `Confirmed_Date` (`confirmedDate`);
 
