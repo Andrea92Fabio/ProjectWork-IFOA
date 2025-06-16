@@ -48,7 +48,7 @@ public class SubmissionsController
                 {
                     throw new InvalidEmailException("1x01");
                 }
-                if (candidate.getResidencyCountry().equalsIgnoreCase("Italia"))
+                if (candidate.getResidencyCountry().equalsIgnoreCase("italy"))
                 {
                     if (this.userSubmissionService.isFiscalCodeAlreadyTaken(candidate))
                     {
