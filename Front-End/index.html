@@ -182,6 +182,7 @@
                     <div class="form-input-wrapper" id="form-name-wrapper">
                         <label for="name" class="lab-button label">Nome</label>
                         <input
+                            placeholder="mario"
                             value="mario"
                             type="text"
                             name="name"
@@ -218,6 +219,20 @@
                             name="email"
                             class="input input-date mt-xs"
                             id="form-email"
+                        />
+                        <div id="form-email-errors" class="errors-target"></div>
+                    </div>
+
+                    <div class="form-input-wrapper" id="form-telephone-wrapper">
+                        <label for="telephone" class="lab-button label"
+                            >Numero di telefono</label
+                        >
+                        <input
+                            value=""
+                            type="tel"
+                            name="telephone"
+                            class="input input-date mt-xs"
+                            id="form-telephone"
                         />
                         <div id="form-email-errors" class="errors-target"></div>
                     </div>
@@ -280,6 +295,30 @@
                         </select>
                         <div
                             id="form-residency-country-errors"
+                            class="errors-target"
+                        ></div>
+                    </div>
+
+                    <div
+                        class="form-input-wrapper"
+                        id="form-residency-province-wrapper"
+                    >
+                        <label
+                            for="form-residency-province"
+                            class="lab-button label"
+                            >Provincia di residenza</label
+                        >
+                        <select
+                            name="residency-province"
+                            id="form-residency-province"
+                            class="input mt-xs"
+                        >
+                            <option value="italy">Italia</option>
+                            <option value="san marino">San Marino</option>
+                            <option value="other">Altro</option>
+                        </select>
+                        <div
+                            id="form-residency-province-errors"
                             class="errors-target"
                         ></div>
                     </div>
@@ -369,6 +408,30 @@
 
                     <div
                         class="form-input-wrapper"
+                        id="form-shipping-province-wrapper"
+                    >
+                        <label
+                            for="form-shipping-province"
+                            class="lab-button label"
+                            >Provincia di spedizione</label
+                        >
+                        <select
+                            name="shipping-province"
+                            id="form-shipping-province"
+                            class="input mt-xs"
+                        >
+                            <option value="italy">Italia</option>
+                            <option value="san marino">San Marino</option>
+                            <option value="other">Altro</option>
+                        </select>
+                        <div
+                            id="form-shipping-province-errors"
+                            class="errors-target"
+                        ></div>
+                    </div>
+
+                    <div
+                        class="form-input-wrapper"
                         id="form-shipping-address-wrapper"
                     >
                         <label for="shipping-address" class="lab-button label"
@@ -406,7 +469,28 @@
                             class="errors-target"
                         ></div>
                     </div>
-                    <div></div>
+                    <div class="checkboxes-wrapper">
+                        <div class="" id="form-shipping-zip-code-wrapper">
+                            <label for="form-privacy" class=""
+                                >Accetto la privacy
+                            </label>
+                            <input type="checkbox" id="form-privacy" required />
+                            <div
+                                id="form-shipping-zip-code-errors"
+                                class="errors-target"
+                            ></div>
+                        </div>
+                        <div class="" id="form-shipping-zip-code-wrapper">
+                            <label for="form-privacy" class=""
+                                >Accetto la privacy
+                            </label>
+                            <input type="checkbox" id="form-privacy" required />
+                            <div
+                                id="form-shipping-zip-code-errors"
+                                class="errors-target"
+                            ></div>
+                        </div>
+                    </div>
 
                     <input type="submit" class="cta lab-button" value="invia" />
                     <div></div>

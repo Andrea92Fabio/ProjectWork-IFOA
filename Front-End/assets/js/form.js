@@ -108,6 +108,8 @@ export default function form() {
     function validateForm() {
         const errors = new Map();
 
+        let isValidForm = true;
+
         errors.set('form-name', null);
         errors.set('form-surname', null);
         errors.set('form-email', null);
@@ -121,69 +123,81 @@ export default function form() {
         errors.set('form-shipping-address', null);
         errors.set('form-shipping-zip-code', null);
 
-        const checkerMap = new Map(errors);
-
         const birthdateObject = new Date(
             formElement.querySelector('#form-birthdate').value
         );
 
         if (!isDrinkingAge(birthdateObject)) {
+            isValidForm = false;
             errors.set(
                 'form-birthdate',
                 'Devi essere maggiorenne per partecipare'
             );
         }
         if (!validateStringNotEmptyOrWhitespaceOnly(name.value)) {
+            isValidForm = false;
             errors.set('form-name', 'Il nome inserito non è valido');
         }
 
-        if (!validateStringNotEmptyOrWhitespaceOnly(surname.value))
+        if (!validateStringNotEmptyOrWhitespaceOnly(surname.value)) {
+            isValidForm = false;
             errors.set('form-surname', 'Il cognome inserito non è valido');
-
+        }
         //Inserire email
         if (!validateEmail(email.value)) {
+            isValidForm = false;
             errors.set('form-email', `L'email inserita non è valida`);
         }
         //inserire paese residenza
         if (!validateCountry(residencyCountry.value)) {
+            isValidForm = false;
             errors.set(
                 'form-residency-country',
                 `Il paese di residenza inserito non è valido`
             );
         }
 
-        if (!validateStringNotEmptyOrWhitespaceOnly(residencyAddress.value))
+        if (!validateStringNotEmptyOrWhitespaceOnly(residencyAddress.value)) {
+            isValidForm = false;
             errors.set(
                 'form-residency-address',
                 `L'indirizzo di residenza inserito non è valido`
             );
+        }
 
-        if (!validateStringNotEmptyOrWhitespaceOnly(shippingAddress.value))
+        if (!validateStringNotEmptyOrWhitespaceOnly(shippingAddress.value)) {
+            isValidForm = false;
             errors.set(
                 'form-shipping-address',
                 `L'indirizzo di spedizione inserito non è valido`
             );
+        }
         //cap 5 figures
         if (!validateZipCode(residencyZipCode.value)) {
+            isValidForm = false;
             errors.set(
                 'form-residency-zip-code',
                 `Il CAP che hai inserito non è valido`
             );
         }
         //Codice fiscale
-        if (!validateFiscalCode(fiscalCode.value, residencyCountry.value))
+        if (!validateFiscalCode(fiscalCode.value, residencyCountry.value)) {
+            isValidForm = false;
             errors.set(
                 'form-fiscal-code',
                 `Hai inserito un codice fiscale sbagliato`
             );
+        }
         //
         if (!validateZipCode(shippingZipCode.value)) {
+            isValidForm = false;
             errors.set(
                 'form-shipping-zip-code',
                 `Il CAP che hai inserito non è valido`
             );
         }
         if (!validateCountry(shippingCountry.value)) {
+            isValidForm = false;
             errors.set(
                 'form-shipping-country',
                 `Il paese di spedizione che hai inserito non è valido`
@@ -211,16 +225,6 @@ export default function form() {
         });
 
         console.log(errors);
-        console.log(checkerMap);
-
-        let isValidForm = true;
-
-        //todo: delete checker map and set is valid form inside the if statements
-        checkerMap.forEach((el, key) => {
-            if (checkerMap.get(key) != errors.get(key)) {
-                isValidForm = false;
-            }
-        });
 
         return isValidForm;
     }
@@ -252,6 +256,8 @@ function validateZipCode(s) {
 }
 
 function validateFiscalCode(s, t) {
+    console.log(t);
+
     if (t === 'san marino') {
         return true;
     }
