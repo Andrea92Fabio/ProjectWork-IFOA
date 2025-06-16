@@ -42,7 +42,7 @@ public class SubmissionsController
             {
                 User candidate = gson.fromJson(req.body(), User.class);
                 candidate.assignTokenId();
-                candidate.checkUser();
+                messages = candidate.checkUser();
                 System.out.println(this.userSubmissionService.isEmailAlreadyTaken(candidate));
                 if (this.userSubmissionService.isEmailAlreadyTaken(candidate))
                 {

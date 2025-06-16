@@ -55,7 +55,7 @@ public class User
         this.tokenId = retvalue.toString();
     }
 
-    private String checkEmail(String email) throws  InvalidEmailException{
+    private String checkEmail(String email){
         String regex = "^[a-zA-Z0-9]{1,}[a-zA-Z0-9.]+@[a-zA-Z0-9.]+\\.[a-zA-Z]{2,}$";
         if (!Pattern.matches(regex, email)){
             return "0x00";
@@ -63,28 +63,28 @@ public class User
         return null;
     }
 
-    private String checkName(String name) throws InvalidNameException{
+    private String checkName(String name) {
         if (name == null || name.length() < 2){
             return "0x01";
         }
         return null;
     }
 
-    private String checkSurname(String surname) throws InvalidSurnameException{
+    private String checkSurname(String surname){
         if (surname == null || surname.length() < 2){
             return "0x02";
         }
         return null;
     }
 
-    private String checkGender(String gender) throws InvalidGenderException {
+    private String checkGender(String gender){
         if(!gender.equals("man") && !gender.equals("woman") && !gender.equals("other") && !gender.equals("not specified")){
             return "0x03";
         }
         return null;
     }
 
-    private String checkPhoneNumber(String phoneNumber) throws InvalidPhoneNumberException {
+    private String checkPhoneNumber(String phoneNumber){
         if (phoneNumber == null || phoneNumber.trim().isEmpty()) {
             return "0x04";
         }
@@ -95,7 +95,7 @@ public class User
         return null;
     }
 
-    private String checkFiscalCode(String fiscalCode) throws InvalidFiscalCodeException {
+    private String checkFiscalCode(String fiscalCode){
         if(this.residencyCountry.equals("San Marino")){
             return null;
         }
@@ -106,14 +106,14 @@ public class User
         return null;
     }
 
-    private String checkResidencyCountry(String residencyCountry) throws InvalidResidenceCountryException {
+    private String checkResidencyCountry(String residencyCountry){
         if (residencyCountry == null || (!residencyCountry.equals("Italia") && !residencyCountry.equals("San Marino"))) {
             return "0x06";
         }
         return null;
     }
 
-    private String checkResidencyZipCode(String residencyZipCode) throws InvalidZipCodeException {
+    private String checkResidencyZipCode(String residencyZipCode){
         String regex = "^[0-9]{5}$";
         if (!Pattern.matches(regex, residencyZipCode) ) {
             return "0x07";
@@ -121,14 +121,14 @@ public class User
         return null;
     }
 
-    private String checkResidencyAddress(String residencyAddress) throws InvalidAddressException {
+    private String checkResidencyAddress(String residencyAddress){
         if (residencyAddress == null && residencyAddress.length()<=2) {
             return "0x08";
         }
         return null;
     }
 
-    private String checkResidencyProvincia(String residencyProvincia) throws InvalidResidencyProvinciaException{
+    private String checkResidencyProvincia(String residencyProvincia){
         if(this.residencyCountry.equals("San Marino")){
             return null;
         }
@@ -139,14 +139,14 @@ public class User
     }
 
 
-    private String checkShipCountry(String shipCountry) throws InvalidResidenceCountryException {
+    private String checkShipCountry(String shipCountry){
         if (shipCountry == null || (!shipCountry.equals("Italia") && !shipCountry.equals("San Marino"))) {
             return "0x10";
         }
         return null;
     }
 
-    private String checkShipZipCode(String shipZipCode) throws InvalidZipCodeException {
+    private String checkShipZipCode(String shipZipCode){
         String regex = "^[0-9]{5}$";
         if (!Pattern.matches(regex, shipZipCode) ) {
             return "0x11";
@@ -154,14 +154,14 @@ public class User
         return null;
     }
 
-    private String checkShipAddress(String shipAddress) throws InvalidAddressException {
+    private String checkShipAddress(String shipAddress){
         if (shipAddress == null && shipAddress.length()<=2) {
             return "0x12";
         }
         return null;
     }
 
-    private String checkShipProvincia(String residencyProvincia) throws InvalidShipProvinciaException{
+    private String checkShipProvincia(String residencyProvincia){
         if(this.residencyCountry.equals("San Marino")){
             return null;
         }
@@ -171,21 +171,21 @@ public class User
         return null;
     }
 
-    private String checkPrivacy(boolean privacy) throws InvalidPrivacyException {
+    private String checkPrivacy(boolean privacy){
         if (!privacy) {
             return "0x14";
         }
         return null;
     }
 
-    private String checkRules(boolean rules) throws InvalidRulesException {
+    private String checkRules(boolean rules){
         if (!rules) {
             return "0x15";
         }
         return null;
     }
 
-    private String checkBirthDate(LocalDate birthDate) throws InvalidBirthDateException {
+    private String checkBirthDate(LocalDate birthDate){
         if (birthDate == null) {
             return "0x16";
         }
