@@ -70,8 +70,8 @@ public class SubmissionsController
                 messages.add("invalid json format");
             }
             catch (FiscalCodeAlreadyPresentException | EmailAlreadyPresentException e){
-                res.status(HttpStatus.CREATED_201);
-                messages.add("submission successful");
+                res.status(HttpStatus.CONFLICT_409);
+                messages.add(e.getMessage());
             }
             catch (CustomException e)
             {

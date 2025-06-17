@@ -41,6 +41,7 @@ public class App {
     UserSubmissionService userSubmissionService;
     UserConfirmationService userConfirmationService;
 
+    //todo: add shutdown hook
     ExecutorService emailExecutor;
 
     public static void main(String[] args) {
