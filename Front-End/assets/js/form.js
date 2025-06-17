@@ -80,7 +80,7 @@ export default function form() {
             console.log(jsonUser);
             try {
                 const res = await fetch(
-                    'http://192.168.100.30/api/submission',
+                    'http://192.168.100.37/api/submission',
                     {
                         method: 'POST',
                         body: jsonUser,
