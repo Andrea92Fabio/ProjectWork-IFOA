@@ -4,9 +4,7 @@ import static spark.Spark.*;
 
 import com.google.gson.*;
 import it.ifts.ifoa.teletubbies.entity.User;
-import it.ifts.ifoa.teletubbies.exception.CustomException;
-import it.ifts.ifoa.teletubbies.exception.InvalidEmailException;
-import it.ifts.ifoa.teletubbies.exception.InvalidFiscalCodeException;
+import it.ifts.ifoa.teletubbies.exception.*;
 import it.ifts.ifoa.teletubbies.service.MailService;
 import it.ifts.ifoa.teletubbies.service.UserSubmissionService;
 import org.eclipse.jetty.http.HttpStatus;
@@ -47,13 +45,13 @@ public class SubmissionsController
                 System.out.println(this.userSubmissionService.isEmailAlreadyTaken(candidate));
                 if (this.userSubmissionService.isEmailAlreadyTaken(candidate))
                 {
-                    throw new InvalidEmailException("1x01");
+                    throw new EmailAlreadyPresentException("1x01");
                 }
                 if (candidate.getResidencyCountry().equalsIgnoreCase("italy"))
                 {
                     if (this.userSubmissionService.isFiscalCodeAlreadyTaken(candidate))
                     {
-                        throw new InvalidFiscalCodeException("1x02");
+                        throw new FiscalCodeAlreadyPresentException("1x02");
                     }
                 }
                 if (messages.isEmpty()){
@@ -66,6 +64,10 @@ public class SubmissionsController
                 res.status(HttpStatus.BAD_REQUEST_400);
                 messages.add("invalid json format");
             }
+            catch (FiscalCodeAlreadyPresentException | EmailAlreadyPresentException e){
+                res.status(HttpStatus.CONFLICT_409);
+                messages.add(e.getMessage());
+            }
             catch (CustomException e)
             {
                 res.status(HttpStatus.BAD_REQUEST_400);
@@ -76,10 +78,9 @@ public class SubmissionsController
             {
                 res.status(HttpStatus.CREATED_201);
                 messages.add("submission successful");
-                responseBody.put("message", messages);
+                responseBody.put("messages", messages);
             } else {
-                res.status(HttpStatus.BAD_REQUEST_400);
-                responseBody.put("error", messages);
+                responseBody.put("errors", messages);
             }
 
             return gson.toJson(responseBody);

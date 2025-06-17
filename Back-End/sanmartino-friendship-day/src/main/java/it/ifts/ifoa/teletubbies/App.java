@@ -15,6 +15,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 
 import static spark.Spark.*;
 
@@ -23,11 +25,18 @@ import static spark.Spark.*;
 
 public class App
 {
+    public final static LocalDateTime START_CONTEST = LocalDateTime.of(2025, Month.JULY, 1, 9, 0);
+    public final static LocalDateTime END_CONTEST = LocalDateTime.of(2025, Month.JULY, 8, 9, 0);
+
     Connection connection;
     UserRepository userRepository;
     MailService mailService;
+
     SubmissionsController submissionsController;
     ConfirmationController confirmationController;
+
+    Middleware middleware;
+
     UserSubmissionService userSubmissionService;
     UserConfirmationService userConfirmationService;
 
@@ -42,7 +51,20 @@ public class App
     {
         port(80);
 
-        Middleware.enableCORS();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
+                    @Override
+                    public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+                            throws JsonParseException {
+                        return LocalDate.parse(json.getAsString());
+                    }
+                })
+                .create();
+
+        this.middleware = new Middleware(gson);
+
+        middleware.enableCORS();
+        middleware.handleRequestBeforeOrAfterContest();
 
         //todo: setup connection string
         try
@@ -55,20 +77,10 @@ public class App
         }
         this.userRepository = new UserRepository(connection);
 
-        this.mailService = new MailService();
         this.userSubmissionService = new UserSubmissionService(userRepository);
         this.userConfirmationService = new UserConfirmationService(userRepository);
 
 
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
-                    @Override
-                    public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-                            throws JsonParseException {
-                        return LocalDate.parse(json.getAsString());
-                    }
-                })
-                .create();
         this.submissionsController = new SubmissionsController(gson, userSubmissionService, mailService);
         this.confirmationController = new ConfirmationController(gson, userConfirmationService);
 
@@ -77,7 +89,6 @@ public class App
     private void run()
     {
         submissionsController.initSubmissionEndpoint();
-
         confirmationController.initConfirmationEndpoint();
     }
 }
