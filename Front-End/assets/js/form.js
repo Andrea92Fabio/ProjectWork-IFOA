@@ -18,6 +18,8 @@ const shippingCountry = formElement.querySelector('#form-shipping-country');
 const shippingAddress = formElement.querySelector('#form-shipping-address');
 const shippingZipCode = formElement.querySelector('#form-shipping-zip-code');
 const fiscalCode = formElement.querySelector('#form-fiscal-code');
+const residencyProvice = formElement.querySelector('#form-residency-province');
+const shippingProvice = formElement.querySelector('#form-shipping-province');
 
 //todo:add provincia for shipping and residency and add phonenumber
 const user = {
@@ -35,7 +37,9 @@ const user = {
     privacy: true,
     rules: true,
     birthDate: null,
-    phoneNumber: 3923936702,
+    phoneNumber: null,
+    residencyProvice: null,
+    shipProvince: null
 };
 
 export default function form() {
@@ -69,6 +73,8 @@ export default function form() {
             user.shipZipCode = shippingZipCode.value;
             user.shipAddress = shippingAddress.value;
             user.birthDate = birthdate.value;
+            user.residencyProvice = residencyProvice.value;
+            user.shipProvince = shippingProvice.value;
 
             const jsonUser = JSON.stringify(user);
             console.log(jsonUser);
@@ -202,6 +208,27 @@ export default function form() {
                 `Il paese di spedizione che hai inserito non è valido`
             );
         }
+        if(!validateProvince(residencyProvice.value, residencyCountry.value)){
+            isValidForm = false;
+            errors.set(
+                'form-residency-province',
+                `La provincia di residenza selezionata non è valida`
+            )
+        }
+        if(!validateProvince(shippingProvice.value, shippingCountry.value)){
+            isValidForm = false;
+            errors.set(
+                'form-shipping-province',
+                `La provincia di spedizione selezionata non è valida`
+            )
+        }
+        if(!validateGender(gender.value)){
+            isValidForm = false;
+            errors.set(
+                'form-gender',
+                `Il genere selezionato non è valido`
+            )
+        }
 
         errors.forEach((el, key) => {
             if (el) {
@@ -280,4 +307,19 @@ function validateCountry(s) {
         return true;
     }
     return false;
+}
+function validateProvince(s,t){
+    if(t === "san marino"){
+        return true;
+    }
+    if(s.length === 2){
+        return true;
+    }
+    return false;
+}
+function validateGender(s){
+    if(s === ""){
+        return false;
+    }
+    return true;
 }

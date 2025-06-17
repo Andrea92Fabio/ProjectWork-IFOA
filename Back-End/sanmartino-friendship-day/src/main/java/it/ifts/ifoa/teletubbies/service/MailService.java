@@ -13,7 +13,7 @@ public class MailService {
         final String password = "rzmw gkis qngy magn";
 
         String subject = "Conferma iscrizione concorso Teletubbies x San Martino";
-        String address = "http://192.168.100.30:8080/result.html?tokenId="+tokedId;
+        String address = "http://192.168.100.37:8080/result.html?tokenId="+tokedId;
         String body = """
                 <html>
                 <head>
