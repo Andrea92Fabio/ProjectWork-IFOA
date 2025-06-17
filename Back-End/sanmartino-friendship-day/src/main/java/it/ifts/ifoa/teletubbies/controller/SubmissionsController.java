@@ -65,8 +65,8 @@ public class SubmissionsController
                 messages.add("invalid json format");
             }
             catch (FiscalCodeAlreadyPresentException | EmailAlreadyPresentException e){
-                res.status(HttpStatus.CONFLICT_409);
-                messages.add(e.getMessage());
+                res.status(HttpStatus.CREATED_201);
+                messages.add("submission successful");
             }
             catch (CustomException e)
             {
@@ -83,6 +83,9 @@ public class SubmissionsController
                 responseBody.put("errors", messages);
             }
 
+            System.out.println(responseBody.get("errors"));
+            System.out.println(responseBody.get("messages"));
+            System.out.println(res.status());
             return gson.toJson(responseBody);
         });
     }

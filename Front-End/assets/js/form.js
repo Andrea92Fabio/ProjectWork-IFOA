@@ -10,6 +10,7 @@ export const name = formElement.querySelector('#form-name');
 const surname = formElement.querySelector('#form-surname');
 export const email = formElement.querySelector('#form-email');
 const birthdate = formElement.querySelector('#form-birthdate');
+const phoneNumber = formElement.querySelector('#form-telephone');
 const gender = formElement.querySelector('#form-gender');
 const residencyCountry = formElement.querySelector('#form-residency-country');
 const residencyAddress = formElement.querySelector('#form-residency-address');
@@ -39,7 +40,7 @@ const user = {
     birthDate: null,
     phoneNumber: null,
     residencyProvice: null,
-    shipProvince: null
+    shipProvince: null,
 };
 
 export default function form() {
@@ -73,6 +74,7 @@ export default function form() {
             user.shipZipCode = shippingZipCode.value;
             user.shipAddress = shippingAddress.value;
             user.birthDate = birthdate.value;
+            user.phoneNumber = phoneNumber.value;
             user.residencyProvice = residencyProvice.value;
             user.shipProvince = shippingProvice.value;
 
@@ -92,8 +94,9 @@ export default function form() {
 
                 if (res.status !== 201) {
                     const error = await res.json();
-                    const code = error.error;
-                    throw new Error(code);
+                    const codes = error.errors;
+                    const codesStr = JSON.stringify(codes);
+                    throw new Error(codesStr);
                 }
             } catch (error) {
                 view.classList.remove('active');
@@ -208,26 +211,23 @@ export default function form() {
                 `Il paese di spedizione che hai inserito non è valido`
             );
         }
-        if(!validateProvince(residencyProvice.value, residencyCountry.value)){
+        if (!validateProvince(residencyProvice.value, residencyCountry.value)) {
             isValidForm = false;
             errors.set(
                 'form-residency-province',
                 `La provincia di residenza selezionata non è valida`
-            )
+            );
         }
-        if(!validateProvince(shippingProvice.value, shippingCountry.value)){
+        if (!validateProvince(shippingProvice.value, shippingCountry.value)) {
             isValidForm = false;
             errors.set(
                 'form-shipping-province',
                 `La provincia di spedizione selezionata non è valida`
-            )
+            );
         }
-        if(!validateGender(gender.value)){
+        if (!validateGender(gender.value)) {
             isValidForm = false;
-            errors.set(
-                'form-gender',
-                `Il genere selezionato non è valido`
-            )
+            errors.set('form-gender', `Il genere selezionato non è valido`);
         }
 
         errors.forEach((el, key) => {
@@ -308,17 +308,17 @@ function validateCountry(s) {
     }
     return false;
 }
-function validateProvince(s,t){
-    if(t === "san marino"){
+function validateProvince(s, t) {
+    if (t === 'san marino') {
         return true;
     }
-    if(s.length === 2){
+    if (s.length === 2) {
         return true;
     }
     return false;
 }
-function validateGender(s){
-    if(s === ""){
+function validateGender(s) {
+    if (s === '') {
         return false;
     }
     return true;

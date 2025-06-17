@@ -25,7 +25,7 @@ import static spark.Spark.*;
 
 public class App
 {
-    public final static LocalDateTime START_CONTEST = LocalDateTime.of(2025, Month.JULY, 1, 9, 0);
+    public final static LocalDateTime START_CONTEST = LocalDateTime.of(2025, Month.JUNE, 17, 9, 0);
     public final static LocalDateTime END_CONTEST = LocalDateTime.of(2025, Month.JULY, 8, 9, 0);
 
     Connection connection;
