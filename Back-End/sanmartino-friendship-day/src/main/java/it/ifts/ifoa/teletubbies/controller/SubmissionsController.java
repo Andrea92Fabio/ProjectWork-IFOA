@@ -13,16 +13,19 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 
 public class SubmissionsController
 {
     private final Gson gson;
     private final UserSubmissionService userSubmissionService;
+    private final ExecutorService emailExecutor;
 
-    public SubmissionsController(Gson gson, UserSubmissionService userSubmissionService, MailService mailService)
+    public SubmissionsController(Gson gson, UserSubmissionService userSubmissionService, MailService mailService, ExecutorService emailExecutor)
     {
         this.gson = gson;
         this.userSubmissionService = userSubmissionService;
+        this.emailExecutor = emailExecutor;
     }
 
     public void initSubmissionEndpoint()
@@ -56,7 +59,9 @@ public class SubmissionsController
                 }
                 if (messages.isEmpty()){
                     this.userSubmissionService.saveUser(candidate);
-                    MailService.sendEmail(candidate.getEmail(), candidate.getTokenId());
+                    emailExecutor.submit(() -> {
+                        MailService.sendEmail(candidate.getEmail(), candidate.getTokenId());
+                    });
                 }
             }
             catch (JsonSyntaxException e)

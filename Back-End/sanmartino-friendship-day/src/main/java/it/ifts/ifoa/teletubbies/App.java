@@ -17,14 +17,15 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static spark.Spark.*;
 
 //Aggiungere Corpo della mail in MailService e oggetto della mail
 //Scegliere se fare un corpo in html o semplice txt
 
-public class App
-{
+public class App {
     public final static LocalDateTime START_CONTEST = LocalDateTime.of(2025, Month.JUNE, 17, 9, 0);
     public final static LocalDateTime END_CONTEST = LocalDateTime.of(2025, Month.JULY, 8, 9, 0);
 
@@ -40,26 +41,23 @@ public class App
     UserSubmissionService userSubmissionService;
     UserConfirmationService userConfirmationService;
 
+    ExecutorService emailExecutor;
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         new App().run();
     }
 
 
-    public App()
-    {
+    public App() {
         port(80);
+        emailExecutor = Executors.newFixedThreadPool(4);
 
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
-                    @Override
-                    public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-                            throws JsonParseException {
-                        return LocalDate.parse(json.getAsString());
-                    }
-                })
-                .create();
+        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
+            @Override
+            public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+                return LocalDate.parse(json.getAsString());
+            }
+        }).create();
 
         this.middleware = new Middleware(gson);
 
@@ -67,12 +65,10 @@ public class App
         middleware.handleRequestBeforeOrAfterContest();
 
         //todo: setup connection string
-        try
-        {
+        try {
             this.connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/san_martino_friendship_day?user=root");
         }
-        catch (SQLException e)
-        {
+        catch (SQLException e) {
             throw new RuntimeException(e);
         }
         this.userRepository = new UserRepository(connection);
@@ -81,13 +77,12 @@ public class App
         this.userConfirmationService = new UserConfirmationService(userRepository);
 
 
-        this.submissionsController = new SubmissionsController(gson, userSubmissionService, mailService);
+        this.submissionsController = new SubmissionsController(gson, userSubmissionService, mailService, emailExecutor);
         this.confirmationController = new ConfirmationController(gson, userConfirmationService);
 
     }
 
-    private void run()
-    {
+    private void run() {
         submissionsController.initSubmissionEndpoint();
         confirmationController.initConfirmationEndpoint();
     }
