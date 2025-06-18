@@ -81,18 +81,20 @@ public class App {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("Shutdown hook triggered. Cleaning up...");
 
-            pool.close(); // Custom method to release DB connections
             emailExecutor.shutdown(); // Stop accepting new tasks
             try {
                 if (!emailExecutor.awaitTermination(10, TimeUnit.SECONDS)) {
                     emailExecutor.shutdownNow(); // Force shutdown if not terminated
                 }
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e) {
                 emailExecutor.shutdownNow();
                 Thread.currentThread().interrupt();
+            } finally {
+                pool.close(); // Custom method to release DB connections
+                System.out.println("Resources released successfully.");
             }
 
-            System.out.println("Resources released successfully.");
         }));
 
     }
