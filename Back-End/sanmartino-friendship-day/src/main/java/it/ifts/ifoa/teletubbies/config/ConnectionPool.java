@@ -35,15 +35,22 @@ public class ConnectionPool {
     }
 
     // Pool management methods, synchronized for thread safety
-    public synchronized Connection borrowConnection() throws InterruptedException {
+    public synchronized Connection borrowConnection() throws InterruptedException, SQLException {
         while (pool.isEmpty()){
             wait();
         }
-        return pool.poll();
+        Connection con = pool.poll();
+
+        if (con == null || con.isClosed()){
+             con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/san_martino_friendship_day?user=root");
+        }
+        return con;
     }
 
     public synchronized void releaseConnection(Connection con) {
-        pool.offer(con);
-        notify();
+        if (con != null){
+            pool.offer(con);
+            notifyAll();
+        }
     }
 }
