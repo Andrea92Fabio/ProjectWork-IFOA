@@ -65,13 +65,13 @@ public class App {
         middleware.enableCORS();
         middleware.handleRequestBeforeOrAfterContest();
 
-        //todo: setup connection string
         try {
             this.connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/san_martino_friendship_day?user=root");
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
         this.userRepository = new UserRepository(connection);
 
         this.userSubmissionService = new UserSubmissionService(userRepository);
