@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import static spark.Spark.*;
 
@@ -52,7 +53,7 @@ public class App {
 
     public App() {
         port(80);
-        emailExecutor = Executors.newFixedThreadPool(4);
+        this.emailExecutor = Executors.newFixedThreadPool(4);
 
         Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
             @Override
@@ -63,8 +64,8 @@ public class App {
 
         this.middleware = new Middleware(gson);
 
-        middleware.enableCORS();
-        middleware.handleRequestBeforeOrAfterContest();
+        this.middleware.enableCORS();
+        this.middleware.handleRequestBeforeOrAfterContest();
 
         this.pool = ConnectionPool.getInstance();
 
@@ -76,6 +77,23 @@ public class App {
 
         this.submissionsController = new SubmissionsController(gson, userSubmissionService, mailService, emailExecutor);
         this.confirmationController = new ConfirmationController(gson, userConfirmationService);
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("Shutdown hook triggered. Cleaning up...");
+
+            pool.close(); // Custom method to release DB connections
+            emailExecutor.shutdown(); // Stop accepting new tasks
+            try {
+                if (!emailExecutor.awaitTermination(10, TimeUnit.SECONDS)) {
+                    emailExecutor.shutdownNow(); // Force shutdown if not terminated
+                }
+            } catch (InterruptedException e) {
+                emailExecutor.shutdownNow();
+                Thread.currentThread().interrupt();
+            }
+
+            System.out.println("Resources released successfully.");
+        }));
 
     }
 

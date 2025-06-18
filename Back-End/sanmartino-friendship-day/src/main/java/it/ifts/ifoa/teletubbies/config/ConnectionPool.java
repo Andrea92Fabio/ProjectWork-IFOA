@@ -25,6 +25,17 @@ public class ConnectionPool {
         }
     }
 
+    public void close() {
+        for (Connection con : pool){
+            try {
+                con.close();
+            }
+            catch (SQLException ignored) {
+            }
+        }
+        pool.clear();
+    }
+
     // Inner static helper class - thread-safe lazy init
     private static class Holder {
         private static final ConnectionPool INSTANCE = new ConnectionPool();
