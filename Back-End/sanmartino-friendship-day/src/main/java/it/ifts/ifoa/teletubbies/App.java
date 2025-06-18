@@ -2,6 +2,7 @@ package it.ifts.ifoa.teletubbies;
 
 
 import com.google.gson.*;
+import it.ifts.ifoa.teletubbies.config.ConnectionPool;
 import it.ifts.ifoa.teletubbies.controller.ConfirmationController;
 import it.ifts.ifoa.teletubbies.controller.SubmissionsController;
 import it.ifts.ifoa.teletubbies.middleware.Middleware;
@@ -29,7 +30,7 @@ public class App {
     public final static LocalDateTime START_CONTEST = LocalDateTime.of(2025, Month.JUNE, 17, 9, 0);
     public final static LocalDateTime END_CONTEST = LocalDateTime.of(2025, Month.JULY, 8, 9, 0);
 
-    Connection connection;
+    ConnectionPool pool;
     UserRepository userRepository;
     MailService mailService;
 
@@ -65,14 +66,9 @@ public class App {
         middleware.enableCORS();
         middleware.handleRequestBeforeOrAfterContest();
 
-        try {
-            this.connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/san_martino_friendship_day?user=root");
-        }
-        catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        this.pool = ConnectionPool.getInstance();
 
-        this.userRepository = new UserRepository(connection);
+        this.userRepository = new UserRepository(pool);
 
         this.userSubmissionService = new UserSubmissionService(userRepository);
         this.userConfirmationService = new UserConfirmationService(userRepository);

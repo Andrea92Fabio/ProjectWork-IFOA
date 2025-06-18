@@ -3,21 +3,22 @@ package it.ifts.ifoa.teletubbies.repository;
 import java.sql.*;
 import java.time.Instant;
 
+import it.ifts.ifoa.teletubbies.config.ConnectionPool;
 import it.ifts.ifoa.teletubbies.entity.User;
 import it.ifts.ifoa.teletubbies.exception.InsertFailedException;
+import it.ifts.ifoa.teletubbies.utils.JdbcUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class UserRepository
-{
-    private final Connection connection;
+public class UserRepository {
+    private final ConnectionPool pool;
 
-    public UserRepository(Connection connection)
-    {
-        this.connection = connection;
+    public UserRepository(ConnectionPool pool) {
+        this.pool = pool;
     }
 
-    //insert user into the db
-    public void saveUser(User user)
-    {
+
+    public void saveUser(User user) {
         String sql = """
                 INSERT INTO customers (email, name, surname,\
                  birthdate, gender, fiscalCode,\
@@ -25,9 +26,13 @@ public class UserRepository
                  residencyZipCode, shipCountry, shipAddress,\
                  shipZipCode, privacy, rules, tokenId) \
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
-        try
-        {
-            PreparedStatement statement = this.connection.prepareStatement(sql);
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = pool.borrowConnection();
+            statement = connection.prepareStatement(sql);
+
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getName());
             statement.setString(3, user.getSurname());
@@ -49,98 +54,121 @@ public class UserRepository
             statement.setBoolean(15, user.getRules());
             statement.setString(16, user.getTokenId());
 
-            if (statement.executeUpdate() < 1)
-            {
+            if (statement.executeUpdate() < 1) {
                 //should never happen, just to be sure
                 throw new InsertFailedException("insert failed");
             }
         }
-        catch (SQLException e)
-        {
+        catch (SQLException | InterruptedException e) {
             throw new RuntimeException(e);
+        } finally {
+            JdbcUtils.closeAndRelease(statement, connection, pool);
         }
     }
+
 
     //if user is italian, verify that fiscal code isn't already taken
-    public boolean isFiscalCodeAlreadyTaken(User user)
-    {
+    public boolean isFiscalCodeAlreadyTaken(User user) {
         String sql = "SELECT id FROM customers WHERE fiscalCode = ?";
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
         boolean retvalue = false;
-        try
-        {
-            PreparedStatement statement = this.connection.prepareStatement(sql);
+        try {
+            connection = pool.borrowConnection();
+            statement = connection.prepareStatement(sql);
             statement.setString(1, user.getFiscalCode());
-            System.out.println(user.getFiscalCode());
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next())
-            {
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
                 retvalue = true;
             }
         }
-        catch (SQLException e)
-        {
+        catch (SQLException | InterruptedException e) {
             throw new RuntimeException(e);
+        } finally {
+            JdbcUtils.closeAndRelease(statement, resultSet, connection, pool);
         }
         return retvalue;
     }
 
-    //verify that email isn't already taken
-    public boolean isEmailAlreadyTaken(User user)
-    {
+    public boolean isEmailAlreadyTaken(User user) {
         String sql = "SELECT id FROM customers WHERE email = ?";
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
         boolean retvalue = false;
-        try
-        {
-            PreparedStatement statement = this.connection.prepareStatement(sql);
+
+        try {
+            connection = pool.borrowConnection();
+            statement = connection.prepareStatement(sql);
             statement.setString(1, user.getEmail());
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next())
-            {
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
                 retvalue = true;
             }
         }
-        catch (SQLException e)
-        {
+        catch (SQLException | InterruptedException e) {
             throw new RuntimeException(e);
+        } finally {
+            JdbcUtils.closeAndRelease(statement, resultSet, connection, pool);
         }
         return retvalue;
     }
 
 
-    public void doubleOptIn(String tokenId)
-    {
+    public void doubleOptIn(String tokenId) {
         String sql = "UPDATE customers SET confirmedDate = ? WHERE tokenId = ? AND confirmedDate IS NULL";
-        try
-        {
-            PreparedStatement statement = this.connection.prepareStatement(sql);
-            statement.setTimestamp(1, Timestamp.from(Instant.now()) );
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = pool.borrowConnection();
+            statement = connection.prepareStatement(sql);
+
+            statement.setTimestamp(1, Timestamp.from(Instant.now()));
             statement.setString(2, tokenId);
             statement.executeUpdate();
         }
-        catch (SQLException e)
-        {
+        catch (SQLException | InterruptedException e) {
             throw new RuntimeException(e);
+        } finally {
+            JdbcUtils.closeAndRelease(statement, connection, pool);
         }
     }
 
-    public boolean isConfirmationTop499(String tokenId)
-    {
-        String sql = "SELECT COUNT(*) FROM (" +
-                "SELECT tokenId FROM customers WHERE confirmedDate IS NOT NULL ORDER BY confirmedDate ASC LIMIT 499) AS s " +
-                "WHERE tokenId = ?";
-        try
-        {
-            PreparedStatement candidateStatement = this.connection.prepareStatement(sql);
-            candidateStatement.setString(1, tokenId);
-            ResultSet resultSet = candidateStatement.executeQuery();
-            if(resultSet.next()){
-                return resultSet.getInt(1) > 0;
-            } return false;
+    public boolean isConfirmationTop499(String tokenId) {
+        String sql = "SELECT COUNT(*) FROM (" + "SELECT tokenId FROM customers WHERE confirmedDate IS NOT NULL ORDER BY confirmedDate ASC LIMIT 499) AS s " + "WHERE tokenId = ?";
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        boolean retvalue = false;
+        try {
+            connection = pool.borrowConnection();
+            statement = connection.prepareStatement(sql);
+
+            statement.setString(1, tokenId);
+
+             resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                retvalue = resultSet.getInt(1) > 0;
+            }
         }
-        catch (SQLException e)
-        {
+        catch (SQLException | InterruptedException e) {
             throw new RuntimeException(e);
+        } finally {
+            JdbcUtils.closeAndRelease(statement, resultSet, connection, pool);
         }
+        return retvalue;
     }
 }
 
