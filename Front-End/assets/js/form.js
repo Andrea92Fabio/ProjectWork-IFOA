@@ -82,7 +82,7 @@ export default function form() {
             console.log(jsonUser);
             try {
                 const res = await fetch(
-                    'http://192.168.100.37/api/submission',
+                    'http://192.168.100.45/api/submission',
                     {
                         method: 'POST',
                         body: jsonUser,
@@ -92,24 +92,17 @@ export default function form() {
                     }
                 );
 
-                if (res.status !== 201) {
-                    const error = await res.json();
-                    const codes = error.errors;
-                    const codesStr = JSON.stringify(codes);
-                    throw new Error(codesStr);
+                if (res.status === 201 || res.status === 409) {
+                    view.classList.remove('active');
+                    thankYou();
+                } else {
+                    errorView(res.status);
                 }
             } catch (error) {
                 view.classList.remove('active');
-
                 console.error('Error message', error.message);
-
                 errorView();
-
-                return;
             }
-
-            view.classList.remove('active');
-            thankYou();
         }
     });
     //todo: add rules and privacy checker and add it on front end

@@ -38,6 +38,22 @@ body {
     padding: 0;
     overflow-x: hidden;
     min-height: 100vh;
+    min-height: 100svh;
+}
+
+body {
+    overflow-y: hidden;
+}
+
+.container {
+    width: min(90%, 1200px);
+    margin: 0 auto;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
 a {

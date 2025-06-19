@@ -4,6 +4,7 @@
     background-position: center;
     min-height: 80vh;
     display: flex;
+    padding-inline: 1rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -44,17 +45,6 @@ h1 {
 .cta:hover {
     background-color: var(--clr-main-700);
     color: var(--clr-main-100);
-}
-
-.container {
-    width: min(90%, 1200px);
-    margin: 0 auto;
-}
-
-img {
-    display: block;
-    width: 100%;
-    height: auto;
 }
 
 .grid-2-col {

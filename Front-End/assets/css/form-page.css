@@ -1,4 +1,15 @@
+.form-hero {
+    min-height: 40vh;
+    display: grid;
+    background: #000;
+    background-size: cover;
+    background-position: center bottom;
+    place-items: center;
+    padding-inline: var(--len-lg);
+}
+
 .main-form {
+    padding-block-start: var(--len-xl);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--len-md);
