@@ -254,6 +254,16 @@ public class User
         return rules;
     }
 
+
+
+    public String getResidencyProvince() {
+        return residencyProvince;
+    }
+
+    public String getShipProvince() {
+        return shipProvince;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -270,6 +280,8 @@ public class User
                 ", shipCountry='" + shipCountry + '\'' +
                 ", shipZipCode='" + shipZipCode + '\'' +
                 ", shipAddress='" + shipAddress + '\'' +
+                ", residencyProvince='" + residencyProvince + '\'' +
+                ", shipProvince='" + shipProvince + '\'' +
                 ", privacy=" + privacy +
                 ", rules=" + rules +
                 ", birthDate=" + birthDate +

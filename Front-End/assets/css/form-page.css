@@ -1,7 +1,7 @@
 .form-hero {
     min-height: 40vh;
     display: grid;
-    background: #000;
+    background-image: url(/assets/img/form.webp);
     background-size: cover;
     background-position: center bottom;
     place-items: center;
