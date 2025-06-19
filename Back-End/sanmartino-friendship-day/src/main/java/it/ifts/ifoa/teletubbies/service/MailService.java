@@ -8,46 +8,12 @@ import java.util.Properties;
 
 public class MailService {
 
-    public static void sendEmail(String receiver, String tokedId) {
+    public static void sendEmail(String receiver, String tokedId, String body) {
         final String senderEmail = "teletubbies.pw@gmail.com";
         final String password = "rzmw gkis qngy magn";
 
         String subject = "Conferma iscrizione concorso Teletubbies x San Martino";
         String address = "http://192.168.100.37:8080/result.html?tokenId="+tokedId;
-        String body = """
-                <html>
-                <head>
-                <style>
-                .cta {
-                    cursor: pointer;
-                    background-color:  #ff5024;
-                    color: #361008;
-                    transition: all 300ms;
-                    font-size: 1rem;
-                    text-transform: uppercase;
-                    font-weight: 600;
-                    letter-spacing: 0.25ch;
-
-                    border: none;
-                    border-radius: 10rem;
-
-                    padding: 1rem 2rem;
-                }
-
-                .cta:hover {
-                    background-color: #6b200f;
-                    color:  #ffd9ce;
-                }
-                </style>
-                </head>
-                <body>
-                <h1>Conferma l'iscrizione</h1>
-                <a href='%s' class='cta'>Clicca qui per Confermare </a>
-                <br>
-                <br>
-                </body>
-                </html>
-                """.formatted(address);
 
         String host = "smtp.gmail.com";
         int port = 587;
@@ -70,7 +36,7 @@ public class MailService {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
             message.setSubject(subject);
             //message.setText(body);
-            message.setContent(body, "text/html");
+            message.setContent(body.formatted(address), "text/html");
 
             Transport.send(message);
             System.out.println("Email sent successfully to: " + receiver);
