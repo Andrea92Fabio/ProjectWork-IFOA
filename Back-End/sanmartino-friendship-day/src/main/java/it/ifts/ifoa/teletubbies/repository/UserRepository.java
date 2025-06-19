@@ -2,13 +2,12 @@ package it.ifts.ifoa.teletubbies.repository;
 
 import java.sql.*;
 import java.time.Instant;
+import java.util.Optional;
 
 import it.ifts.ifoa.teletubbies.config.ConnectionPool;
 import it.ifts.ifoa.teletubbies.entity.User;
 import it.ifts.ifoa.teletubbies.exception.InsertFailedException;
 import it.ifts.ifoa.teletubbies.utils.JdbcUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class UserRepository {
     private final ConnectionPool pool;
@@ -68,22 +67,23 @@ public class UserRepository {
 
 
     //if user is italian, verify that fiscal code isn't already taken
-    public boolean isFiscalCodeAlreadyTaken(User user) {
-        String sql = "SELECT id FROM customers WHERE fiscalCode = ?";
+    public Optional<Integer> idFromFiscalCode(String fiscalCode) {
+        String sql = "SELECT fiscalCode FROM customers WHERE fiscalCode = ?";
 
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
-        boolean retvalue = false;
+        Optional<Integer> id = Optional.empty();
+
         try {
             connection = pool.borrowConnection();
             statement = connection.prepareStatement(sql);
-            statement.setString(1, user.getFiscalCode());
+            statement.setString(1, fiscalCode);
             resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                retvalue = true;
+                id = Optional.of(resultSet.getInt("id"));
             }
         }
         catch (SQLException | InterruptedException e) {
@@ -91,26 +91,26 @@ public class UserRepository {
         } finally {
             JdbcUtils.closeAndRelease(statement, resultSet, connection, pool);
         }
-        return retvalue;
+        return id;
     }
 
-    public boolean isEmailAlreadyTaken(User user) {
-        String sql = "SELECT id FROM customers WHERE email = ?";
+    public Optional<Integer> idFromEmail(String email) {
+        String sql = "SELECT email FROM customers WHERE email = ?";
 
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
-        boolean retvalue = false;
+        Optional<Integer> id = Optional.empty();
 
         try {
             connection = pool.borrowConnection();
             statement = connection.prepareStatement(sql);
-            statement.setString(1, user.getEmail());
+            statement.setString(1, email);
             resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                retvalue = true;
+                id = Optional.of(resultSet.getInt("id"));
             }
         }
         catch (SQLException | InterruptedException e) {
@@ -118,7 +118,7 @@ public class UserRepository {
         } finally {
             JdbcUtils.closeAndRelease(statement, resultSet, connection, pool);
         }
-        return retvalue;
+        return id;
     }
 
 
@@ -142,6 +142,36 @@ public class UserRepository {
             JdbcUtils.closeAndRelease(statement, connection, pool);
         }
     }
+
+
+    public boolean isEmailConfirmed(String email) {
+        String sql = "SELECT COUNT(*) FROM customers WHERE email = ? AND confirmedDate IS NOT NULL ";
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        boolean retvalue = false;
+        try {
+            connection = pool.borrowConnection();
+            statement = connection.prepareStatement(sql);
+
+            statement.setString(1, email);
+
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                retvalue = true;
+            }
+        }
+        catch (SQLException | InterruptedException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JdbcUtils.closeAndRelease(statement, resultSet, connection, pool);
+        }
+        return retvalue;
+    }
+
 
     public boolean isConfirmationTop499(String tokenId) {
         String sql = "SELECT COUNT(*) FROM (" + "SELECT tokenId FROM customers WHERE confirmedDate IS NOT NULL ORDER BY confirmedDate ASC LIMIT 499) AS s " + "WHERE tokenId = ?";

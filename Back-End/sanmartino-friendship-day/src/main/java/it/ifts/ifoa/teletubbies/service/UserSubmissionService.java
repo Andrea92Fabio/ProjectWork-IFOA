@@ -3,6 +3,8 @@ package it.ifts.ifoa.teletubbies.service;
 import it.ifts.ifoa.teletubbies.entity.User;
 import it.ifts.ifoa.teletubbies.repository.UserRepository;
 
+import java.util.Optional;
+
 public class UserSubmissionService
 {
     private final UserRepository userRepository;
@@ -17,13 +19,19 @@ public class UserSubmissionService
         this.userRepository.saveUser(user);
     }
 
-    public boolean isEmailAlreadyTaken(User user)
+    public Optional<Integer> idFromEmail(String email)
     {
-        return this.userRepository.isEmailAlreadyTaken(user);
+        return this.userRepository.idFromEmail(email);
     }
 
-    public boolean isFiscalCodeAlreadyTaken(User user)
+    public Optional<Integer> idFromFiscalCode(String fiscalCode)
     {
-        return this.userRepository.isFiscalCodeAlreadyTaken(user);
+        return this.userRepository.idFromFiscalCode(fiscalCode);
+    }
+
+
+    public boolean isEmailConfirmed(String email)
+    {
+        return this.userRepository.isEmailConfirmed(email);
     }
 }
