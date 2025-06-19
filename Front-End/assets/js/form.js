@@ -20,7 +20,7 @@ const shippingAddress = formElement.querySelector('#form-shipping-address');
 const shippingZipCode = formElement.querySelector('#form-shipping-zip-code');
 const fiscalCode = formElement.querySelector('#form-fiscal-code');
 const residencyProvince = formElement.querySelector('#form-residency-province');
-const shippingProvice = formElement.querySelector('#form-shipping-province');
+const shippingProvince = formElement.querySelector('#form-shipping-province');
 
 //todo:add provincia for shipping and residency and add phonenumber
 const user = {
@@ -76,7 +76,7 @@ export default function form() {
             user.birthDate = birthdate.value;
             user.phoneNumber = phoneNumber.value;
             user.residencyProvince = residencyProvince.value;
-            user.shipProvince = shippingProvice.value;
+            user.shipProvince = shippingProvince.value;
 
             const jsonUser = JSON.stringify(user);
             console.log(jsonUser);
@@ -211,7 +211,7 @@ export default function form() {
                 `La provincia di residenza selezionata non è valida`
             );
         }
-        if (!validateProvince(shippingProvice.value, shippingCountry.value)) {
+        if (!validateProvince(shippingProvince.value, shippingCountry.value)) {
             isValidForm = false;
             errors.set(
                 'form-shipping-province',
