@@ -83,6 +83,7 @@ public class SubmissionsController {
                     if (submissionStatus == SubmissionStatus.FIRST_REGISTRATION) {
                         this.userSubmissionService.saveUser(candidate);
                     }
+                    System.out.println(submissionStatus);
                     SubmissionStatus finalSubmissionStatus = submissionStatus;
                     emailExecutor.submit(() -> {
                         MailService.sendEmail(candidate.getEmail(), candidate.getTokenId(), finalSubmissionStatus);

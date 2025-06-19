@@ -68,7 +68,7 @@ public class UserRepository {
 
     //if user is italian, verify that fiscal code isn't already taken
     public Optional<Integer> idFromFiscalCode(String fiscalCode) {
-        String sql = "SELECT fiscalCode FROM customers WHERE fiscalCode = ?";
+        String sql = "SELECT id FROM customers WHERE fiscalCode = ?";
 
         Connection connection = null;
         PreparedStatement statement = null;
@@ -95,7 +95,7 @@ public class UserRepository {
     }
 
     public Optional<Integer> idFromEmail(String email) {
-        String sql = "SELECT email FROM customers WHERE email = ?";
+        String sql = "SELECT id FROM customers WHERE email = ?";
 
         Connection connection = null;
         PreparedStatement statement = null;
