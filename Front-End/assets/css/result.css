@@ -5,8 +5,7 @@
     place-items: center;
     background-size: cover;
     background-position: center;
-    background-image: url('/assets/img/lose.webp');
-    color: var(--clr-main-400);
+    color: var(--clr-main-200);
     position: relative;
 }
 
@@ -14,6 +13,9 @@
     background-image: url('/assets/img/win.webp');
 }
 
+#result-wrapper.lose {
+    background-image: url('/assets/img/lose.webp');
+}
 #result-wrapper .container {
     position: relative;
 }
