@@ -1,11 +1,26 @@
 .form-hero {
-    min-height: 40vh;
+    position: relative;
+    min-height: 70vh;
     display: grid;
+    color: var(--clr-main-100);
     background-image: url(/assets/img/form.webp);
     background-size: cover;
     background-position: center bottom;
     place-items: center;
     padding-inline: var(--len-lg);
+    z-index: 1;
+}
+
+.form-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+        var(--clr-main-800),
+        var(--clr-main-800) 60%,
+        transparent 80%,
+        transparent
+    );
+    opacity: 0.4;
 }
 
 .main-form {

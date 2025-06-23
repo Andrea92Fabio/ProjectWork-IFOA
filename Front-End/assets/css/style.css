@@ -25,6 +25,11 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+.z-10 {
+    position: relative;
+    z-index: 10;
+}
+
 *,
 *::after,
 *::before {
