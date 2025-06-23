@@ -19,8 +19,8 @@ const shippingCountry = formElement.querySelector('#form-shipping-country');
 const shippingAddress = formElement.querySelector('#form-shipping-address');
 const shippingZipCode = formElement.querySelector('#form-shipping-zip-code');
 const fiscalCode = formElement.querySelector('#form-fiscal-code');
-const residencyProvice = formElement.querySelector('#form-residency-province');
-const shippingProvice = formElement.querySelector('#form-shipping-province');
+const residencyProvince = formElement.querySelector('#form-residency-province');
+const shippingProvince = formElement.querySelector('#form-shipping-province');
 
 //todo:add provincia for shipping and residency and add phonenumber
 const user = {
@@ -39,7 +39,7 @@ const user = {
     rules: true,
     birthDate: null,
     phoneNumber: null,
-    residencyProvice: null,
+    residencyProvince: null,
     shipProvince: null,
 };
 
@@ -75,8 +75,8 @@ export default function form() {
             user.shipAddress = shippingAddress.value;
             user.birthDate = birthdate.value;
             user.phoneNumber = phoneNumber.value;
-            user.residencyProvice = residencyProvice.value;
-            user.shipProvince = shippingProvice.value;
+            user.residencyProvince = residencyProvince.value;
+            user.shipProvince = shippingProvince.value;
 
             const jsonUser = JSON.stringify(user);
             console.log(jsonUser);
@@ -204,14 +204,14 @@ export default function form() {
                 `Il paese di spedizione che hai inserito non è valido`
             );
         }
-        if (!validateProvince(residencyProvice.value, residencyCountry.value)) {
+        if (!validateProvince(residencyProvince.value, residencyCountry.value)) {
             isValidForm = false;
             errors.set(
                 'form-residency-province',
                 `La provincia di residenza selezionata non è valida`
             );
         }
-        if (!validateProvince(shippingProvice.value, shippingCountry.value)) {
+        if (!validateProvince(shippingProvince.value, shippingCountry.value)) {
             isValidForm = false;
             errors.set(
                 'form-shipping-province',
