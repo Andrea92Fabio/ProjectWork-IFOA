@@ -7,6 +7,8 @@ export default function errorView(status) {
     view.removeAttribute('aria-hidden');
     view.removeAttribute('inert');
 
+    console.log(status);
+
     const userErrorName = view.querySelector('#error-name');
     userErrorName.textContent = name.value;
 
@@ -25,7 +27,7 @@ export default function errorView(status) {
             break;
         case 403:
             errorMessageContent =
-                'il concorso non è attivo. Il concorso dura inizia alle 9:00 del 01/07 e termina alle 9:00 del 8/07 alle 9:00';
+                'il concorso non è attivo. Il concorso inizia alle 9:00 del 01/07 e termina alle 9:00 del 08/07 alle 9:00';
             break;
 
         default:
