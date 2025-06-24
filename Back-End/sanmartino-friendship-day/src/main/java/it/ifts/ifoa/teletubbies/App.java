@@ -28,7 +28,7 @@ import static spark.Spark.*;
 //Scegliere se fare un corpo in html o semplice txt
 
 public class App {
-    public final static LocalDateTime START_CONTEST = LocalDateTime.of(2025, Month.JULY, 1, 9, 0);
+    public final static LocalDateTime START_CONTEST = LocalDateTime.of(2025, Month.JUNE, 1, 9, 0);
     public final static LocalDateTime END_CONTEST = LocalDateTime.of(2025, Month.JULY, 8, 9, 0);
 
     ConnectionPool pool;
@@ -72,7 +72,7 @@ public class App {
         this.userRepository = new UserRepository(pool);
 
         this.userSubmissionService = new UserSubmissionService(userRepository);
-        this.userConfirmationService = new UserConfirmationService(userRepository);
+        this.userConfirmationService = new UserConfirmationService(userRepository, emailExecutor);
 
 
         this.submissionsController = new SubmissionsController(gson, userSubmissionService, mailService, emailExecutor);

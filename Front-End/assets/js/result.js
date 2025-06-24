@@ -24,5 +24,6 @@ function displayResult(result) {
     } else {
         messageTarget.textContent =
             "Purtroppo sei arrivato tardi. Ma non abbatterti! Puoi sempre vincere l'estrazione finale";
+        wrapper.classList.add('lose');
     }
 }

@@ -124,25 +124,38 @@ public class UserRepository {
     }
 
 
-    public void doubleOptIn(String tokenId) {
-        String sql = "UPDATE customers SET confirmedDate = ? WHERE tokenId = ? AND confirmedDate IS NULL";
+    public String doubleOptIn(String tokenId) {
+        String insertSql = "UPDATE customers SET confirmedDate = ? WHERE tokenId = ? AND confirmedDate IS NULL";
+        String selectQuery = "SELECT email FROM customers WHERE tokenId = ?";
 
         Connection connection = null;
-        PreparedStatement statement = null;
+        PreparedStatement insertStm = null;
+        PreparedStatement queryStm = null;
 
         try {
             connection = pool.borrowConnection();
-            statement = connection.prepareStatement(sql);
+            insertStm = connection.prepareStatement(insertSql);
 
-            statement.setTimestamp(1, Timestamp.from(Instant.now()));
-            statement.setString(2, tokenId);
-            statement.executeUpdate();
+            insertStm.setTimestamp(1, Timestamp.from(Instant.now()));
+            insertStm.setString(2, tokenId);
+            System.out.println(insertStm.executeUpdate());
+
+            queryStm = connection.prepareStatement(selectQuery);
+            queryStm.setString(1, tokenId);
+
+            ResultSet rs = queryStm.executeQuery();
+            if (rs.next()){
+                return rs.getString("email");
+            }
+
         }
         catch (SQLException | InterruptedException e) {
             throw new RuntimeException(e);
         } finally {
-            JdbcUtils.closeAndRelease(statement, connection, pool);
+            JdbcUtils.closeAndRelease(insertStm, connection, pool);
         }
+
+        return "";
     }
 
 
