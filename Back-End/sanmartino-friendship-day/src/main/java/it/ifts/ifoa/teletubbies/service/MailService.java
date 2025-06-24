@@ -8,16 +8,34 @@ import jakarta.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class MailService {
+    static final String SENDER_EMAIL = "teletubbies.pw@gmail.com"; 
+    private static Session mailSetter(){
+        final String password = "rzmw gkis qngy magn";
+        
+        String host = "smtp.gmail.com";
+        int port = 587;
+        Properties props = new Properties();
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.port", port);
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        Session session = Session.getInstance(props, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(SENDER_EMAIL, password);
+            }
+        });
+        
+        return session;
+
+    }
 
     public static void sendEmail(String receiver, String tokedId, SubmissionStatus status) {
-        final String senderEmail = "teletubbies.pw@gmail.com";
-        final String password = "rzmw gkis qngy magn";
+        Session session = mailSetter();
 
         String subject = "Iscrizione concorso Teletubbies x San Martino";
         String address = "http://192.168.100.48:8080/result.html?tokenId="+tokedId;
 
-        String host = "smtp.gmail.com";
-        int port = 587;
         String body = null;
         if(status == SubmissionStatus.FIRST_REGISTRATION){
             body = """
@@ -177,26 +195,71 @@ public class MailService {
                     </html>
                     """;
         }
-
-        Properties props = new Properties();
-        props.put("mail.smtp.host", host);
-        props.put("mail.smtp.port", port);
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-
-        Session session = Session.getInstance(props, new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(senderEmail, password);
-            }
-        });
+        
 
         try {
             MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(senderEmail));
+            message.setFrom(new InternetAddress(SENDER_EMAIL));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
             message.setSubject(subject);
             //message.setText(body);
             message.setContent(body.formatted(address), "text/html");
+
+            Transport.send(message);
+            System.out.println("Email sent successfully to: " + receiver);
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public static void sendEmail(String receiver, boolean isWinner) {
+        Session session = mailSetter();
+
+        String subject = "Iscrizione concorso Teletubbies x San Martino";
+
+        String body = null;
+        if(isWinner){
+            body = """
+                    <html>
+                    <head>
+                    </head>
+                    <body>
+                        <h1>Complimenti hai vinto</h1>
+                        <p>Ti ringraziamo per aver partecipato al concorso di TELETUBBIES X SAN MARTINO
+                        <br>Ti contatteremo a breve per consegniarti il premio</p>
+                        <br>
+                        <br>
+                    </body>
+                    </html>
+                    """;
+        } else {
+            body = """
+                    <html>
+                    <head>
+                    </head>
+                    <style>
+                    </style>
+                    <body>
+                        <h1>Ci dispiace ma non hai vinto</h1>
+                        <p>Ti ringraziamo per aver partecipato al concorso di TELETUBBIES X SAN MARTINO
+                        <br>Non rassegnarti potresti ancora la possibilità di vincere con l'estrazione finale che avrà luogo in data 18/07/2025.
+                        <br>L'esito di questa estrazione ti verrà comunicato entro 72 ore.</p>
+                        <br>
+                        <br>
+                    </body>
+                    </html>
+                    """;
+        }
+
+
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(SENDER_EMAIL));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+            message.setSubject(subject);
+            //message.setText(body);
+            message.setContent(body, "text/html");
 
             Transport.send(message);
             System.out.println("Email sent successfully to: " + receiver);
