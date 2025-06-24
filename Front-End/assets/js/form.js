@@ -50,6 +50,8 @@ export default function form() {
     view.removeAttribute('aria-hidden');
     view.removeAttribute('inert');
 
+    window.scrollTo(0, 0);
+
     const inputFields = formElement.querySelectorAll('.input-field');
 
     view.querySelector('#form-birthdate').value = sessionStorage
