@@ -96,8 +96,8 @@ export default function form() {
                     }
                 );
 
+                view.classList.remove('active');
                 if (res.status === 201 || res.status === 409) {
-                    view.classList.remove('active');
                     thankYou();
                 } else {
                     errorView(res.status);
@@ -107,6 +107,9 @@ export default function form() {
                 console.error('Error message', error.message);
                 errorView();
             }
+        } else {
+            view.querySelector('#generic-error-target').textContent =
+                'Ci sono degli errori nei dati che hai inserito. Correggili prima di rinviare ';
         }
     });
     //todo: add rules and privacy checker and add it on front end
@@ -253,6 +256,7 @@ export default function form() {
 
         return isValidForm;
     }
+
     //todo: todo: send data as json
 
     const animatableOnEntranceObjs = [

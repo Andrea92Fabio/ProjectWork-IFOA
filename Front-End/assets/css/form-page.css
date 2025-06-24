@@ -42,6 +42,10 @@
     }
 }
 
+.main-form .cta {
+    align-self: center;
+}
+
 @media screen and (width < 1000px) {
     .form-hero {
         min-height: 20rem;

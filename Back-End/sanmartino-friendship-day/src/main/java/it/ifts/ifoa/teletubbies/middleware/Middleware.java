@@ -45,7 +45,10 @@ public class Middleware {
     }
 
     public  void handleRequestBeforeOrAfterContest(){
-        before((req, res) -> {
+        before("/api/*" , (req, res) -> {
+            if ("OPTIONS".equalsIgnoreCase(req.requestMethod())) {
+                return;
+            }
             var today = LocalDateTime.now();
             if (today.isBefore(App.START_CONTEST)|| today.isAfter(App.END_CONTEST)){
                 throw new ContestAlreadyClosedException("2x01");
@@ -60,7 +63,6 @@ public class Middleware {
 
             retvalue.put("errors", errors);
 
-//            return errors
             res.status(HttpStatus.FORBIDDEN_403);
             res.body(gson.toJson(retvalue));
         });

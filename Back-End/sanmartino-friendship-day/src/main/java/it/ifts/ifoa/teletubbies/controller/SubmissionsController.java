@@ -95,7 +95,7 @@ public class SubmissionsController {
                 messages.add("invalid json format");
             }
             catch (FiscalCodeAlreadyPresentException | EmailAlreadyPresentException e) {
-                res.status(HttpStatus.CONFLICT_409);
+                res.status(HttpStatus.FORBIDDEN_403);
                 messages.add(e.getMessage());
             }
             catch (CustomException e) {
