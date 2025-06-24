@@ -34,7 +34,7 @@ public class MailService {
         Session session = mailSetter();
 
         String subject = "Iscrizione concorso Teletubbies x San Martino";
-        String address = "http://192.168.100.48:8080/result.html?tokenId="+tokedId;
+        String address = "http://192.168.100.48:8080/result?tokenId="+tokedId;
 
         String body = null;
         if(status == SubmissionStatus.FIRST_REGISTRATION){
@@ -262,7 +262,7 @@ public class MailService {
             message.setContent(body, "text/html");
 
             Transport.send(message);
-            System.out.println("Email sent successfully to: " + receiver);
+            System.out.println("Winner email sent successfully to: " + receiver);
 
         } catch (MessagingException e) {
             e.printStackTrace();
