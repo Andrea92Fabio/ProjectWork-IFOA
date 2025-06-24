@@ -88,6 +88,9 @@ public class User
 //        if (phoneNumber == null || phoneNumber.trim().isEmpty()) {
 //            return "0x04";
 //        }
+        if(phoneNumber == null || phoneNumber.isBlank()){
+            return null;
+        }
         String regex =  "^\\+*[0-9]{6,15}$";
         if(!Pattern.matches(regex,phoneNumber)){
             return "0x04";
