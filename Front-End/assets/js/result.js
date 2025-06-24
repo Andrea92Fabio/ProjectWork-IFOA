@@ -7,7 +7,7 @@ displayResult(await getResultFromServer(tokenId));
 
 async function getResultFromServer(tokenId) {
     const response = await fetch(
-        `http://192.168.100.45:80/api/confirmation/${tokenId}`
+        `http://192.168.100.48/api/confirmation/${tokenId}`
     );
 
     const retvalue = await response.json();

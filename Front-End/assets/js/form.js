@@ -82,7 +82,7 @@ export default function form() {
             console.log(jsonUser);
             try {
                 const res = await fetch(
-                    'http://192.168.100.45/api/submission',
+                    'http://192.168.100.48/api/submission',
                     {
                         method: 'POST',
                         body: jsonUser,
@@ -204,7 +204,9 @@ export default function form() {
                 `Il paese di spedizione che hai inserito non è valido`
             );
         }
-        if (!validateProvince(residencyProvince.value, residencyCountry.value)) {
+        if (
+            !validateProvince(residencyProvince.value, residencyCountry.value)
+        ) {
             isValidForm = false;
             errors.set(
                 'form-residency-province',
