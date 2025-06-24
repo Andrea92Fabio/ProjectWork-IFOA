@@ -21,6 +21,8 @@ const shippingZipCode = formElement.querySelector('#form-shipping-zip-code');
 const fiscalCode = formElement.querySelector('#form-fiscal-code');
 const residencyProvince = formElement.querySelector('#form-residency-province');
 const shippingProvince = formElement.querySelector('#form-shipping-province');
+const rules = formElement.querySelector('#form-rules');
+const privacy = formElement.querySelector('#form-privacy');
 
 //todo:add provincia for shipping and residency and add phonenumber
 const user = {
@@ -35,8 +37,8 @@ const user = {
     shipCountry: null,
     shipZipCode: null,
     shipAddress: null,
-    privacy: true,
-    rules: true,
+    privacy: null,
+    rules: null,
     birthDate: null,
     phoneNumber: null,
     residencyProvince: null,
@@ -77,6 +79,8 @@ export default function form() {
             user.phoneNumber = phoneNumber.value;
             user.residencyProvince = residencyProvince.value;
             user.shipProvince = shippingProvince.value;
+            user.rules = rules.value == 'on';
+            user.privacy = privacy.value == 'on';
 
             const jsonUser = JSON.stringify(user);
             console.log(jsonUser);

@@ -35,7 +35,17 @@
     flex-direction: column;
 }
 
+.checkbox-wrapper {
+    color: var(--clr-main-800);
+    a {
+        text-decoration: underline;
+    }
+}
+
 @media screen and (width < 1000px) {
+    .form-hero {
+        min-height: 20rem;
+    }
     .main-form {
         grid-template-columns: 1fr;
     }
