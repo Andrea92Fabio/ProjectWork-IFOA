@@ -41,54 +41,21 @@ public class SubmissionsController {
 
                 System.out.println(candidate);
 
-                SubmissionStatus submissionStatus = SubmissionStatus.FIRST_REGISTRATION;
+                SubmissionStatus submissionStatus = getSubmissionStatus(candidate);
 
-                Optional<Integer> idFromEmail = this.userSubmissionService.idFromEmail(candidate.getEmail());
-                Optional<Integer> idFromFiscalCode;
-                boolean isConfirmed;
 
-                if (idFromEmail.isPresent()) {
-                    submissionStatus = SubmissionStatus.ALREADY_PRESENT;
 
-                    if (candidate.getResidencyCountry().equalsIgnoreCase("italy")) {
-                        idFromFiscalCode = this.userSubmissionService.idFromFiscalCode(candidate.getFiscalCode());
-
-                        if (idFromFiscalCode.isPresent()) {
-                            if (idFromFiscalCode.get().equals(idFromEmail.get())) {
-                                if (userSubmissionService.isEmailConfirmed(candidate.getEmail())) {
-                                    submissionStatus = SubmissionStatus.ALREADY_CONFIRMED;
-                                }
-                            }
-                            else {
-                                submissionStatus = SubmissionStatus.INVALID;
-                            }
-                        }
-
-                    }
-                    else {
-                        if (userSubmissionService.isEmailConfirmed(candidate.getEmail())) {
-                            submissionStatus = SubmissionStatus.ALREADY_CONFIRMED;
-                        }
-                    }
-                }
-
-                else if (candidate.getResidencyCountry().equalsIgnoreCase("italy")) {
-
-                    idFromFiscalCode = this.userSubmissionService.idFromFiscalCode(candidate.getFiscalCode());
-                    if (idFromFiscalCode.isPresent()) {
-                        submissionStatus = SubmissionStatus.INVALID;
-                    }
-                }
                 if (messages.isEmpty()) {
                     if (submissionStatus == SubmissionStatus.FIRST_REGISTRATION) {
                         this.userSubmissionService.saveUser(candidate);
                     }
                     System.out.println(submissionStatus);
-                    SubmissionStatus finalSubmissionStatus = submissionStatus;
                     emailExecutor.submit(() -> {
-                        MailService.sendEmail(candidate.getEmail(), candidate.getTokenId(), finalSubmissionStatus);
+                        MailService.sendEmail(candidate.getEmail(), candidate.getTokenId(), submissionStatus);
                     });
                 }
+
+
             }
             catch (JsonSyntaxException e) {
                 res.status(HttpStatus.BAD_REQUEST_400);
@@ -118,5 +85,38 @@ public class SubmissionsController {
             System.out.println(res.status());
             return gson.toJson(responseBody);
         });
+    }
+
+
+    private SubmissionStatus getSubmissionStatus(User candidate) {
+        Optional<Integer> idFromEmail = this.userSubmissionService.idFromEmail(candidate.getEmail());
+        Optional<Integer> idFromFiscalCode = Optional.empty();
+
+        SubmissionStatus submissionStatus = SubmissionStatus.FIRST_REGISTRATION;
+
+        if (candidate.getResidencyCountry().equalsIgnoreCase("italy")) {
+            idFromFiscalCode = this.userSubmissionService.idFromFiscalCode(candidate.getFiscalCode());
+            if (idFromEmail.isPresent() && idFromFiscalCode.isPresent()) {
+                int idEmail = idFromEmail.get();
+                int idFiscalCode = idFromFiscalCode.get();
+
+                if (idEmail != idFiscalCode) {
+                    submissionStatus = SubmissionStatus.INVALID;
+                }
+                else {
+                    submissionStatus = this.userSubmissionService.isEmailConfirmed(candidate.getEmail()) ? SubmissionStatus.ALREADY_CONFIRMED : SubmissionStatus.ALREADY_PRESENT;
+                }
+            } else if(idFromEmail.isPresent() || idFromFiscalCode.isPresent()) {
+                submissionStatus = SubmissionStatus.INVALID;
+            }
+        }
+        else {
+            if (idFromEmail.isPresent()) {
+                submissionStatus = this.userSubmissionService.isEmailConfirmed(candidate.getEmail()) ? SubmissionStatus.ALREADY_CONFIRMED : SubmissionStatus.ALREADY_PRESENT;
+            }
+        }
+
+        return submissionStatus;
+
     }
 }

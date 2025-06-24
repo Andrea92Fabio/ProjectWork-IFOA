@@ -89,7 +89,7 @@ public class MailService {
                         </style>
                     </head>
                     <body>
-                        <h1>Sei già registrata</h1>
+                        <h1>Sei già registrato</h1>
                         <p>I tuoi dati sono già registrati, clicca il bottone qui sotto per scoprire se hai vinto</p>
                         <a href='%s' class='cta'>Controlla se hai vinto</a>
                         <br>
