@@ -34,7 +34,7 @@ public class MailService {
         Session session = mailSetter();
 
         String subject = "Iscrizione concorso Teletubbies x San Martino";
-        String address = "http://192.168.100.48:8080/result?tokenId="+tokedId;
+        String address = "http://192.168.100.48:8080/result/index.html?tokenId="+tokedId;
 
         String body = null;
         if(status == SubmissionStatus.FIRST_REGISTRATION){
