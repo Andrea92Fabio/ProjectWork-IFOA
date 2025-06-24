@@ -132,6 +132,9 @@ export default function form() {
         errors.set('form-shipping-country', null);
         errors.set('form-shipping-address', null);
         errors.set('form-shipping-zip-code', null);
+        errors.set('form-residency-province', null);
+        errors.set('form-shipping-province', null);
+        errors.set('form-telephone', null)
 
         const birthdateObject = new Date(
             formElement.querySelector('#form-birthdate').value
@@ -247,6 +250,13 @@ export default function form() {
                 `Il campo è obbligatorio`
             );
         }
+        if(!validatePhoneNumber(phoneNumber.value)){
+            isValidForm = false;
+            errors.set(
+                'form-telephone',
+                `Il numero di telefono inserito non è valido`
+            );
+        }
 
         errors.forEach((el, key) => {
             if (el) {
@@ -341,4 +351,11 @@ function validateGender(s) {
         return false;
     }
     return true;
+}
+function validatePhoneNumber(s){
+    const reg = /^\+*[0-9]{6,15}$/;
+    if(reg.test(s)){
+        return true;
+    }
+    return false;
 }
