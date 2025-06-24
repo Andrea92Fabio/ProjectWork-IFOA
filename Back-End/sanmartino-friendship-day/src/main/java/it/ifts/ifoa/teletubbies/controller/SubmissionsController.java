@@ -43,8 +43,6 @@ public class SubmissionsController {
                 SubmissionStatus submissionStatus = getSubmissionStatus(candidate);
 
 
-
-
                 if (messages.isEmpty()) {
                     if (submissionStatus == SubmissionStatus.FIRST_REGISTRATION) {
                         candidate.assignTokenId();
@@ -107,13 +105,21 @@ public class SubmissionsController {
                 else {
                     submissionStatus = this.userSubmissionService.isEmailConfirmed(candidate.getEmail()) ? SubmissionStatus.ALREADY_CONFIRMED : SubmissionStatus.ALREADY_PRESENT;
                 }
-            } else if(idFromEmail.isPresent() || idFromFiscalCode.isPresent()) {
+            }
+            else if (idFromEmail.isPresent() || idFromFiscalCode.isPresent()) {
                 submissionStatus = SubmissionStatus.INVALID;
             }
         }
         else {
             if (idFromEmail.isPresent()) {
-                submissionStatus = this.userSubmissionService.isEmailConfirmed(candidate.getEmail()) ? SubmissionStatus.ALREADY_CONFIRMED : SubmissionStatus.ALREADY_PRESENT;
+                String dbCountry = this.userSubmissionService.getResidencyCountryFromId(idFromEmail.get());
+                if (dbCountry.equalsIgnoreCase(candidate.getResidencyCountry())) {
+
+                    submissionStatus = this.userSubmissionService.isEmailConfirmed(candidate.getEmail()) ? SubmissionStatus.ALREADY_CONFIRMED : SubmissionStatus.ALREADY_PRESENT;
+                }
+                else {
+                    submissionStatus = SubmissionStatus.INVALID;
+                }
             }
         }
 

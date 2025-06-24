@@ -29,6 +29,9 @@ public class UserSubmissionService
         return this.userRepository.idFromFiscalCode(fiscalCode);
     }
 
+    public String getResidencyCountryFromId(int id){
+        return this.userRepository.getResidencyCountryFromId(id);
+    }
 
     public boolean isEmailConfirmed(String email)
     {

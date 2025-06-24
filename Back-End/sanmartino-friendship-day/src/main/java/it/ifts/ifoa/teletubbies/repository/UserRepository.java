@@ -216,6 +216,33 @@ public class UserRepository {
         return retvalue;
     }
 
+    public String getResidencyCountryFromId(int id){
+
+        String sql = "SELECT residencyCountry FROM customers WHERE id = ?";
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+       String retvalue = null;
+        try {
+            connection = pool.borrowConnection();
+            statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, id);
+
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                retvalue = resultSet.getString("residencyCountry");
+            }
+        }
+        catch (SQLException | InterruptedException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JdbcUtils.closeAndRelease(statement, resultSet, connection, pool);
+        }
+        return retvalue;
+    }
 
     public boolean isConfirmationTop499(String tokenId) {
         String sql = "SELECT COUNT(*) FROM (" + "SELECT tokenId FROM customers WHERE confirmedDate IS NOT NULL ORDER BY confirmedDate ASC LIMIT 499) AS s " + "WHERE tokenId = ?";
