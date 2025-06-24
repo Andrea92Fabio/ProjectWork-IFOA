@@ -233,6 +233,20 @@ export default function form() {
             isValidForm = false;
             errors.set('form-gender', `Il genere selezionato non è valido`);
         }
+        if(!rules.checked){
+            isValidForm = false;
+            errors.set(
+                'form-rules',
+                `Il campo è obbligatorio`
+            );
+        }
+        if(!privacy.checked){
+            isValidForm = false;
+            errors.set(
+                'form-privacy',
+                `Il campo è obbligatorio`
+            );
+        }
 
         errors.forEach((el, key) => {
             if (el) {
