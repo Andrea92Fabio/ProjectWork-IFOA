@@ -42,8 +42,9 @@
     }
 }
 
-.main-form .cta {
-    align-self: center;
+.main-form .cta,
+#generic-error-target {
+    align-self: self-end;
 }
 
 @media screen and (width < 1000px) {
@@ -52,5 +53,8 @@
     }
     .main-form {
         grid-template-columns: 1fr;
+    }
+    #generic-error-target {
+        grid-row: 20;
     }
 }
