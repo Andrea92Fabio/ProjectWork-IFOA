@@ -28,6 +28,14 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--len-md);
+
+    a {
+        color: var(--clr-main-700);
+        text-decoration: underline;
+        &:hover {
+            color: var(--clr-main-600);
+        }
+    }
 }
 
 .form-input-wrapper {
