@@ -124,6 +124,35 @@ public class UserRepository {
     }
 
 
+
+    public Optional<String> tokenIdFromEmail(String email) {
+        String sql = "SELECT tokenId FROM customers WHERE email = ?";
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        Optional<String> tokenId = Optional.empty();
+
+        try {
+            connection = pool.borrowConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, email);
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                tokenId = Optional.of(resultSet.getString("tokenId"));
+            }
+        }
+        catch (SQLException | InterruptedException e) {
+            throw new RuntimeException(e);
+        } finally {
+            JdbcUtils.closeAndRelease(statement, resultSet, connection, pool);
+        }
+        return tokenId;
+    }
+
+
     public String doubleOptIn(String tokenId) {
         String insertSql = "UPDATE customers SET confirmedDate = ? WHERE tokenId = ? AND confirmedDate IS NULL";
         String selectQuery = "SELECT email FROM customers WHERE tokenId = ?";
@@ -160,7 +189,7 @@ public class UserRepository {
 
 
     public boolean isEmailConfirmed(String email) {
-        String sql = "SELECT COUNT(*) FROM customers WHERE email = ? AND confirmedDate IS NOT NULL ";
+        String sql = "SELECT 1 FROM customers WHERE email = ? AND confirmedDate IS NOT NULL";
 
         Connection connection = null;
         PreparedStatement statement = null;

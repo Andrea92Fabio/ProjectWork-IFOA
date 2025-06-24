@@ -34,4 +34,9 @@ public class UserSubmissionService
     {
         return this.userRepository.isEmailConfirmed(email);
     }
+
+    public String tokenIdFromEmail(String email) {
+        Optional<String> queryResult = this.userRepository.tokenIdFromEmail(email);
+        return queryResult.orElse("");
+    }
 }

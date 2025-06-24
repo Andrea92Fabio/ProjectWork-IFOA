@@ -36,7 +36,6 @@ public class SubmissionsController {
             try {
                 System.out.println(req.body());
                 User candidate = gson.fromJson(req.body(), User.class);
-                candidate.assignTokenId();
                 messages = candidate.checkUser();
 
                 System.out.println(candidate);
@@ -45,13 +44,15 @@ public class SubmissionsController {
 
 
 
+
                 if (messages.isEmpty()) {
                     if (submissionStatus == SubmissionStatus.FIRST_REGISTRATION) {
+                        candidate.assignTokenId();
                         this.userSubmissionService.saveUser(candidate);
                     }
                     System.out.println(submissionStatus);
                     emailExecutor.submit(() -> {
-                        MailService.sendEmail(candidate.getEmail(), candidate.getTokenId(), submissionStatus);
+                        MailService.sendEmail(candidate.getEmail(), userSubmissionService.tokenIdFromEmail(candidate.getEmail()), submissionStatus);
                     });
                 }
 
