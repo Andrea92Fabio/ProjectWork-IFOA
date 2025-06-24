@@ -23,8 +23,8 @@ public class UserRepository {
                  birthdate, gender, fiscalCode,\
                  phoneNumber, residencyCountry, residencyAddress,\
                  residencyZipCode, shipCountry, shipAddress,\
-                 shipZipCode, privacy, rules, tokenId) \
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
+                 shipZipCode, privacy, rules, tokenId, residencyProvince, shipProvince) \
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -52,6 +52,8 @@ public class UserRepository {
             statement.setBoolean(14, user.getPrivacy());
             statement.setBoolean(15, user.getRules());
             statement.setString(16, user.getTokenId());
+            statement.setString(17, user.getResidencyProvince());
+            statement.setString(18, user.getShipProvince());
 
             if (statement.executeUpdate() < 1) {
                 //should never happen, just to be sure

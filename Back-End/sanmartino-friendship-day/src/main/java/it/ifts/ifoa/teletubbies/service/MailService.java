@@ -14,7 +14,7 @@ public class MailService {
         final String password = "rzmw gkis qngy magn";
 
         String subject = "Iscrizione concorso Teletubbies x San Martino";
-        String address = "http://192.168.100.37:8080/result.html?tokenId="+tokedId;
+        String address = "http://192.168.100.48:8080/result.html?tokenId="+tokedId;
 
         String host = "smtp.gmail.com";
         int port = 587;
@@ -137,7 +137,7 @@ public class MailService {
                     </html>
                     """;
         } else {
-            address = "http://192.168.100.37:8080";
+            address = "http://192.168.100.48:8080";
             body = """
                     <html>
                     <head>
