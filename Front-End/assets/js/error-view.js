@@ -23,8 +23,13 @@ export default function errorView(status) {
             errorMessageContent =
                 'sembra che ci siano degli errori nei dati che hai mandato. Riprova';
             break;
+        case 403:
+            errorMessageContent =
+                'il concorso non è attivo. Il concorso dura inizia alle 9:00 del 01/07 e termina alle 9:00 del 8/07 alle 9:00';
+            break;
+
         default:
             break;
     }
-    errorMessageEl.textContent = errorMessageEl;
+    errorMessageEl.textContent = errorMessageContent;
 }
