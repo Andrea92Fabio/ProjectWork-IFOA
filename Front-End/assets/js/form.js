@@ -299,7 +299,7 @@ function validateStringNotEmptyOrWhitespaceOnly(s) {
 }
 
 function validateZipCode(s) {
-    const reg = /^[\d]{5}/;
+    const reg = /^[\d]{5}$/;
     if (reg.test(s)) {
         return true;
     }
